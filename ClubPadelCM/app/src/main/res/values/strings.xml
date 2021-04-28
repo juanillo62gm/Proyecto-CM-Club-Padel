@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Club Padel</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_notifications">Perfil</string>
+</resources>
