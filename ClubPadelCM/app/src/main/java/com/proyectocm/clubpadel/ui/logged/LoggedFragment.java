@@ -32,6 +32,4 @@ public class LoggedFragment extends Fragment {
         });
         return root;
     }
-
-
 }
