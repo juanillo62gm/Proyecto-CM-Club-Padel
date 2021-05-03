@@ -25,3 +25,6 @@
 - APT Certificate fingerprints:
   SHA1: 7A:3A:F5:83:D4:57:ED:66:32:5E:01:BB:FA:1E:70:45:8A:53:28:C1
   SHA256: FC:52:FE:8D:09:C6:DF:4C:93:96:0D:24:B0:FB:33:14:C7:77:BA:E1:62:9D:C1:4D:86:DB:77:2D:2D:30:0A:2C
+
+# Tutoriales
+https://www.youtube.com/watch?v=dpURgJ4HkMk

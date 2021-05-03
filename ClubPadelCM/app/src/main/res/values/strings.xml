@@ -2,4 +2,6 @@
     <string name="app_name">Club Padel</string>
     <string name="title_home">Inicio</string>
     <string name="title_notifications">Perfil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
