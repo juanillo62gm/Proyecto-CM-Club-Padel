@@ -59,6 +59,13 @@ Para la tabla partidos (Parejas):
 - 2: J1 y J4 vs J2 y J3
 
 # Tutoriales
-https://www.youtube.com/watch?v=dpURgJ4HkMk
-https://www.youtube.com/watch?v=IwdjCApjIzA
-Para firebase Database: 1:https://www.youtube.com/watch?v=2Zui7Te_zc4 2: https://www.youtube.com/watch?v=ADzghd25iXQ 3: https://www.youtube.com/watch?v=5j81RmRQFU0 4: https://www.youtube.com/watch?v=HTsIBm4kjqE
+
+- Firebase Auth
+  1. https://www.youtube.com/watch?v=dpURgJ4HkMk
+  2. https://www.youtube.com/watch?v=IwdjCApjIzA
+
+- Firebase Database
+  1. https://www.youtube.com/watch?v=2Zui7Te_zc4
+  2. https://www.youtube.com/watch?v=ADzghd25iXQ
+  3. https://www.youtube.com/watch?v=5j81RmRQFU0
+  4. https://www.youtube.com/watch?v=HTsIBm4kjqE
