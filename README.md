@@ -40,7 +40,6 @@
    - Apellidos
    - Email
    - Teléfono
-   - Nivel
 
 - Partidos
    - idPartido
