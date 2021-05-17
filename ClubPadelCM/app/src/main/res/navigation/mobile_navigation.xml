@@ -15,5 +15,5 @@
         android:id="@+id/navigation_notifications"
         android:name="com.proyectocm.clubpadel.ui.profile.ProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_logged" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

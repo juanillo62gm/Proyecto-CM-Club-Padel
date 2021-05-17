@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/text_notifications4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -33,21 +34,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
+        <EditText
+            android:id="@+id/editTextTextEmailAddress"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Correo" />
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Correo"
+            android:inputType="textEmailAddress" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="8dp" />
 
-        <TextView
-            android:id="@+id/textView2"
+        <EditText
+            android:id="@+id/editTextTextPassword"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Proveedor" />
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
 
         <Space
             android:layout_width="match_parent"
@@ -59,12 +64,24 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/logOut"
-                android:layout_width="395dp"
+                android:id="@+id/createAccount"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cerrar Sesión" />
+                android:text="Crear cuenta" />
 
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/logIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Acceder" />
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
