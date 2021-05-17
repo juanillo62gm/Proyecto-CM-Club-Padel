@@ -15,7 +15,7 @@ public class ProfileViewModel extends ViewModel {
         mText.setValue("Este es el perfil sin iniciar sesión");
     }
 
-    public LiveData<String> getText() {
+    public  LiveData<String> getText() {
         return mText;
     }
 }
