@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         mEditTextEmail = findViewById(R.id.editTextTextEmailAddress);
         mEditTextPass = findViewById(R.id.editTextTextPassword);
 
-        bSignUp = findViewById(R.id.createAccount);
-        bSignIn = findViewById(R.id.logIn);
+        bSignUp = findViewById(R.id.signUp);
+        bSignIn = findViewById(R.id.signIn);
 
         bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,16 +46,14 @@ public class LoginActivity extends AppCompatActivity {
                 email = mEditTextEmail.getText().toString();
                 pass = mEditTextPass.getText().toString();
 
-
                 if (!email.isEmpty() && !pass.isEmpty()) {
                     if (pass.length() >= 6) {
                         registerUser();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Error contraseña demasiado corta, mínimo longitud 6", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "La contraseña es demasiado corta, la longitud mínima es de 6 caracteres", Toast.LENGTH_LONG).show();
                     }
                 } else {
-
-                    Toast.makeText(getApplicationContext(), "Error parámetros vacíos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Complete todos los campos para crear una cuenta", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -65,8 +63,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = mEditTextEmail.getText().toString();
                 pass = mEditTextPass.getText().toString();
-                loginUser();
 
+                if (!email.isEmpty() && !pass.isEmpty()) {
+                    loginUser();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Complete todos los campos para acceder", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -77,11 +79,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(LoginActivity.this,
-                            MainActivity.class);
-                    startActivity(intent);
+                    Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(jumpTo);
+                    Toast.makeText(getApplicationContext(), "Se ha iniciado sesión correctamente", Toast.LENGTH_LONG).show();
                 } else {
-
+                    Toast.makeText(getApplicationContext(), "No se ha podido acceder", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -93,9 +95,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-
+                    loginUser();
+                    Toast.makeText(getApplicationContext(), "Su cuenta se ha creado correctamente", Toast.LENGTH_LONG).show();
                 } else {
-
+                    Toast.makeText(getApplicationContext(), "Esta cuenta ya existe", Toast.LENGTH_LONG).show();
                 }
             }
         });
