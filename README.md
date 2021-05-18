@@ -62,6 +62,7 @@ Para la tabla partidos (Parejas):
 - Firebase Auth
   1. https://www.youtube.com/watch?v=dpURgJ4HkMk
   2. https://www.youtube.com/watch?v=IwdjCApjIzA
+  3. https://www.youtube.com/watch?v=bBJF1M5h_UU
 
 - Firebase Database
   1. https://www.youtube.com/watch?v=2Zui7Te_zc4
