@@ -91,8 +91,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-
-
                     Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(jumpTo);
                     Toast.makeText(getApplicationContext(), "Se ha iniciado sesión correctamente", Toast.LENGTH_LONG).show();
