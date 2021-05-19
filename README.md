@@ -63,6 +63,10 @@ Para la tabla partidos (Parejas):
   1. https://www.youtube.com/watch?v=dpURgJ4HkMk
   2. https://www.youtube.com/watch?v=IwdjCApjIzA
   3. https://www.youtube.com/watch?v=bBJF1M5h_UU
+  4. https://www.youtube.com/watch?v=YO6Xx5glLPE Facebook
+  5. https://developers.facebook.com/docs/facebook-login/access-tokens/
+  6. https://github.com/firebase/snippets-android/blob/7484726ae6d9d2b1cfe9d0545e1c80f98a359a71/auth/app/src/main/java/com/google/firebase/quickstart/auth/FacebookLoginActivity.java#L88-L94
+   
 
 - Firebase Database
   1. https://www.youtube.com/watch?v=2Zui7Te_zc4

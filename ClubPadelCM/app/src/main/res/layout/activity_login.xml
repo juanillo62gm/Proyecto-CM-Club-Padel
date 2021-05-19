@@ -45,17 +45,30 @@
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
+
         <Button
-            android:id="@+id/buttonFacebook"
+            android:id="@+id/buttonFacebook2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar sesión en Facebook" />
+            android:text="Iniciar sesión con Facebook" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/buttonFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
 
         <Button
             android:id="@+id/buttonGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar sesión en Google" />
+            android:text="Iniciar sesión con Google" />
 
         <Space
             android:layout_width="match_parent"

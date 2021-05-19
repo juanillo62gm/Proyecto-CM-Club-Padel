@@ -17,6 +17,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -33,20 +35,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.jetbrains.annotations.NotNull;
+
 public class LoginActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
+
     private EditText mEditTextEmail;
     private EditText mEditTextPass;
-    private Button bFacebook;
     private Button bGoogle;
     private Button bSignUp;
     private Button bSignIn;
     private GoogleSignInClient mGoogleSignInClient;
-    private AccessToken accessToken;
     private final static int RC_SIGN_IN = 111;
     private String email = "";
     private String pass = "";
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,27 +60,41 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        accessToken = AccessToken.getCurrentAccessToken();
-
         mEditTextEmail = findViewById(R.id.editTextTextEmailAddress);
         mEditTextPass = findViewById(R.id.editTextTextPassword);
 
-        bFacebook = findViewById(R.id.buttonFacebook);
         bGoogle = findViewById(R.id.buttonGoogle);
         bSignUp = findViewById(R.id.buttonSignUp);
         bSignIn = findViewById(R.id.buttonSignIn);
 
         SignInGoogle();
 
-        /* En proceso Facebook
-        bFacebook.setOnClickListener(new View.OnClickListener() {
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
+
+        // Initialize Facebook Login button
+        callbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = findViewById(R.id.buttonFacebook);
+        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onClick(View v) {
-                handleFacebookAccessToken(accessToken);
-                Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google correctamente", Toast.LENGTH_LONG).show();
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookAccessToken(loginResult.getAccessToken());
+                Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Facebook correctamente", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getApplicationContext(), "facebook:onCancel", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(getApplicationContext(), "facebook:onError" + error, Toast.LENGTH_LONG).show();
             }
         });
-        */
 
         bGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // Start Email SignIn
     private void loginUser() {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @SuppressLint("ResourceType")
@@ -160,7 +179,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    // End Email SignIn
 
+    // Start Google SignIn
     private void SignInGoogle(){
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -179,6 +200,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Start Facebook Login
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        // End Facebook Login
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
@@ -216,7 +240,9 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    /* En proceso Facebook
+    // End Google SignIn
+
+    // Start Facebook SignIn
     private void handleFacebookAccessToken(AccessToken token) {
         Toast.makeText(getApplicationContext(), "handleFacebookAccessToken:" + token, Toast.LENGTH_LONG).show();
 
@@ -228,7 +254,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(getApplicationContext(), "signInWithCredential:success" + token, Toast.LENGTH_LONG).show();
-
+                            FirebaseUser user = mAuth.getCurrentUser();
                             Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(jumpTo);
                         } else {
@@ -239,6 +265,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-     */
+    // End Facebook SignIn
 
 }
