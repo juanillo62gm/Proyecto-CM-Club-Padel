@@ -47,18 +47,10 @@
 
 
         <Button
-            android:id="@+id/buttonFacebook2"
+            android:id="@+id/buttonFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Iniciar sesión con Facebook" />
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/buttonFacebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp" />
 
         <Space
             android:layout_width="match_parent"

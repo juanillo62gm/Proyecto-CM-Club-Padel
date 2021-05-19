@@ -3,7 +3,6 @@ package com.proyectocm.clubpadel;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +17,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
-import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -35,21 +33,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
+    // Firebase
     private FirebaseAuth mAuth;
 
+    // Email SignIn
     private EditText mEditTextEmail;
     private EditText mEditTextPass;
-    private Button bGoogle;
-    private Button bSignUp;
-    private Button bSignIn;
-    private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 111;
     private String email = "";
     private String pass = "";
+    private Button bSignUp;
+    private Button bSignIn;
+
+    // Google SignIn
+    private GoogleSignInClient mGoogleSignInClient;
+    private final static int RC_SIGN_IN = 111;
+    private Button bGoogle;
+
+    // FaceBook SignIn
+    private Button bFacebook;
     private CallbackManager callbackManager;
 
     @Override
@@ -64,11 +69,13 @@ public class LoginActivity extends AppCompatActivity {
         mEditTextPass = findViewById(R.id.editTextTextPassword);
 
         bGoogle = findViewById(R.id.buttonGoogle);
+        bFacebook = findViewById(R.id.buttonFacebook);
         bSignUp = findViewById(R.id.buttonSignUp);
         bSignIn = findViewById(R.id.buttonSignIn);
 
         SignInGoogle();
 
+        // Debug Mode Facebook Login Tokens
         if (BuildConfig.DEBUG) {
             FacebookSdk.setIsDebugEnabled(true);
             FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
@@ -76,13 +83,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.buttonFacebook);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Facebook correctamente", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -96,11 +100,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        bFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
+            }
+        });
+
         bGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
-                Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google correctamente", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google.", Toast.LENGTH_LONG).show();
                 }
         });
 
@@ -114,10 +125,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (pass.length() >= 6) {
                         registerUser();
                     } else {
-                        Toast.makeText(getApplicationContext(), "La contraseña es demasiado corta, la longitud mínima es de 6 caracteres", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "La contraseña es demasiado corta, la longitud mínima es de 6 carácteres.", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Complete todos los campos para crear una cuenta", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Complete todos los campos para crear una cuenta.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -131,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (!email.isEmpty() && !pass.isEmpty()) {
                     loginUser();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Complete todos los campos para acceder", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Complete todos los campos para acceder.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -144,7 +155,8 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(jumpTo);
-            Toast.makeText(getApplicationContext(), "Se ha iniciado sesión automáticamente", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Se ha iniciado sesión automáticamente.", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
@@ -157,9 +169,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(jumpTo);
-                    Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con email correctamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con email.", Toast.LENGTH_LONG).show();
+                    finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "No se ha podido acceder", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No se ha podido acceder con email.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -172,9 +185,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     loginUser();
-                    Toast.makeText(getApplicationContext(), "Su cuenta se ha creado correctamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Su cuenta ha sido creada.", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Esta cuenta ya existe", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Cuenta ya existente, inicie sesión.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -211,11 +224,10 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Toast.makeText(getApplicationContext(), "firebaseAuthWithGoogle:" + account.getId(), Toast.LENGTH_LONG).show();
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(getApplicationContext(), "Google sign in failed" + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No se ha podido iniciar sesión con Google." + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -228,13 +240,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(getApplicationContext(), "signInWithCredential:success", Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(jumpTo);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "signInWithCredential:failure" + task.getException(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "No se ha podido iniciar sesión con Google." + task.getException(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -244,8 +256,6 @@ public class LoginActivity extends AppCompatActivity {
 
     // Start Facebook SignIn
     private void handleFacebookAccessToken(AccessToken token) {
-        Toast.makeText(getApplicationContext(), "handleFacebookAccessToken:" + token, Toast.LENGTH_LONG).show();
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -253,14 +263,14 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(getApplicationContext(), "signInWithCredential:success" + token, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Se ha iniciado sesión con Facebook.", Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(jumpTo);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "signInWithCredential:failure" + token, Toast.LENGTH_LONG).show();
-                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Cuenta en uso por otro proveedor.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

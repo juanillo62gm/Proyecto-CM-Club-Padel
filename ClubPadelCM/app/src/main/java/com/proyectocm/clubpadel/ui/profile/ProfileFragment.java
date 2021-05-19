@@ -61,9 +61,10 @@ public class ProfileFragment extends Fragment {
                     FirebaseAuth.getInstance().signOut(); //signout firebase
                     Intent jumpTo = new Intent(getActivity(), LoginActivity.class);
                     startActivity(jumpTo);
-                    Toast.makeText(getActivity(), "Se ha cerrado sesión", Toast.LENGTH_LONG).show();
+                    getActivity().finish();
+                    Toast.makeText(getActivity(), "Se ha cerrado sesión.", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(getActivity(), "Error al cerrar sesión", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Se ha producido un error al cerrar sesión.", Toast.LENGTH_LONG).show();
                 }
             }
         });
