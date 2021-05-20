@@ -38,6 +38,7 @@ public class ProfileFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // Texto central
+        /*
         final TextView textView = root.findViewById(R.id.text_notifications);
         profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -45,6 +46,7 @@ public class ProfileFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        */
 
         // Información del Usuario
         final TextView textMail = root.findViewById(R.id.userEmail);
