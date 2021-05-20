@@ -3,6 +3,7 @@ package com.proyectocm.clubpadel;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,25 +29,29 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // Firebase
+    // Firebase Authentication
     private FirebaseAuth mAuth;
 
+    // Firebase RealtimeDatabase
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
     // Email SignIn
-    private EditText mEditTextEmail;
-    private EditText mEditTextPass;
-    private String email = "";
-    private String pass = "";
-    private Button bSignUp;
-    private Button bSignIn;
+    private EditText mEditTextEmail, mEditTextPass;
+    private String email = "", pass = "";
+    private Button bSignUp, bSignIn;
 
     // Google SignIn
     private GoogleSignInClient mGoogleSignInClient;
@@ -61,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance("https://club-padel-cm-default-rtdb.europe-west1.firebasedatabase.app/");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -91,12 +97,12 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                Toast.makeText(getApplicationContext(), "facebook:onCancel", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Se ha cancelado el inicio de sesión con Facebook.", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(getApplicationContext(), "facebook:onError" + error, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Se ha producido un error al iniciar sesión con Facebook" + error, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -146,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     protected void onStart() {
@@ -185,9 +192,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     loginUser();
+
+                    // End Database Store User Data - WIP
+                    mReference = mDatabase.getReference("Users");
+
+                    String name = "Name";
+                    String surname = "Surname";
+                    String email = mEditTextEmail.getText().toString();
+                    String phone = "Phone";
+
+                    User user = new User(name, surname, email, phone);
+                    mReference.child(phone).setValue(user);
+                    // End Database Store User Data - WIP
+
                     Toast.makeText(getApplicationContext(), "Su cuenta ha sido creada.", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Cuenta ya existente, inicie sesión.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Cuenta ya existente, inicie sesión con Google o Facebook.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -251,7 +271,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
     // End Google SignIn
 
     // Start Facebook SignIn
@@ -270,7 +289,7 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Cuenta en uso por otro proveedor.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Cuenta ya existente, inicie sesión con Email o Google.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

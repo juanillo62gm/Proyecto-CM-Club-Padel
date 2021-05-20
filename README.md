@@ -28,18 +28,18 @@
 
 
 # Database
-- Reservas:
-   - idReserva
-   - Horario   Ej: (04/05/2021 18:00:00)
-   - idUsuario
-   - Pista
-
 - Usuarios:
    - idUsuario
    - Nombre
    - Apellidos
    - Email
    - Teléfono
+
+- Reservas:
+   - idReserva
+   - Horario   Ej: (04/05/2021 18:00:00)
+   - idUsuario
+   - Pista
 
 - Partidos
    - idPartido
@@ -76,3 +76,4 @@ Para la tabla partidos (Parejas):
   2. https://www.youtube.com/watch?v=ADzghd25iXQ
   3. https://www.youtube.com/watch?v=5j81RmRQFU0
   4. https://www.youtube.com/watch?v=HTsIBm4kjqE
+  5. https://www.youtube.com/watch?v=wa8OrQ_e76M

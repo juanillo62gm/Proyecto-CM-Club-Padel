@@ -19,12 +19,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.proyectocm.clubpadel.LoginActivity;
 import com.proyectocm.clubpadel.MainActivity;
 import com.proyectocm.clubpadel.R;
+
+import java.util.concurrent.Executor;
 
 public class ProfileFragment extends Fragment {
 
@@ -49,9 +55,24 @@ public class ProfileFragment extends Fragment {
         */
 
         // Información del Usuario
-        final TextView textMail = root.findViewById(R.id.userEmail);
+        final TextView dataUserEmail = root.findViewById(R.id.userEmail);
+        final TextView dataUserName = root.findViewById(R.id.userName);
+        final TextView dataUserSignIn = root.findViewById(R.id.userSignIn);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        textMail.setText(user.getEmail());
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                dataUserSignIn.setText(profile.getProviderId());
+
+                // UID specific to the provider
+                //String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                dataUserName.setText(profile.getDisplayName());
+                dataUserEmail.setText(profile.getEmail());
+            }
+        }
 
         // SignOut
         final Button buttonLogOut = root.findViewById(R.id.signOut);
