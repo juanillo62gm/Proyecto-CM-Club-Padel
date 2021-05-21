@@ -131,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent jumpTo = new Intent(LoginActivity.this, CreateAccountActivity.class);
                 startActivity(jumpTo);
-                finish();
             }
         });
 

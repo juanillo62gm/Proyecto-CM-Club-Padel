@@ -80,7 +80,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     loginUser();
 
-                    // End Database Store User Data - WIP
+                    // Start Database Store User Data
                     mReference = mDatabase.getReference("Users");
 
                     String name = dataName.getText().toString();
@@ -92,7 +92,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                     mReference.child(userId).setValue(user);
-                    // End Database Store User Data - WIP
+                    // End Database Store User Data
 
                     Toast.makeText(getApplicationContext(), "Su cuenta ha sido creada.", Toast.LENGTH_LONG).show();
                 } else {
