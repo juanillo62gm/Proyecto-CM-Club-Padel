@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.proyectocm.clubpadel.LinkFacebookActivity;
 import com.proyectocm.clubpadel.LoginActivity;
 import com.proyectocm.clubpadel.R;
 
@@ -29,8 +31,16 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
 
+    // Firebase Authentication
+    private FirebaseAuth mAuth;
+
     // Firebase RealtimeDatabase
     private DatabaseReference mReference;
+
+    // Google SignIn
+    private GoogleSignInClient mGoogleSignInClient;
+    private final static int RC_SIGN_IN = 111;
+    private Button bGoogle;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -85,7 +95,29 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        // Link FaceBook Button
+        final Button buttonFB = root.findViewById(R.id.buttonLinkFB);
+        buttonFB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent jumpTo = new Intent(getActivity(), LinkFacebookActivity.class);
+                startActivity(jumpTo);
+                getActivity().finish();
+                Toast.makeText(getActivity(), "Botón Link Facebook", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        // Link Google Button
+        final Button buttonGoogle = root.findViewById(R.id.buttonLinkGoogle);
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Botón Link Google", Toast.LENGTH_LONG).show();
+            }
+        });
+
         return root;
     }
+
 }
 
