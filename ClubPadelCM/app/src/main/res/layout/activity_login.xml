@@ -89,7 +89,7 @@
             android:layout_height="8dp" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/insertSignInEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -101,7 +101,7 @@
             android:layout_height="8dp" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/insertSignInPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -112,31 +112,35 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:text="Iniciar Sesión con Correo" />
 
-            <Button
-                android:id="@+id/buttonSignIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Iniciar Sesión" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
+        <TextView
+            android:id="@+id/text04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="¿Aún no tienes una cuenta?" />
 
-            <Button
-                android:id="@+id/buttonSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Crear cuenta" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/buttonSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Crear cuenta" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

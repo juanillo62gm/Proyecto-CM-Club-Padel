@@ -3,7 +3,6 @@ package com.proyectocm.clubpadel;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,13 +28,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
@@ -44,40 +40,35 @@ public class LoginActivity extends AppCompatActivity {
     // Firebase Authentication
     private FirebaseAuth mAuth;
 
-    // Firebase RealtimeDatabase
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mReference;
-
-    // Email SignIn
-    private EditText mEditTextEmail, mEditTextPass;
-    private String email = "", pass = "";
-    private Button bSignUp, bSignIn;
+    // FaceBook SignIn
+    private Button bFacebook;
+    private CallbackManager callbackManager;
 
     // Google SignIn
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 111;
     private Button bGoogle;
 
-    // FaceBook SignIn
-    private Button bFacebook;
-    private CallbackManager callbackManager;
+    // Email SignIn
+    private EditText dataEmail, dataPassword;
+    private String email = "", pass = "";
+    private Button bSignUp, bEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance("https://club-padel-cm-default-rtdb.europe-west1.firebasedatabase.app/");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEditTextEmail = findViewById(R.id.editTextTextEmailAddress);
-        mEditTextPass = findViewById(R.id.editTextTextPassword);
+        mAuth = FirebaseAuth.getInstance();
+
+        dataEmail = findViewById(R.id.insertSignInEmail);
+        dataPassword = findViewById(R.id.insertSignInPass);
 
         bGoogle = findViewById(R.id.buttonGoogle);
         bFacebook = findViewById(R.id.buttonFacebook);
         bSignUp = findViewById(R.id.buttonSignUp);
-        bSignIn = findViewById(R.id.buttonSignIn);
+        bEmail = findViewById(R.id.buttonSignIn);
 
         SignInGoogle();
 
@@ -121,35 +112,26 @@ public class LoginActivity extends AppCompatActivity {
                 }
         });
 
-        bSignUp.setOnClickListener(new View.OnClickListener() {
+        bEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = mEditTextEmail.getText().toString();
-                pass = mEditTextPass.getText().toString();
-
-                if (!email.isEmpty() && !pass.isEmpty()) {
-                    if (pass.length() >= 6) {
-                        registerUser();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "La contraseña es demasiado corta, la longitud mínima es de 6 carácteres.", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Complete todos los campos para crear una cuenta.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        bSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email = mEditTextEmail.getText().toString();
-                pass = mEditTextPass.getText().toString();
+                email = dataEmail.getText().toString();
+                pass = dataPassword.getText().toString();
 
                 if (!email.isEmpty() && !pass.isEmpty()) {
                     loginUser();
                 } else {
                     Toast.makeText(getApplicationContext(), "Complete todos los campos para acceder.", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        bSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent jumpTo = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                startActivity(jumpTo);
+                finish();
             }
         });
 
@@ -180,34 +162,6 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "No se ha podido acceder con email.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
-
-    private void registerUser() {
-        mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    loginUser();
-
-                    // End Database Store User Data - WIP
-                    mReference = mDatabase.getReference("Users");
-
-                    String name = "Name";
-                    String surname = "Surname";
-                    String email = mEditTextEmail.getText().toString();
-                    String phone = "Phone";
-
-                    User user = new User(name, surname, email, phone);
-                    mReference.child(phone).setValue(user);
-                    // End Database Store User Data - WIP
-
-                    Toast.makeText(getApplicationContext(), "Su cuenta ha sido creada.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Cuenta ya existente, inicie sesión con Google o Facebook.", Toast.LENGTH_LONG).show();
                 }
             }
         });

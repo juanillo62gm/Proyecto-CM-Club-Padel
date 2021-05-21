@@ -1,77 +1,61 @@
 package com.proyectocm.clubpadel.ui.profile;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.proyectocm.clubpadel.LoginActivity;
-import com.proyectocm.clubpadel.MainActivity;
 import com.proyectocm.clubpadel.R;
-
-import java.util.concurrent.Executor;
+import com.proyectocm.clubpadel.User;
 
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
 
-    private FirebaseAuth mAuth;
+    // Firebase RealtimeDatabase
+    private DatabaseReference mDatabase;
+    DataSnapshot dataSnapshot;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Texto central
-        /*
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        */
-
+        mDatabase = FirebaseDatabase.getInstance("https://club-padel-cm-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+        
         // Información del Usuario
-        final TextView dataUserEmail = root.findViewById(R.id.userEmail);
-        final TextView dataUserName = root.findViewById(R.id.userName);
-        final TextView dataUserSignIn = root.findViewById(R.id.userSignIn);
+        final TextView dataName = root.findViewById(R.id.fetchName);
+        final TextView dataSurname = root.findViewById(R.id.fetchSurname);
+        final TextView dataPhone = root.findViewById(R.id.fetchPhone);
+        final TextView dataUserEmail = root.findViewById(R.id.fetchEmail);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
-                // Id of the provider (ex: google.com)
-                dataUserSignIn.setText(profile.getProviderId());
-
-                // UID specific to the provider
-                //String uid = profile.getUid();
-
-                // Name, email address, and profile photo Url
-                dataUserName.setText(profile.getDisplayName());
-                dataUserEmail.setText(profile.getEmail());
-            }
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            dataName.setText("Test 1");
+            dataSurname.setText("Test 2");
+            dataPhone.setText("Test 3");
+            dataUserEmail.setText("Test 4");
         }
 
         // SignOut

@@ -35,47 +35,67 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textSignIn"
+            android:id="@+id/textFetchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Método de Inicio de Sesión" />
+            android:text="Nombre" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
         <TextView
-            android:id="@+id/userSignIn"
+            android:id="@+id/fetchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sesión del Usuario" />
+            android:text="Nombre Capturado" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/textName"
+            android:id="@+id/textFetchSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Usuario" />
+            android:text="Apellidos" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/fetchSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre del Usuario" />
+            android:text="Apellidos Capturados" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/textEmail"
+            android:id="@+id/textFetchPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Móvil" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/fetchPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Móvil Capturado" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <TextView
+            android:id="@+id/textFetchEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Correo" />
@@ -85,10 +105,10 @@
             android:layout_height="10dp" />
 
         <TextView
-            android:id="@+id/userEmail"
+            android:id="@+id/fetchEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo del Usuario" />
+            android:text="Correo Capturado" />
 
         <Space
             android:layout_width="match_parent"
