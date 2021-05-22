@@ -29,17 +29,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class ProfileFragment extends Fragment {
 
+    private final static int RC_SIGN_IN = 111;
     private ProfileViewModel profileViewModel;
-
     // Firebase Authentication
     private FirebaseAuth mAuth;
-
     // Firebase RealtimeDatabase
     private DatabaseReference mReference;
-
     // Google SignIn
     private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 111;
     private Button bGoogle;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

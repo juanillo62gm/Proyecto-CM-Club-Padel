@@ -37,16 +37,14 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private final static int RC_SIGN_IN = 111;
     // Firebase Authentication
     private FirebaseAuth mAuth;
-
     // FaceBook SignIn
     private Button bFacebook;
     private CallbackManager callbackManager;
-
     // Google SignIn
     private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 111;
     private Button bGoogle;
 
     // Email SignIn
@@ -109,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 signIn();
                 Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google.", Toast.LENGTH_LONG).show();
-                }
+            }
         });
 
         bEmail.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
     // End Email SignIn
 
     // Start Google SignIn
-    private void SignInGoogle(){
+    private void SignInGoogle() {
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))

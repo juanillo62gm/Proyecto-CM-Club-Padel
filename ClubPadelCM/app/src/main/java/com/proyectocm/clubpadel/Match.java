@@ -20,7 +20,7 @@ public class Match {
         this.result = result;
     }
 
-    public Match(){
+    public Match() {
         this.idBooking = idBooking;
         this.idUser1 = idUser1;
         this.idUser2 = idUser2;
