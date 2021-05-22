@@ -14,13 +14,6 @@ public class User {
         this.email = email;
     }
 
-    public User() {
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.email = email;
-    }
-
     public String getName() {
         return name;
     }

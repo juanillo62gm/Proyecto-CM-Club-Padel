@@ -15,28 +15,25 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyectocm.clubpadel.LinkFacebookActivity;
 import com.proyectocm.clubpadel.LoginActivity;
 import com.proyectocm.clubpadel.R;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
+
+    // Firebase Firestore
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Firebase RealtimeDatabase
-        DatabaseReference mReference = FirebaseDatabase.getInstance("https://club-padel-cm-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         final TextView dataName = root.findViewById(R.id.fetchName);
@@ -44,27 +41,27 @@ public class ProfileFragment extends Fragment {
         final TextView dataPhone = root.findViewById(R.id.fetchPhone);
         final TextView dataUserEmail = root.findViewById(R.id.fetchEmail);
 
-        // Request stored info to DB
-        mReference.child("Users")
-                .child(userId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
-                        String fbName = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
-                        String fbSurname = Objects.requireNonNull(dataSnapshot.child("surname").getValue()).toString();
-                        String fbPhone = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
-                        String fbEmail = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
-                        dataName.setText(fbName);
-                        dataSurname.setText(fbSurname);
-                        dataPhone.setText(fbPhone);
-                        dataUserEmail.setText(fbEmail);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                    }
-                });
+        // Request stored info from DB
+        DocumentReference docRef = db.collection("Users").document(userId);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (Objects.requireNonNull(document).exists()) {
+                    String fbName = Objects.requireNonNull(document.get("name")).toString();
+                    String fbSurname = Objects.requireNonNull(document.get("surname")).toString();
+                    String fbPhone = Objects.requireNonNull(document.get("phone")).toString();
+                    String fbEmail = Objects.requireNonNull(document.get("email")).toString();
+                    dataName.setText(fbName);
+                    dataSurname.setText(fbSurname);
+                    dataPhone.setText(fbPhone);
+                    dataUserEmail.setText(fbEmail);
+                } else {
+                    Toast.makeText(getActivity(), "No existe el usuario", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), "Error en la solicitud" + task.getException(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         // SignOut Button
         final Button buttonLogOut = root.findViewById(R.id.signOut);

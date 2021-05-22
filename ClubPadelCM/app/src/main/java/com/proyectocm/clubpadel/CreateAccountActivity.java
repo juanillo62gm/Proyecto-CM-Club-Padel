@@ -9,8 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -20,9 +19,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     // Firebase Authentication
     private FirebaseAuth mAuth;
 
-    // Firebase RealtimeDatabase
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mReference;
+    // Firebase Firestore
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // Email SignUp
     private EditText dataName, dataSurname, dataPhone, dataEmail, dataPassword;
@@ -37,7 +35,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         setTitle("Crear cuenta");
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance("https://club-padel-cm-default-rtdb.europe-west1.firebasedatabase.app/");
 
         dataName = findViewById(R.id.insertSignUpName);
         dataSurname = findViewById(R.id.insertSignUpSurname);
@@ -70,17 +67,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                 loginUser();
 
                 // Start Database Store User Data
-                mReference = mDatabase.getReference("Users");
-
+                String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                 String name = dataName.getText().toString();
                 String surname = dataSurname.getText().toString();
                 String phone = dataPhone.getText().toString();
                 String email = dataEmail.getText().toString();
 
                 User user = new User(name, surname, phone, email);
-                String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-                mReference.child(userId).setValue(user);
+                db.collection("Users").document(userId)
+                        .set(user)
+                        .addOnSuccessListener(aVoid -> Toast.makeText(getApplicationContext(), "Los datos del usuario se han almacenado correctamente.", Toast.LENGTH_LONG).show())
+                        .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Error al almacenar los datos del usuario.", Toast.LENGTH_LONG).show());
                 // End Database Store User Data
 
                 Toast.makeText(getApplicationContext(), "Su cuenta ha sido creada.", Toast.LENGTH_LONG).show();
