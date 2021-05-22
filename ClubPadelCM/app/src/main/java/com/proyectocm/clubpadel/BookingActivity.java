@@ -87,14 +87,7 @@ public class BookingActivity extends AppCompatActivity {
         Day_selected = Today;
         espacioTemporal();
         obtenerDatos(Day_selected);
-        imageButton = findViewById(R.id.imageButton_back);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                startActivity(jumpTo);
-            }
-        });
+
         radioGroup = findViewById(R.id.radio_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
