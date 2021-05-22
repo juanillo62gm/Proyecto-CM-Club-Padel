@@ -234,28 +234,28 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/reserva_4_1"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="18:00"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/reserva_4_2"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="18:00"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/reserva_4_3"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="18:00"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/reserva_4_4"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="18:00"
@@ -264,7 +264,7 @@
             :
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/reserva_4_5"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="18:00"
@@ -276,28 +276,28 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button12"
+                android:id="@+id/reserva_5_1"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="19:30"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button13"
+                android:id="@+id/reserva_5_2"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="19:30"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button14"
+                android:id="@+id/reserva_5_3"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="19:30"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button15"
+                android:id="@+id/reserva_5_4"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="19:30"
@@ -306,7 +306,7 @@
             :
 
             <Button
-                android:id="@+id/button16"
+                android:id="@+id/reserva_5_5"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:text="19:30"
@@ -319,28 +319,28 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button17"
+                android:id="@+id/reserva_6_1"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:text="21:00"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button18"
+                android:id="@+id/reserva_6_2"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:text="21:00"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button19"
+                android:id="@+id/reserva_6_3"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:text="21:00"
                 android:textSize="12sp"/>
 
             <Button
-                android:id="@+id/button20"
+                android:id="@+id/reserva_6_4"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:text="21:00"
@@ -349,7 +349,7 @@
             :
 
             <Button
-                android:id="@+id/button21"
+                android:id="@+id/reserva_6_5"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:text="21:00"
