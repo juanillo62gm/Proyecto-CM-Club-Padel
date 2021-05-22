@@ -88,7 +88,34 @@
             android:id="@+id/buttonStoreNewProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aceptar" />
+            android:text="Editar Perfil" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <TextView
+            android:id="@+id/textModifyEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Correo" />
+
+        <EditText
+            android:id="@+id/insertModifiedEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo"
+            android:inputType="textEmailAddress" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <Button
+            android:id="@+id/buttonRequestEditEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar Email" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
