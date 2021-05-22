@@ -84,8 +84,9 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
         Today = LocalDateTime.now(ZoneId.of("Europe/Madrid"));
+        Day_selected = Today;
         espacioTemporal();
-        obtenerDatos(Today);
+        obtenerDatos(Day_selected);
         imageButton = findViewById(R.id.imageButton_back);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
