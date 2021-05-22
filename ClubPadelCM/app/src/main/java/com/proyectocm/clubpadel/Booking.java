@@ -1,5 +1,7 @@
 package com.proyectocm.clubpadel;
 
+import com.google.firebase.Timestamp;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -7,9 +9,9 @@ public class Booking {
 
     private int nFloor;
     private String idUser;
-    private LocalDateTime time;
+    private Timestamp time;
 
-    public Booking(int nFloor, String idUser, LocalDateTime time){
+    public Booking(int nFloor, String idUser, Timestamp time){
         this.nFloor = nFloor;
         this.idUser = idUser;
         this.time = time;
@@ -29,7 +31,7 @@ public class Booking {
         return idUser;
     }
 
-    public LocalDateTime getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
@@ -41,7 +43,7 @@ public class Booking {
         this.idUser = idUser;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }
