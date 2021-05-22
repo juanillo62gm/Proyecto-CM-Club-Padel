@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,25 +26,18 @@ import com.proyectocm.clubpadel.R;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ProfileFragment extends Fragment {
+import java.util.Objects;
 
-    private final static int RC_SIGN_IN = 111;
-    private ProfileViewModel profileViewModel;
-    // Firebase Authentication
-    private FirebaseAuth mAuth;
-    // Firebase RealtimeDatabase
-    private DatabaseReference mReference;
-    // Google SignIn
-    private GoogleSignInClient mGoogleSignInClient;
-    private Button bGoogle;
+public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        mReference = FirebaseDatabase.getInstance("https://club-padel-cm-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        // Firebase RealtimeDatabase
+        DatabaseReference mReference = FirebaseDatabase.getInstance("https://club-padel-cm-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         final TextView dataName = root.findViewById(R.id.fetchName);
         final TextView dataSurname = root.findViewById(R.id.fetchSurname);
@@ -57,11 +49,11 @@ public class ProfileFragment extends Fragment {
                 .child(userId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String fbName = dataSnapshot.child("name").getValue().toString();
-                        String fbSurname = dataSnapshot.child("surname").getValue().toString();
-                        String fbPhone = dataSnapshot.child("phone").getValue().toString();
-                        String fbEmail = dataSnapshot.child("email").getValue().toString();
+                    public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+                        String fbName = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
+                        String fbSurname = Objects.requireNonNull(dataSnapshot.child("surname").getValue()).toString();
+                        String fbPhone = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
+                        String fbEmail = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
                         dataName.setText(fbName);
                         dataSurname.setText(fbSurname);
                         dataPhone.setText(fbPhone);
@@ -76,42 +68,31 @@ public class ProfileFragment extends Fragment {
 
         // SignOut Button
         final Button buttonLogOut = root.findViewById(R.id.signOut);
-        buttonLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    FirebaseAuth.getInstance().signOut(); //signout firebase
-                    Intent jumpTo = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(jumpTo);
-                    getActivity().finish();
-                    Toast.makeText(getActivity(), "Se ha cerrado sesión.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getActivity(), "Se ha producido un error al cerrar sesión.", Toast.LENGTH_LONG).show();
-                }
+        buttonLogOut.setOnClickListener(v -> {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                FirebaseAuth.getInstance().signOut(); //signout firebase
+                Intent jumpTo = new Intent(getActivity(), LoginActivity.class);
+                startActivity(jumpTo);
+                requireActivity().finish();
+                Toast.makeText(getActivity(), "Se ha cerrado sesión.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), "Se ha producido un error al cerrar sesión.", Toast.LENGTH_LONG).show();
             }
         });
 
         // Link FaceBook Button
         final Button buttonFB = root.findViewById(R.id.buttonLinkFB);
-        buttonFB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent jumpTo = new Intent(getActivity(), LinkFacebookActivity.class);
-                startActivity(jumpTo);
-                getActivity().finish();
-                Toast.makeText(getActivity(), "Botón Link Facebook", Toast.LENGTH_LONG).show();
-            }
+        buttonFB.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(getActivity(), LinkFacebookActivity.class);
+            startActivity(jumpTo);
+            requireActivity().finish();
+            Toast.makeText(getActivity(), "Botón Link Facebook", Toast.LENGTH_LONG).show();
         });
 
         // Link Google Button
         final Button buttonGoogle = root.findViewById(R.id.buttonLinkGoogle);
-        buttonGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Botón Link Google", Toast.LENGTH_LONG).show();
-            }
-        });
+        buttonGoogle.setOnClickListener(v -> Toast.makeText(getActivity(), "Botón Link Google", Toast.LENGTH_LONG).show());
 
         return root;
     }

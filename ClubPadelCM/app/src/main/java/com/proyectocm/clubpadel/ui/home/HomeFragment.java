@@ -16,22 +16,16 @@ import com.proyectocm.clubpadel.R;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private Button booking_button;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        booking_button = root.findViewById(R.id.buttonBooking);
+        Button booking_button = root.findViewById(R.id.buttonBooking);
 
-        booking_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent jumpTo = new Intent(getActivity(), BookingActivity.class);
-                startActivity(jumpTo);
-            }
+        booking_button.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(getActivity(), BookingActivity.class);
+            startActivity(jumpTo);
         });
         return root;
     }
