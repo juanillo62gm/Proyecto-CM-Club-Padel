@@ -39,9 +39,7 @@ public class LinkFacebookActivity extends AppCompatActivity {
         }
 
         Button bFacebook = findViewById(R.id.buttonFacebook2);
-
         bFacebook.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(LinkFacebookActivity.this, Arrays.asList("email", "public_profile")));
-
 
         // Initialize Facebook Login button
         // FaceBook SignIn

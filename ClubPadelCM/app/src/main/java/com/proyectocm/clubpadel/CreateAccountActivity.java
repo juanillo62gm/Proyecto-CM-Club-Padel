@@ -16,12 +16,10 @@ import java.util.Objects;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    // Firebase Authentication
-    private FirebaseAuth mAuth;
-
     // Firebase Firestore
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    // Firebase Authentication
+    private FirebaseAuth mAuth;
     // Email SignUp
     private EditText dataName, dataSurname, dataPhone, dataEmail, dataPassword;
     private String email = "", pass = "";

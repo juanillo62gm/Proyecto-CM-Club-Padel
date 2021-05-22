@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".ModifyUserAccountActivity">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textFetchName"
+            android:id="@+id/textModifyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre" />
@@ -29,17 +31,19 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <TextView
-            android:id="@+id/fetchName"
+        <EditText
+            android:id="@+id/insertModifiedName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:inputType="textEmailAddress" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/textFetchSurname"
+            android:id="@+id/textModifySurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Apellidos" />
@@ -48,17 +52,19 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <TextView
-            android:id="@+id/fetchSurname"
+        <EditText
+            android:id="@+id/insertModifiedSurname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Apellidos"
+            android:inputType="textEmailAddress" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/textFetchPhone"
+            android:id="@+id/textModifyPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Móvil" />
@@ -67,61 +73,22 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <TextView
-            android:id="@+id/fetchPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
-
-        <TextView
-            android:id="@+id/textFetchEmail"
+        <EditText
+            android:id="@+id/insertModifiedPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <TextView
-            android:id="@+id/fetchEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:hint="Móvil"
+            android:inputType="textEmailAddress" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
         <Button
-            android:id="@+id/buttonEditProfile"
+            android:id="@+id/buttonStoreNewProfileInfo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Editar Perfil" />
-
-        <Button
-            android:id="@+id/buttonSignOut"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Cerrar Sesión" />
-
-        <Button
-            android:id="@+id/buttonLinkFB"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Vincular Cuenta de Facebook" />
-
-        <Button
-            android:id="@+id/buttonLinkGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Vincular Cuenta de Google" />
+            android:layout_height="wrap_content"
+            android:text="Aceptar" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

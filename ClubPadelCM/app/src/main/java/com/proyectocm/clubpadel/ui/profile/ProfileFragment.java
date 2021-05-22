@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyectocm.clubpadel.LinkFacebookActivity;
 import com.proyectocm.clubpadel.LoginActivity;
+import com.proyectocm.clubpadel.ModifyUserAccountActivity;
 import com.proyectocm.clubpadel.R;
 
 import java.util.Objects;
@@ -63,8 +64,15 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        // Edit Profile Button
+        final Button bEditProfile = root.findViewById(R.id.buttonEditProfile);
+        bEditProfile.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(getActivity(), ModifyUserAccountActivity.class);
+            startActivity(jumpTo);
+        });
+
         // SignOut Button
-        final Button buttonLogOut = root.findViewById(R.id.signOut);
+        final Button buttonLogOut = root.findViewById(R.id.buttonSignOut);
         buttonLogOut.setOnClickListener(v -> {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
