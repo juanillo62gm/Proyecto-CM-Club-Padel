@@ -1,6 +1,14 @@
 package com.proyectocm.clubpadel;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.google.firebase.Timestamp;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.TimeZone;
 
 public class Booking {
 
@@ -42,5 +50,30 @@ public class Booking {
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public String toString() {
+        return "Pista " + nFloor + " "+ getDate(time);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getDate(Timestamp time){
+        String res;
+        String min;
+        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochSecond(time.getSeconds()), TimeZone.getDefault().toZoneId());
+        int e = date.getDayOfMonth();
+        int m = date.getMonthValue();
+        int y = date.getYear();
+        int hour = date.getHour();
+        int minute = date.getMinute();
+        if(minute ==0){
+           min = "00";
+        }else{
+            min = "30";
+        }
+        res = e + "/" + m + "/" + y + " " + hour + ":" + min;
+        return res;
     }
 }

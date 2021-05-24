@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.proyectocm.clubpadel.BookingActivity;
 import com.proyectocm.clubpadel.LoginActivity;
+import com.proyectocm.clubpadel.MyBookingsActivity;
 import com.proyectocm.clubpadel.R;
 
 public class HomeFragment extends Fragment {
@@ -29,6 +30,12 @@ public class HomeFragment extends Fragment {
 
         booking_button.setOnClickListener(v -> {
             Intent jumpTo = new Intent(getActivity(), BookingActivity.class);
+            startActivity(jumpTo);
+        });
+
+        Button my_bookings = root.findViewById(R.id.buttonMyBookings);
+        my_bookings.setOnClickListener(v-> {
+            Intent jumpTo = new Intent(getActivity(), MyBookingsActivity.class);
             startActivity(jumpTo);
         });
 
