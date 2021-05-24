@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         Button bGoogle = findViewById(R.id.buttonGoogle);
         Button bFacebook = findViewById(R.id.buttonFacebook);
         Button bSignUp = findViewById(R.id.buttonSignUp);
+        Button bForgottenPass = findViewById(R.id.buttonForgottenPass);
 
         SignInGoogle();
 
@@ -104,6 +105,11 @@ public class LoginActivity extends AppCompatActivity {
 
         bSignUp.setOnClickListener(v -> {
             Intent jumpTo = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(jumpTo);
+        });
+
+        bForgottenPass.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(LoginActivity.this, ForgottenPasswordActivity.class);
             startActivity(jumpTo);
         });
 

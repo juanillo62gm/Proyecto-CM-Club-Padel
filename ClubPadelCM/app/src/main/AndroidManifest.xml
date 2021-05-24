@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubPadel">
-        <activity android:name=".RemoveAccountActivity"></activity>
+        <activity android:name=".ForgottenPasswordActivity"></activity>
+        <activity android:name=".RemoveAccountActivity" />
         <activity android:name=".EditPasswordActivity" />
         <activity android:name=".EditEmailActivity" />
         <activity android:name=".ModifyUserAccountActivity" />

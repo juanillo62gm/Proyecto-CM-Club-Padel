@@ -125,7 +125,7 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
     private void buttonRemoveAccount() {
         final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
         bRemoveAccount.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(ModifyUserAccountActivity.this, LoginActivity.class);
+            Intent jumpTo = new Intent(ModifyUserAccountActivity.this, RemoveAccountActivity.class);
             startActivity(jumpTo);
             finish();
         });
