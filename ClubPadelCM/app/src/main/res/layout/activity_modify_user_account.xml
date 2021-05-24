@@ -82,63 +82,21 @@
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
-        <TextView
-            android:id="@+id/textOldEmail"
+        <Button
+            android:id="@+id/buttonEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo antiguo" />
-
-        <EditText
-            android:id="@+id/insertOldEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo antiguo"
-            android:inputType="textEmailAddress" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
-
-        <TextView
-            android:id="@+id/textPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contraseña" />
-
-        <EditText
-            android:id="@+id/insertPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
-
-        <TextView
-            android:id="@+id/textModifyEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Correo nuevo" />
-
-        <EditText
-            android:id="@+id/insertModifiedEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo nuevo"
-            android:inputType="textEmailAddress" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
+            android:text="Cambiar Correo" />
 
         <Button
-            android:id="@+id/buttonRequestEditEmail"
+            android:id="@+id/buttonEditPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar Email" />
+            android:text="Cambiar Contraseña" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
         <Button
             android:id="@+id/buttonRemoveAccount"
