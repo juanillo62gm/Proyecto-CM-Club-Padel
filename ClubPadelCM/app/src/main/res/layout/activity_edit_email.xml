@@ -25,13 +25,30 @@
             android:id="@+id/textOldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo antiguo" />
+            android:text="Correo actual" />
 
         <EditText
             android:id="@+id/insertOldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo antiguo"
+            android:hint="Correo actual"
+            android:inputType="textEmailAddress" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <TextView
+            android:id="@+id/textModifyEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Correo nuevo" />
+
+        <EditText
+            android:id="@+id/insertModifiedEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo nuevo"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -51,23 +68,6 @@
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
-
-        <TextView
-            android:id="@+id/textModifyEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Correo nuevo" />
-
-        <EditText
-            android:id="@+id/insertModifiedEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo nuevo"
-            android:inputType="textEmailAddress" />
 
         <Space
             android:layout_width="match_parent"

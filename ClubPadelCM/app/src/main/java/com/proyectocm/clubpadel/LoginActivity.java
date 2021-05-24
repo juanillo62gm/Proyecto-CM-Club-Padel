@@ -32,17 +32,14 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private final static int RC_SIGN_IN = 111;
     // Firebase Authentication
     private FirebaseAuth mAuth;
     private CallbackManager callbackManager;
-
     // Email SignIn
     private EditText dataEmail, dataPassword;
-
     // Google SignIn
     private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 111;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

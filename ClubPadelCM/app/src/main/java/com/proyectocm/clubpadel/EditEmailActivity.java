@@ -1,12 +1,12 @@
 package com.proyectocm.clubpadel;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -20,11 +20,10 @@ import java.util.Objects;
 
 public class EditEmailActivity extends AppCompatActivity {
 
-    // Firebase Authentication
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
     // Firebase Firestore
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    // Firebase Authentication
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
