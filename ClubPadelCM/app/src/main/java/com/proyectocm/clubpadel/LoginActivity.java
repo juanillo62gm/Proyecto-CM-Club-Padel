@@ -32,15 +32,17 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private final static int RC_SIGN_IN = 111;
     // Firebase Authentication
     private FirebaseAuth mAuth;
     private CallbackManager callbackManager;
-    // Google SignIn
-    private GoogleSignInClient mGoogleSignInClient;
+
     // Email SignIn
     private EditText dataEmail, dataPassword;
-    private String email = "", pass = "";
+
+    // Google SignIn
+    private GoogleSignInClient mGoogleSignInClient;
+    private final static int RC_SIGN_IN = 111;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +52,9 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        dataEmail = findViewById(R.id.insertSignInEmail);
-        dataPassword = findViewById(R.id.insertSignInPass);
-
         Button bGoogle = findViewById(R.id.buttonGoogle);
-        // FaceBook SignIn
         Button bFacebook = findViewById(R.id.buttonFacebook);
         Button bSignUp = findViewById(R.id.buttonSignUp);
-        Button bEmail = findViewById(R.id.buttonSignIn);
 
         SignInGoogle();
 
@@ -93,12 +90,16 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google.", Toast.LENGTH_LONG).show();
         });
 
+        Button bEmail = findViewById(R.id.buttonSignIn);
+        dataEmail = findViewById(R.id.insertSignInEmail);
+        dataPassword = findViewById(R.id.insertSignInPass);
+
         bEmail.setOnClickListener(v -> {
-            email = dataEmail.getText().toString();
-            pass = dataPassword.getText().toString();
+            String email = dataEmail.getText().toString();
+            String pass = dataPassword.getText().toString();
 
             if (!email.isEmpty() && !pass.isEmpty()) {
-                loginUser();
+                loginUser(email, pass);
             } else {
                 Toast.makeText(getApplicationContext(), "Complete todos los campos para acceder.", Toast.LENGTH_LONG).show();
             }
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Start Email SignIn
-    private void loginUser() {
+    private void loginUser(String email, String pass) {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);

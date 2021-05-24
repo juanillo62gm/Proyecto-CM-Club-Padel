@@ -27,10 +27,6 @@
             android:layout_height="wrap_content"
             android:text="Nombre" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
         <EditText
             android:id="@+id/insertModifiedName"
             android:layout_width="match_parent"
@@ -40,17 +36,13 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="12dp" />
 
         <TextView
             android:id="@+id/textModifySurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Apellidos" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
 
         <EditText
             android:id="@+id/insertModifiedSurname"
@@ -61,17 +53,13 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="12dp" />
 
         <TextView
             android:id="@+id/textModifyPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Móvil" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
 
         <EditText
             android:id="@+id/insertModifiedPhone"
@@ -82,7 +70,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="12dp" />
 
         <Button
             android:id="@+id/buttonStoreNewProfileInfo"
@@ -95,27 +83,68 @@
             android:layout_height="25dp" />
 
         <TextView
+            android:id="@+id/textOldEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Correo antiguo" />
+
+        <EditText
+            android:id="@+id/insertOldEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo antiguo"
+            android:inputType="textEmailAddress" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <TextView
+            android:id="@+id/textPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contraseña" />
+
+        <EditText
+            android:id="@+id/insertPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <TextView
             android:id="@+id/textModifyEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo" />
+            android:text="Correo nuevo" />
 
         <EditText
             android:id="@+id/insertModifiedEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo"
+            android:hint="Correo nuevo"
             android:inputType="textEmailAddress" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="12dp" />
 
         <Button
             android:id="@+id/buttonRequestEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Editar Email" />
+
+        <Button
+            android:id="@+id/buttonRemoveAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eliminar cuenta" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

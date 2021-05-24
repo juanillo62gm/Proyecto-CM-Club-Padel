@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.proyectocm.clubpadel.LinkFacebookActivity;
 import com.proyectocm.clubpadel.LoginActivity;
 import com.proyectocm.clubpadel.ModifyUserAccountActivity;
 import com.proyectocm.clubpadel.R;
@@ -89,9 +88,6 @@ public class ProfileFragment extends Fragment {
         // Link FaceBook Button
         final Button buttonFB = root.findViewById(R.id.buttonLinkFB);
         buttonFB.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(getActivity(), LinkFacebookActivity.class);
-            startActivity(jumpTo);
-            requireActivity().finish();
             Toast.makeText(getActivity(), "Botón Link Facebook", Toast.LENGTH_LONG).show();
         });
 

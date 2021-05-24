@@ -109,19 +109,29 @@
             android:layout_weight="1"
             android:text="Cerrar Sesión" />
 
-        <Button
-            android:id="@+id/buttonLinkFB"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Vincular Cuenta de Facebook" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonLinkGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Vincular Cuenta de Google" />
+            <Button
+                android:id="@+id/buttonLinkFB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Link FB" />
+
+            <Button
+                android:id="@+id/buttonLinkGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="Link G" />
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

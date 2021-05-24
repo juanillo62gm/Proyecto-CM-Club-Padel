@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -17,6 +19,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 public class ModifyUserAccountActivity extends AppCompatActivity {
+
+    // Firebase Authentication
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     // Firebase Firestore
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -32,17 +37,20 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         final TextView dataName = findViewById(R.id.insertModifiedName);
         final TextView dataSurname = findViewById(R.id.insertModifiedSurname);
         final TextView dataPhone = findViewById(R.id.insertModifiedPhone);
-        final TextView dataEmail = findViewById(R.id.insertModifiedEmail);
+        final TextView dataOldEmail = findViewById(R.id.insertOldEmail);
+        final TextView dataPass = findViewById(R.id.insertPass);
+        final TextView dataNewEmail = findViewById(R.id.insertModifiedEmail);
 
-        fetchUserData(userId, dataName, dataSurname, dataPhone, dataEmail);
+        fetchUserData(userId, dataName, dataSurname, dataPhone, dataOldEmail);
 
         buttonSendUserData(userId, dataName, dataSurname, dataPhone);
 
-        buttonSendEmail(dataEmail);
+        buttonSendEmail(userId, dataOldEmail, dataPass, dataNewEmail);
 
+        buttonRemoveAccount();
     }
 
-    private void fetchUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone, TextView dataEmail) {
+    private void fetchUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone, TextView dataOldEmail) {
 
         // Request stored info from DB
         DocumentReference docRef = db.collection("Users").document(userId);
@@ -57,7 +65,7 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
                     dataName.setText(fbName);
                     dataSurname.setText(fbSurname);
                     dataPhone.setText(fbPhone);
-                    dataEmail.setText(fbEmail);
+                    dataOldEmail.setText(fbEmail);
 
                 } else {
                     Toast.makeText(getApplicationContext(), "No existe el usuario.", Toast.LENGTH_LONG).show();
@@ -109,28 +117,57 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         });
     }
 
-    // Hay que iniciar sesión justo antes de modificar este tipo de cosas (WIP)
     // https://firebase.google.com/docs/auth/android/manage-users#set_a_users_email_address
     // https://firebase.google.com/docs/auth/android/manage-users#re-authenticate_a_user
-    private void modifyUserEmail(TextView dataEmail) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private void modifyUserEmail(String userId, TextView dataOldEmail, TextView dataPass, TextView dataNewEmail) {
+        reauthenticate(dataOldEmail.getText().toString(), dataPass.getText().toString());
 
-        user.updateEmail(dataEmail.getText().toString())
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        Objects.requireNonNull(user).updateEmail(dataNewEmail.getText().toString())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Se ha actualizado el correo correctamente", Toast.LENGTH_LONG).show();
+                        DocumentReference modifiedData = db.collection("Users").document(userId);
+                        modifiedData
+                                .update("email", dataNewEmail.getText().toString())
+                                .addOnSuccessListener(aVoid -> {
+                                    //Toast.makeText(getApplicationContext(), "Se ha actualizado el campo email.", Toast.LENGTH_LONG).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    //Toast.makeText(getApplicationContext(), "Error al actualizar el campo email.", Toast.LENGTH_LONG).show();
+                                });
+                        Toast.makeText(getApplicationContext(), "La dirección de correo se ha actualizado correctamente, se le ha enviado un correo para verificar la nueva dirección.", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Se ha producido un error al actualizar el correo", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Contraseña incorrecta, no se ha podido actualizar la dirección de correo.", Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
-    private void buttonSendEmail(TextView dataEmail) {
+    private void buttonSendEmail(String userId, TextView dataOldEmail, TextView dataPass, TextView dataNewEmail) {
         final Button bEditEmail = findViewById(R.id.buttonRequestEditEmail);
         bEditEmail.setOnClickListener(v -> {
-            modifyUserEmail(dataEmail);
-            Toast.makeText(getApplicationContext(), "Se ha enviado un email para verificar la nueva dirección de email.", Toast.LENGTH_LONG).show();
+            modifyUserEmail(userId, dataOldEmail, dataPass, dataNewEmail);
             Intent jumpTo = new Intent(ModifyUserAccountActivity.this, MainActivity.class);
+            startActivity(jumpTo);
+            finish();
+        });
+    }
+
+    private void reauthenticate(String email, String pass) {
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        AuthCredential credential = EmailAuthProvider.getCredential(email, pass);
+
+        Objects.requireNonNull(user).reauthenticate(credential)
+                .addOnCompleteListener(task -> {
+                    //Toast.makeText(getApplicationContext(), "Re-Autenticado el usuario", Toast.LENGTH_LONG).show();
+                });
+    }
+
+    private void buttonRemoveAccount() {
+        final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
+        bRemoveAccount.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(ModifyUserAccountActivity.this, LoginActivity.class);
             startActivity(jumpTo);
             finish();
         });

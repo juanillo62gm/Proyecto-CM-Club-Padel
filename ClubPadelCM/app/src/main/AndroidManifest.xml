@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubPadel">
-        <activity android:name=".ModifyUserAccountActivity"></activity>
+        <activity android:name=".RemoveAccountActivity"></activity>
+        <activity android:name=".EditPasswordActivity" />
+        <activity android:name=".EditEmailActivity" />
+        <activity android:name=".ModifyUserAccountActivity" />
         <activity android:name=".BookingActivity" />
-        <activity android:name=".LinkFacebookActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".MainActivity" />
         <activity
