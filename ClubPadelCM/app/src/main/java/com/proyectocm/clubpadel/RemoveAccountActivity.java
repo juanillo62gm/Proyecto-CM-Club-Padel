@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -83,6 +85,7 @@ public class RemoveAccountActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            removeUserFromDB(userId);
                             Toast.makeText(getApplicationContext(), "Se ha eliminado la cuenta.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -98,6 +101,25 @@ public class RemoveAccountActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     //Toast.makeText(getApplicationContext(), "Re-Autenticado el usuario", Toast.LENGTH_LONG).show();
                 });
+    }
+
+    private void removeUserFromDB(String userId) {
+        db.collection("Users").document(userId)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //Toast.makeText(getApplicationContext(), "Se ha eliminado al usuario correctamente de la DB.", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Toast.makeText(getApplicationContext(), "No se ha podido eliminar al usuario de la DB.", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
     }
 
 }
