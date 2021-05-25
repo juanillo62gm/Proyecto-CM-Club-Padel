@@ -18,7 +18,7 @@ import java.util.Objects;
 public class ModifyUserAccountActivity extends AppCompatActivity {
 
     // Firebase Firestore
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

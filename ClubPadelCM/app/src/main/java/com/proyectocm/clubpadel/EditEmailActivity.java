@@ -21,7 +21,7 @@ import java.util.Objects;
 public class EditEmailActivity extends AppCompatActivity {
 
     // Firebase Firestore
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     // Firebase Authentication
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
