@@ -1,6 +1,5 @@
 package com.proyectocm.clubpadel;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -11,31 +10,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -44,6 +28,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.TimeZone;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -55,10 +40,7 @@ public class BookingActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private Button button;
     private LocalDateTime Today, Day_selected;
-    private Pair<Integer, Integer> tupla;
-    private Button button1_1, button1_2, button1_3, button1_4, button1_5, button2_1, button2_2, button2_3, button2_4, button2_5;
-    private Button button3_1, button3_2, button3_3, button3_4, button3_5, button4_1, button4_2, button4_3, button4_4, button4_5;
-    private Button button5_1, button5_2, button5_3, button5_4, button5_5, button6_1, button6_2, button6_3, button6_4, button6_5;
+    private Button button1_1, button1_2, button1_3, button1_4, button1_5, button2_1, button2_2, button2_3, button2_4, button2_5, button3_1, button3_2, button3_3, button3_4, button3_5, button4_1, button4_2, button4_3, button4_4, button4_5, button5_1, button5_2, button5_3, button5_4, button5_5, button6_1, button6_2, button6_3, button6_4, button6_5;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,30 +65,64 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
         asociaButton();
-        String codigo = "";
-        generaCodigo();
-}
+
+        //generaCodigo();
+
+        botonReserva(button1_1, 1, "pista 1", "9:00");
+        botonReserva(button1_2, 2, "pista 2", "9:00");
+        botonReserva(button1_3, 3, "pista 3", "9:00");
+        botonReserva(button1_4, 4, "pista 4", "9:00");
+        botonReserva(button1_5, 5, "pista 5", "9:00");
+
+        botonReserva(button2_1, 1, "pista 1", "10:30");
+        botonReserva(button2_2, 2, "pista 2", "10:30");
+        botonReserva(button2_3, 3, "pista 3", "10:30");
+        botonReserva(button2_4, 4, "pista 4", "10:30");
+        botonReserva(button2_5, 5, "pista 5", "10:30");
+
+        botonReserva(button3_1, 1, "pista 1", "12:00");
+        botonReserva(button3_2, 2, "pista 2", "12:00");
+        botonReserva(button3_3, 3, "pista 3", "12:00");
+        botonReserva(button3_4, 4, "pista 4", "12:00");
+        botonReserva(button3_5, 5, "pista 5", "12:00");
+
+        botonReserva(button4_1, 1, "pista 1", "18:00");
+        botonReserva(button4_2, 2, "pista 2", "18:00");
+        botonReserva(button4_3, 3, "pista 3", "18:00");
+        botonReserva(button4_4, 4, "pista 4", "18:00");
+        botonReserva(button4_5, 5, "pista 5", "18:00");
+
+        botonReserva(button5_1, 1, "pista 1", "19:30");
+        botonReserva(button5_2, 2, "pista 2", "19:30");
+        botonReserva(button5_3, 3, "pista 3", "19:30");
+        botonReserva(button5_4, 4, "pista 4", "19:30");
+        botonReserva(button5_5, 5, "pista 5", "19:30");
+
+        botonReserva(button6_1, 1, "pista 1", "19:30");
+        botonReserva(button6_2, 2, "pista 2", "19:30");
+        botonReserva(button6_3, 3, "pista 3", "19:30");
+        botonReserva(button6_4, 4, "pista 4", "19:30");
+        botonReserva(button6_5, 5, "pista 5", "19:30");
+    }
 
     public void checkButton(View v) {
         int radioId = radioGroup.getCheckedRadioButtonId();
         findViewById(radioId);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void espacioTemporal() {
         RadioButton day1 = findViewById(R.id.radio_button_today);
         RadioButton day2 = findViewById(R.id.radio_button_tomorrow);
         RadioButton day3 = findViewById(R.id.radio_button_nextDay);
 
         LocalDateTime currentDay = LocalDateTime.now(ZoneId.of("Europe/Madrid"));
-        String aux = String.valueOf(currentDay.getDayOfMonth()) + " " + currentDay.getMonth().toString();
+        String aux = currentDay.getDayOfMonth() + " " + currentDay.getMonth().toString();
         day1.setText(aux);
-        aux = String.valueOf(currentDay.plusDays(1).getDayOfMonth()) + " " + currentDay.plusDays(1).getMonth().toString();
+        aux = currentDay.plusDays(1).getDayOfMonth() + " " + currentDay.plusDays(1).getMonth().toString();
         day2.setText(aux);
-        aux = String.valueOf(currentDay.plusDays(2).getDayOfMonth()) + " " + currentDay.plusDays(2).getMonth().toString();
+        aux = currentDay.plusDays(2).getDayOfMonth() + " " + currentDay.plusDays(2).getMonth().toString();
         day3.setText(aux);
     }
-
 
     private void obtenerDatos(LocalDateTime day) {
         seleccionaButtonIdInversa();
@@ -119,14 +135,14 @@ public class BookingActivity extends AppCompatActivity {
         String fecha4 = d + "/" + m + "/" + y + " 18:0";
         String fecha5 = d + "/" + m + "/" + y + " 19:30";
         String fecha6 = d + "/" + m + "/" + y + " 21:0";
-        final List<String> ls = new ArrayList<String>();
+        final List<String> ls = new ArrayList<>();
         ls.add(fecha1);
         ls.add(fecha2);
         ls.add(fecha3);
         ls.add(fecha4);
         ls.add(fecha5);
         ls.add(fecha6);
-        if(day==Today) {
+        if (day == Today) {
             if (day.getHour() >= 21) {
                 for (int i = 0; i < 6; i++) {
                     for (int j = 1; j < 6; j++) {
@@ -163,27 +179,24 @@ public class BookingActivity extends AppCompatActivity {
                 }
             }
         }
-        db.collection("Bookings").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot d : task.getResult()) {
-                        Timestamp time = (Timestamp) d.getData().get("time");
-                        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochSecond(time.getSeconds()), TimeZone.getDefault().toZoneId());
-                        int e = date.getDayOfMonth();
-                        int m = date.getMonthValue();
-                        int y = date.getYear();
-                        int hour = date.getHour();
-                        int minute = date.getMinute();
-                        String aux = e + "/" + m + "/" + y + " " + hour + ":" + minute;
-                        String aux2 = d.getData().get("nFloor").toString();
-                        for (int i = 0; i < 6; i++) {
-                            for (Integer j = 1; j < 6; j++) {
-                                if (aux2.equals(j.toString()) && aux.equals(ls.get(i))) {
-                                    seleccionaButtonId(i, j);
-                                }
-
+        db.collection("Bookings").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot d1 : Objects.requireNonNull(task.getResult())) {
+                    Timestamp time = (Timestamp) d1.getData().get("time");
+                    LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochSecond(Objects.requireNonNull(time).getSeconds()), TimeZone.getDefault().toZoneId());
+                    int e = date.getDayOfMonth();
+                    int m1 = date.getMonthValue();
+                    int y1 = date.getYear();
+                    int hour = date.getHour();
+                    int minute = date.getMinute();
+                    String aux = e + "/" + m1 + "/" + y1 + " " + hour + ":" + minute;
+                    String aux2 = Objects.requireNonNull(d1.getData().get("nFloor")).toString();
+                    for (int i = 0; i < 6; i++) {
+                        for (int j = 1; j < 6; j++) {
+                            if (aux2.equals(Integer.toString(j)) && aux.equals(ls.get(i))) {
+                                seleccionaButtonId(i, j);
                             }
+
                         }
                     }
                 }
@@ -194,6 +207,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void seleccionaButtonId(int i, int j) {
+        Pair<Integer, Integer> tupla;
         switch (i) {
             case 0:
                 switch (j) {
@@ -651,10 +665,10 @@ public class BookingActivity extends AppCompatActivity {
 
     }
 
-    private void generaCodigo(){
-        button1_1.setOnClickListener(v -> {
+    private void botonReserva(Button numero, Integer numeroPista, String pista, String hora) {
+        numero.setOnClickListener(v -> {
 
-            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            String idUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
             int d = Day_selected.getDayOfMonth();
             int m = Day_selected.getMonthValue();
             int y = Day_selected.getYear();
@@ -662,20 +676,17 @@ public class BookingActivity extends AppCompatActivity {
             String aux2 = d + "/" + m + "/" + y;
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                    .setMessage("¿Desea reservar la pista 1 a las 09:00 el " + aux2 + "?").setTitle("Reserva de pista")
+                    .setMessage("¿Desea reservar la " + pista + " a las " + hora + " el " + aux2 + "?").setTitle("Reserva de pista")
                     .setPositiveButton(R.string.ok, (dialog, which) -> {
                         try {
                             Date date = formatter.parse(aux);
-                            Timestamp time = new Timestamp(date);
-                            Booking booking = new Booking(1, idUser, time);
-                            db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                    Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                    startActivity(jumpTo);
+                            Timestamp time = new Timestamp(Objects.requireNonNull(date));
+                            Booking booking = new Booking(numeroPista, idUser, time);
+                            db.collection("Bookings").add(booking).addOnSuccessListener(documentReference -> {
+                                Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
+                                Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
+                                startActivity(jumpTo);
 
-                                }
                             });
                         } catch (ParseException e) {
                             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
@@ -689,1296 +700,6 @@ public class BookingActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
 
-
-        });
-
-        button1_2.setOnClickListener(v -> {
-
-            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            int d = Day_selected.getDayOfMonth();
-            int m = Day_selected.getMonthValue();
-            int y = Day_selected.getYear();
-            String aux = d + "/" + m + "/" + y + " 09:00";
-            String aux2 = d + "/" + m + "/" + y;
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                    .setMessage("¿Desea reservar la pista 2 a las 09:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            try {
-                                Date date = formatter.parse(aux);
-                                Timestamp time = new Timestamp(date);
-                                Booking booking = new Booking(2, idUser, time);
-                                db.collection("Bookings").add(booking).addOnSuccessListener(documentReference -> {
-                                    Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                    Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                    startActivity(jumpTo);
-                                });
-                            } catch (ParseException e) {
-                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    })
-
-                    .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-
-        });
-
-        button1_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 09:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 3 a las 09:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(3, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-
-            }
-        });
-
-        button1_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 09:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 4 a las 09:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(4, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-
-            }
-        });
-
-        button1_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 09:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 5 a las 09:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(5, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-
-            }
-        });
-
-        button2_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 10:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 1 a las 10:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(1, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-
-            }
-        });
-
-        button2_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 10:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 2 a las 10:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(2, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button2_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 10:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 3 a las 10:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(3, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button2_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 10:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 4 a las 10:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(4, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button2_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 10:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 5 a las 10:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(5, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button3_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 12:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 1 a las 12:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(1, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button3_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 12:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 2 a las 12:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(2, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button3_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 12:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 3 a las 12:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(3, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button3_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 12:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 4 a las 12:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(4, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button3_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 12:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 5 a las 12:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(5, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-        button4_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 18:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 1 a las 18:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(1, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button4_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 18:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 2 a las 18:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(2, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button4_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 18:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 3 a las 18:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(3, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button4_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 18:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 4 a las 18:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(4, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button4_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 18:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 5 a las 18:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(5, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button5_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 19:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 1 a las 19:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(1, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button5_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 19:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 2 a las 19:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(2, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button5_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 19:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 3 a las 19:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(3, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button5_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 19:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 4 a las 19:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(4, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button5_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 19:30";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 5 a las 19:30 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(5, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button6_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 21:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 1 a las 21:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(1, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button6_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 21:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 2 a las 21:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(2, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button6_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 21:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 3 a las 21:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(3, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button6_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 21:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 4 a las 21:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(4, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        button6_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                int d = Day_selected.getDayOfMonth();
-                int m = Day_selected.getMonthValue();
-                int y = Day_selected.getYear();
-                String aux = d + "/" + m + "/" + y + " 21:00";
-                String aux2 = d + "/" + m + "/" + y;
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
-                        .setMessage("¿Desea reservar la pista 5 a las 21:00 el " + aux2 + "?").setTitle("Reserva de pista")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    Date date = formatter.parse(aux);
-                                    Timestamp time = new Timestamp(date);
-                                    Booking booking = new Booking(5, idUser, time);
-                                    db.collection("Bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getApplicationContext(), "Pista reservada", Toast.LENGTH_LONG).show();
-                                            Intent jumpTo = new Intent(v.getContext(), MainActivity.class);
-                                            startActivity(jumpTo);
-                                        }
-                                    });
-                                } catch (ParseException e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
         });
     }
 
