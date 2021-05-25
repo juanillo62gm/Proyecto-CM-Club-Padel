@@ -31,20 +31,24 @@ import org.jetbrains.annotations.NotNull;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.TimeZone;
-
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class MyBookingsActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ListView listView;
-    private ArrayList<Booking> ls = new ArrayList<Booking>();
+    private ListView listView_pendiente,listView_finalizada;
+    private ArrayList<Booking> ls_pendiente = new ArrayList<Booking>();
+    private ArrayList<Booking> ls_finalizada = new ArrayList<Booking>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_bookings);
 
-        listView = (ListView) findViewById(R.id.list_view);
+
+        listView_pendiente = (ListView) findViewById(R.id.list_view_pendiente);
+        listView_finalizada = (ListView) findViewById(R.id.list_view_finalizada);
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         db.collection("Bookings").whereEqualTo("idUser", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -55,64 +59,72 @@ public class MyBookingsActivity extends AppCompatActivity {
                         Timestamp time = (Timestamp) d.getData().get("time");
                         String id = d.getData().get("idUser").toString();
                         Booking booking = new Booking(nFloor, id, time);
-                        ls.add(booking);
+                        if (time.getSeconds() > Timestamp.now().getSeconds()) {
+                            ls_pendiente.add(booking);
+                        }else{
+                            ls_finalizada.add(booking);
+                        }
                     }
-                    ArrayAdapter<Booking> adapter = new ArrayAdapter<Booking>(getApplicationContext(), android.R.layout.simple_list_item_1, ls);
-                    listView.setAdapter(adapter);
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    Collections.sort(ls_pendiente);
+                    Collections.sort(ls_finalizada);
+                    ArrayAdapter<Booking> adapter = new ArrayAdapter<Booking>(getApplicationContext(), android.R.layout.simple_list_item_1, ls_pendiente);
+                    listView_pendiente.setAdapter(adapter);
+                    listView_pendiente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @RequiresApi(api = Build.VERSION_CODES.O)
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            int pista = ls.get(position).getnFloor();
-                            Pair<String, String> tupla = getDate(ls.get(position).getTime());
-                            String hora = tupla.second;
-                            String fecha = tupla.first;
-                            AlertDialog.Builder builder = new AlertDialog.Builder(MyBookingsActivity.this)
-                                    .setMessage("¿Desea cancelar la pista " + pista + " reservada a las " + hora + " del " + fecha + "?")
-                                    .setTitle("Anular pista").setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            db.collection("Bookings").whereEqualTo("idUser", ls.get(position).getIdUser())
-                                                    .whereEqualTo("nFloor", ls.get(position).getnFloor()).whereEqualTo("time", ls.get(position).getTime()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        String id = task.getResult().getDocuments().get(0).getId();
-                                                        db.collection("Bookings").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                Toast.makeText(getApplicationContext(), "Pista anulada", Toast.LENGTH_LONG).show();
-                                                                Intent jumpTo = new Intent(parent.getContext(), MainActivity.class);
-                                                                startActivity(jumpTo);
-                                                            }
-                                                        }).addOnFailureListener(new OnFailureListener() {
-                                                            @Override
-                                                            public void onFailure(@NonNull @NotNull Exception e) {
-                                                                Toast.makeText(getApplicationContext(), "Error al anular pista", Toast.LENGTH_LONG).show();
-                                                            }
-                                                        });
+                                int pista = ls_pendiente.get(position).getnFloor();
+                                Pair<String, String> tupla = getDateString(ls_pendiente.get(position).getTime());
+                                String hora = tupla.second;
+                                String fecha = tupla.first;
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MyBookingsActivity.this)
+                                        .setMessage("¿Desea cancelar la pista " + pista + " reservada a las " + hora + " del " + fecha + "?")
+                                        .setTitle("Anular pista").setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                db.collection("Bookings").whereEqualTo("idUser", ls_pendiente.get(position).getIdUser())
+                                                        .whereEqualTo("nFloor", ls_pendiente.get(position).getnFloor()).whereEqualTo("time", ls_pendiente.get(position).getTime()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            String id = task.getResult().getDocuments().get(0).getId();
+                                                            db.collection("Bookings").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void unused) {
+                                                                    Toast.makeText(getApplicationContext(), "Pista anulada", Toast.LENGTH_LONG).show();
+                                                                    Intent jumpTo = new Intent(parent.getContext(), MainActivity.class);
+                                                                    startActivity(jumpTo);
+                                                                }
+                                                            }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull @NotNull Exception e) {
+                                                                    Toast.makeText(getApplicationContext(), "Error al anular pista", Toast.LENGTH_LONG).show();
+                                                                }
+                                                            });
+                                                        }
                                                     }
-                                                }
-                                            });
-                                        }
-                                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
+                                                });
+                                            }
+                                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
 
-                                        }
-                                    });
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
+                                            }
+                                        });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
                         }
                     });
 
+                    ArrayAdapter<Booking> adapter2 = new ArrayAdapter<Booking>(getApplicationContext(), android.R.layout.simple_list_item_1, ls_finalizada);
+                    listView_finalizada.setAdapter(adapter2);
                 }
             }
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private Pair<String, String> getDate(Timestamp time) {
+
+    private Pair<String, String> getDateString(Timestamp time) {
         String res;
         String min;
         Pair<String, String> tupla;
@@ -131,6 +143,14 @@ public class MyBookingsActivity extends AppCompatActivity {
         String hora = hour + ":" + min;
         tupla = Pair.create(res, hora);
         return tupla;
+    }
+    private Boolean pistaCancelable(Timestamp time){
+        Boolean res = false;
+        LocalDateTime aux = LocalDateTime.ofInstant(Instant.ofEpochSecond(time.getSeconds()), TimeZone.getDefault().toZoneId());
+        if(aux.isAfter(LocalDateTime.now())){
+            res = true;
+        }
+        return res;
     }
 
 }

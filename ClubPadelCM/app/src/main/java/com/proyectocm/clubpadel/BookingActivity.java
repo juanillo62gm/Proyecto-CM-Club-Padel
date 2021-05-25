@@ -29,6 +29,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -76,6 +83,575 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
         asociaButton();
+        String codigo = "";
+        generaCodigo();
+}
+
+    public void checkButton(View v) {
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        findViewById(radioId);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void espacioTemporal() {
+        RadioButton day1 = findViewById(R.id.radio_button_today);
+        RadioButton day2 = findViewById(R.id.radio_button_tomorrow);
+        RadioButton day3 = findViewById(R.id.radio_button_nextDay);
+
+        LocalDateTime currentDay = LocalDateTime.now(ZoneId.of("Europe/Madrid"));
+        String aux = String.valueOf(currentDay.getDayOfMonth()) + " " + currentDay.getMonth().toString();
+        day1.setText(aux);
+        aux = String.valueOf(currentDay.plusDays(1).getDayOfMonth()) + " " + currentDay.plusDays(1).getMonth().toString();
+        day2.setText(aux);
+        aux = String.valueOf(currentDay.plusDays(2).getDayOfMonth()) + " " + currentDay.plusDays(2).getMonth().toString();
+        day3.setText(aux);
+    }
+
+
+    private void obtenerDatos(LocalDateTime day) {
+        seleccionaButtonIdInversa();
+        int d = day.getDayOfMonth();
+        int m = day.getMonthValue();
+        int y = day.getYear();
+        String fecha1 = d + "/" + m + "/" + y + " 9:0";
+        String fecha2 = d + "/" + m + "/" + y + " 10:30";
+        String fecha3 = d + "/" + m + "/" + y + " 12:0";
+        String fecha4 = d + "/" + m + "/" + y + " 18:0";
+        String fecha5 = d + "/" + m + "/" + y + " 19:30";
+        String fecha6 = d + "/" + m + "/" + y + " 21:0";
+        final List<String> ls = new ArrayList<String>();
+        ls.add(fecha1);
+        ls.add(fecha2);
+        ls.add(fecha3);
+        ls.add(fecha4);
+        ls.add(fecha5);
+        ls.add(fecha6);
+        if(day==Today) {
+            if (day.getHour() >= 21) {
+                for (int i = 0; i < 6; i++) {
+                    for (int j = 1; j < 6; j++) {
+                        seleccionaButtonId(i, j);
+                    }
+                }
+            } else if (day.getHour() >= 19) {
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 1; j < 6; j++) {
+                        seleccionaButtonId(i, j);
+                    }
+                }
+            } else if (day.getHour() >= 18) {
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 1; j < 6; j++) {
+                        seleccionaButtonId(i, j);
+                    }
+                }
+            } else if (day.getHour() >= 12) {
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 1; j < 6; j++) {
+                        seleccionaButtonId(i, j);
+                    }
+                }
+            } else if (day.getHour() >= 10) {
+                for (int i = 0; i < 2; i++) {
+                    for (int j = 1; j < 6; j++) {
+                        seleccionaButtonId(i, j);
+                    }
+                }
+            } else if (day.getHour() >= 9) {
+                for (int j = 1; j < 6; j++) {
+                    seleccionaButtonId(0, j);
+                }
+            }
+        }
+        db.collection("Bookings").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot d : task.getResult()) {
+                        Timestamp time = (Timestamp) d.getData().get("time");
+                        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochSecond(time.getSeconds()), TimeZone.getDefault().toZoneId());
+                        int e = date.getDayOfMonth();
+                        int m = date.getMonthValue();
+                        int y = date.getYear();
+                        int hour = date.getHour();
+                        int minute = date.getMinute();
+                        String aux = e + "/" + m + "/" + y + " " + hour + ":" + minute;
+                        String aux2 = d.getData().get("nFloor").toString();
+                        for (int i = 0; i < 6; i++) {
+                            for (Integer j = 1; j < 6; j++) {
+                                if (aux2.equals(j.toString()) && aux.equals(ls.get(i))) {
+                                    seleccionaButtonId(i, j);
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    private void seleccionaButtonId(int i, int j) {
+        switch (i) {
+            case 0:
+                switch (j) {
+                    case 1:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_1_1);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 2:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_1_2);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 3:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_1_3);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 4:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_1_4);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 5:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_1_5);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                }
+                break;
+            case 1:
+                switch (j) {
+                    case 1:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_2_1);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 2:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_2_2);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 3:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_2_3);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 4:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_2_4);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 5:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_2_5);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                }
+                break;
+            case 2:
+                switch (j) {
+                    case 1:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_3_1);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 2:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_3_2);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 3:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_3_3);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 4:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_3_4);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 5:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_3_5);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                }
+                break;
+            case 3:
+                switch (j) {
+                    case 1:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_4_1);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 2:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_4_2);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 3:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_4_3);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 4:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_4_4);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 5:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_4_5);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                }
+                break;
+            case 4:
+                switch (j) {
+                    case 1:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_5_1);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 2:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_5_2);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 3:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_5_3);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 4:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_5_4);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 5:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_5_5);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                }
+                break;
+            case 5:
+                switch (j) {
+                    case 1:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_6_1);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 2:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_6_2);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 3:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_6_3);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 4:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_6_4);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                    case 5:
+                        tupla = Pair.create(i, j);
+                        lsTuple.add(tupla);
+                        button = findViewById(R.id.reserva_6_5);
+                        button.setBackgroundColor(0xffff0000);
+                        button.setEnabled(false);
+                        break;
+                }
+        }
+    }
+
+    private void seleccionaButtonIdInversa() {
+        for (int k = 0; k < lsTuple.size(); k++) {
+            Integer i = lsTuple.get(k).first;
+            Integer j = lsTuple.get(k).second;
+            switch (i) {
+                case 0:
+                    switch (j) {
+                        case 1:
+                            button = findViewById(R.id.reserva_1_1);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 2:
+                            button = findViewById(R.id.reserva_1_2);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 3:
+
+                            button = findViewById(R.id.reserva_1_3);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 4:
+                            button = findViewById(R.id.reserva_1_4);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 5:
+                            button = findViewById(R.id.reserva_1_5);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (j) {
+                        case 1:
+                            button = findViewById(R.id.reserva_2_1);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 2:
+                            button = findViewById(R.id.reserva_2_2);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 3:
+                            button = findViewById(R.id.reserva_2_3);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 4:
+                            button = findViewById(R.id.reserva_2_4);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 5:
+                            button = findViewById(R.id.reserva_2_5);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (j) {
+                        case 1:
+                            button = findViewById(R.id.reserva_3_1);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 2:
+                            button = findViewById(R.id.reserva_3_2);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 3:
+                            button = findViewById(R.id.reserva_3_3);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 4:
+                            button = findViewById(R.id.reserva_3_4);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 5:
+                            button = findViewById(R.id.reserva_3_5);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+
+                            button.setEnabled(true);
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (j) {
+                        case 1:
+                            button = findViewById(R.id.reserva_4_1);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 2:
+                            button = findViewById(R.id.reserva_4_2);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 3:
+                            button = findViewById(R.id.reserva_4_3);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 4:
+                            button = findViewById(R.id.reserva_4_4);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 5:
+                            button = findViewById(R.id.reserva_4_5);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                    }
+                    break;
+                case 4:
+                    switch (j) {
+                        case 1:
+                            button = findViewById(R.id.reserva_5_1);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 2:
+                            button = findViewById(R.id.reserva_5_2);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 3:
+                            button = findViewById(R.id.reserva_5_3);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 4:
+                            button = findViewById(R.id.reserva_5_4);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 5:
+                            button = findViewById(R.id.reserva_5_5);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                    }
+                    break;
+                case 5:
+                    switch (j) {
+                        case 1:
+                            button = findViewById(R.id.reserva_6_1);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 2:
+                            button = findViewById(R.id.reserva_6_2);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 3:
+                            button = findViewById(R.id.reserva_6_3);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 4:
+                            button = findViewById(R.id.reserva_6_4);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                        case 5:
+                            button = findViewById(R.id.reserva_6_5);
+                            button.setBackgroundColor(Color.parseColor("#99FF99"));
+                            button.setEnabled(true);
+                            break;
+                    }
+            }
+        }
+        lsTuple.clear();
+    }
+
+    private void asociaButton() {
+        button1_1 = findViewById(R.id.reserva_1_1);
+        button1_2 = findViewById(R.id.reserva_1_2);
+        button1_3 = findViewById(R.id.reserva_1_3);
+        button1_4 = findViewById(R.id.reserva_1_4);
+        button1_5 = findViewById(R.id.reserva_1_5);
+        button2_1 = findViewById(R.id.reserva_2_1);
+        button2_2 = findViewById(R.id.reserva_2_2);
+        button2_3 = findViewById(R.id.reserva_2_3);
+        button2_4 = findViewById(R.id.reserva_2_4);
+        button2_5 = findViewById(R.id.reserva_2_5);
+        button3_1 = findViewById(R.id.reserva_3_1);
+        button3_2 = findViewById(R.id.reserva_3_2);
+        button3_3 = findViewById(R.id.reserva_3_3);
+        button3_4 = findViewById(R.id.reserva_3_4);
+        button3_5 = findViewById(R.id.reserva_3_5);
+        button4_1 = findViewById(R.id.reserva_4_1);
+        button4_2 = findViewById(R.id.reserva_4_2);
+        button4_3 = findViewById(R.id.reserva_4_3);
+        button4_4 = findViewById(R.id.reserva_4_4);
+        button4_5 = findViewById(R.id.reserva_4_5);
+        button5_1 = findViewById(R.id.reserva_5_1);
+        button5_2 = findViewById(R.id.reserva_5_2);
+        button5_3 = findViewById(R.id.reserva_5_3);
+        button5_4 = findViewById(R.id.reserva_5_4);
+        button5_5 = findViewById(R.id.reserva_5_5);
+        button6_1 = findViewById(R.id.reserva_6_1);
+        button6_2 = findViewById(R.id.reserva_6_2);
+        button6_3 = findViewById(R.id.reserva_6_3);
+        button6_4 = findViewById(R.id.reserva_6_4);
+        button6_5 = findViewById(R.id.reserva_6_5);
+
+
+    }
+
+    private void generaCodigo(){
         button1_1.setOnClickListener(v -> {
 
             String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -1404,532 +1980,6 @@ public class BookingActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-    }
-
-    public void checkButton(View v) {
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        findViewById(radioId);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void espacioTemporal() {
-        RadioButton day1 = findViewById(R.id.radio_button_today);
-        RadioButton day2 = findViewById(R.id.radio_button_tomorrow);
-        RadioButton day3 = findViewById(R.id.radio_button_nextDay);
-
-        LocalDateTime currentDay = LocalDateTime.now(ZoneId.of("Europe/Madrid"));
-        String aux = String.valueOf(currentDay.getDayOfMonth()) + " " + currentDay.getMonth().toString();
-        day1.setText(aux);
-        aux = String.valueOf(currentDay.plusDays(1).getDayOfMonth()) + " " + currentDay.plusDays(1).getMonth().toString();
-        day2.setText(aux);
-        aux = String.valueOf(currentDay.plusDays(2).getDayOfMonth()) + " " + currentDay.plusDays(2).getMonth().toString();
-        day3.setText(aux);
-    }
-
-
-    private void obtenerDatos(LocalDateTime day) {
-        seleccionaButtonIdInversa();
-        int d = day.getDayOfMonth();
-        int m = day.getMonthValue();
-        int y = day.getYear();
-        String fecha1 = d + "/" + m + "/" + y + " 9:0";
-        String fecha2 = d + "/" + m + "/" + y + " 10:30";
-        String fecha3 = d + "/" + m + "/" + y + " 12:0";
-        String fecha4 = d + "/" + m + "/" + y + " 18:0";
-        String fecha5 = d + "/" + m + "/" + y + " 19:30";
-        String fecha6 = d + "/" + m + "/" + y + " 21:0";
-        final List<String> ls = new ArrayList<String>();
-        ls.add(fecha1);
-        ls.add(fecha2);
-        ls.add(fecha3);
-        ls.add(fecha4);
-        ls.add(fecha5);
-        ls.add(fecha6);
-        db.collection("Bookings").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot d : task.getResult()) {
-                        Timestamp time = (Timestamp) d.getData().get("time");
-                        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochSecond(time.getSeconds()), TimeZone.getDefault().toZoneId());
-                        int e = date.getDayOfMonth();
-                        int m = date.getMonthValue();
-                        int y = date.getYear();
-                        int hour = date.getHour();
-                        int minute = date.getMinute();
-                        String aux = e + "/" + m + "/" + y + " " + hour + ":" + minute;
-                        String aux2 = d.getData().get("nFloor").toString();
-                        for (int i = 0; i < 6; i++) {
-                            for (Integer j = 1; j < 6; j++) {
-                                if (aux2.equals(j.toString()) && aux.equals(ls.get(i))) {
-                                    seleccionaButtonId(i, j);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-
-    }
-
-    private void seleccionaButtonId(int i, int j) {
-        switch (i) {
-            case 0:
-                switch (j) {
-                    case 1:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_1);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 2:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_2);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 3:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_3);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 4:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_4);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 5:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_5);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                }
-                break;
-            case 1:
-                switch (j) {
-                    case 1:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_1);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 2:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_2);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 3:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_3);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 4:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_4);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 5:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_5);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                }
-                break;
-            case 2:
-                switch (j) {
-                    case 1:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_1);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 2:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_2);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 3:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_3);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 4:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_4);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 5:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_5);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                }
-                break;
-            case 3:
-                switch (j) {
-                    case 1:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_1);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 2:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_2);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 3:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_3);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 4:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_4);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 5:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_5);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                }
-                break;
-            case 4:
-                switch (j) {
-                    case 1:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_1);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 2:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_2);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 3:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_3);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 4:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_4);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 5:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_5);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                }
-                break;
-            case 5:
-                switch (j) {
-                    case 1:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_1);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 2:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_2);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 3:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_3);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 4:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_4);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                    case 5:
-                        tupla = Pair.create(i, j);
-                        lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_5);
-                        button.setBackgroundColor(0xffff0000);
-                        button.setEnabled(false);
-                        break;
-                }
-        }
-    }
-
-    private void seleccionaButtonIdInversa() {
-        for (int k = 0; k < lsTuple.size(); k++) {
-            Integer i = lsTuple.get(k).first;
-            Integer j = lsTuple.get(k).second;
-            switch (i) {
-                case 0:
-                    switch (j) {
-                        case 1:
-                            button = findViewById(R.id.reserva_1_1);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 2:
-                            button = findViewById(R.id.reserva_1_2);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 3:
-
-                            button = findViewById(R.id.reserva_1_3);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 4:
-                            button = findViewById(R.id.reserva_1_4);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 5:
-                            button = findViewById(R.id.reserva_1_5);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                    }
-                    break;
-                case 1:
-                    switch (j) {
-                        case 1:
-                            button = findViewById(R.id.reserva_2_1);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 2:
-                            button = findViewById(R.id.reserva_2_2);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 3:
-                            button = findViewById(R.id.reserva_2_3);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 4:
-                            button = findViewById(R.id.reserva_2_4);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 5:
-                            button = findViewById(R.id.reserva_2_5);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                    }
-                    break;
-                case 2:
-                    switch (j) {
-                        case 1:
-                            button = findViewById(R.id.reserva_3_1);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 2:
-                            button = findViewById(R.id.reserva_3_2);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 3:
-                            button = findViewById(R.id.reserva_3_3);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 4:
-                            button = findViewById(R.id.reserva_3_4);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 5:
-                            button = findViewById(R.id.reserva_3_5);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-
-                            button.setEnabled(true);
-                            break;
-                    }
-                    break;
-                case 3:
-                    switch (j) {
-                        case 1:
-                            button = findViewById(R.id.reserva_4_1);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 2:
-                            button = findViewById(R.id.reserva_4_2);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 3:
-                            button = findViewById(R.id.reserva_4_3);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 4:
-                            button = findViewById(R.id.reserva_4_4);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 5:
-                            button = findViewById(R.id.reserva_4_5);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                    }
-                    break;
-                case 4:
-                    switch (j) {
-                        case 1:
-                            button = findViewById(R.id.reserva_5_1);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 2:
-                            button = findViewById(R.id.reserva_5_2);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 3:
-                            button = findViewById(R.id.reserva_5_3);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 4:
-                            button = findViewById(R.id.reserva_5_4);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 5:
-                            button = findViewById(R.id.reserva_5_5);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                    }
-                    break;
-                case 5:
-                    switch (j) {
-                        case 1:
-                            button = findViewById(R.id.reserva_6_1);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 2:
-                            button = findViewById(R.id.reserva_6_2);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 3:
-                            button = findViewById(R.id.reserva_6_3);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 4:
-                            button = findViewById(R.id.reserva_6_4);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                        case 5:
-                            button = findViewById(R.id.reserva_6_5);
-                            button.setBackgroundColor(Color.parseColor("#99FF99"));
-                            button.setEnabled(true);
-                            break;
-                    }
-            }
-        }
-        lsTuple.clear();
-    }
-
-    private void asociaButton() {
-        button1_1 = findViewById(R.id.reserva_1_1);
-        button1_2 = findViewById(R.id.reserva_1_2);
-        button1_3 = findViewById(R.id.reserva_1_3);
-        button1_4 = findViewById(R.id.reserva_1_4);
-        button1_5 = findViewById(R.id.reserva_1_5);
-        button2_1 = findViewById(R.id.reserva_2_1);
-        button2_2 = findViewById(R.id.reserva_2_2);
-        button2_3 = findViewById(R.id.reserva_2_3);
-        button2_4 = findViewById(R.id.reserva_2_4);
-        button2_5 = findViewById(R.id.reserva_2_5);
-        button3_1 = findViewById(R.id.reserva_3_1);
-        button3_2 = findViewById(R.id.reserva_3_2);
-        button3_3 = findViewById(R.id.reserva_3_3);
-        button3_4 = findViewById(R.id.reserva_3_4);
-        button3_5 = findViewById(R.id.reserva_3_5);
-        button4_1 = findViewById(R.id.reserva_4_1);
-        button4_2 = findViewById(R.id.reserva_4_2);
-        button4_3 = findViewById(R.id.reserva_4_3);
-        button4_4 = findViewById(R.id.reserva_4_4);
-        button4_5 = findViewById(R.id.reserva_4_5);
-        button5_1 = findViewById(R.id.reserva_5_1);
-        button5_2 = findViewById(R.id.reserva_5_2);
-        button5_3 = findViewById(R.id.reserva_5_3);
-        button5_4 = findViewById(R.id.reserva_5_4);
-        button5_5 = findViewById(R.id.reserva_5_5);
-        button6_1 = findViewById(R.id.reserva_6_1);
-        button6_2 = findViewById(R.id.reserva_6_2);
-        button6_3 = findViewById(R.id.reserva_6_3);
-        button6_4 = findViewById(R.id.reserva_6_4);
-        button6_5 = findViewById(R.id.reserva_6_5);
-
-
     }
 
 }

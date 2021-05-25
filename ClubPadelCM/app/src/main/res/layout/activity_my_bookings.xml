@@ -10,9 +10,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/text_reservas_pendiente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reservas Pendientes" />
+
         <ListView
-            android:id="@+id/list_view"
+            android:id="@+id/list_view_pendiente"
+            android:layout_width="match_parent"
+            android:layout_height="346dp" />
+
+        <TextView
+            android:id="@+id/text_reservas_finalizada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reservas finalizadas" />
+
+        <ListView
+            android:id="@+id/list_view_finalizada"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
