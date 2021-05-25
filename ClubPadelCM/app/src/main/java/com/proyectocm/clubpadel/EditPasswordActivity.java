@@ -6,11 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -74,18 +71,15 @@ public class EditPasswordActivity extends AppCompatActivity {
 
     }
 
-    private void changePassword(TextView dataEmail, TextView dataOldPass, TextView dataNewPass){
+    private void changePassword(TextView dataEmail, TextView dataOldPass, TextView dataNewPass) {
         reauthenticate(dataEmail.getText().toString(), dataOldPass.getText().toString());
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        user.updatePassword(dataNewPass.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Se ha actualizado la contraseña.", Toast.LENGTH_LONG).show();
-                        }
+        Objects.requireNonNull(user).updatePassword(dataNewPass.getText().toString())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Se ha actualizado la contraseña.", Toast.LENGTH_LONG).show();
                     }
                 });
     }

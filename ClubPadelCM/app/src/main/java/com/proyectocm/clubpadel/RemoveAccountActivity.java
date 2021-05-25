@@ -6,13 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,19 +70,16 @@ public class RemoveAccountActivity extends AppCompatActivity {
 
     }
 
-    private void removeUser(String userId, TextView dataEmail, TextView dataPass){
+    private void removeUser(String userId, TextView dataEmail, TextView dataPass) {
         reauthenticate(dataEmail.getText().toString(), dataPass.getText().toString());
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        user.delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            removeUserFromDB(userId);
-                            Toast.makeText(getApplicationContext(), "Se ha eliminado la cuenta.", Toast.LENGTH_LONG).show();
-                        }
+        Objects.requireNonNull(user).delete()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        removeUserFromDB(userId);
+                        Toast.makeText(getApplicationContext(), "Se ha eliminado la cuenta.", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -106,18 +98,12 @@ public class RemoveAccountActivity extends AppCompatActivity {
     private void removeUserFromDB(String userId) {
         db.collection("Users").document(userId)
                 .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //Toast.makeText(getApplicationContext(), "Se ha eliminado al usuario correctamente de la DB.", Toast.LENGTH_LONG).show();
-                    }
+                .addOnSuccessListener(aVoid -> {
+                    //Toast.makeText(getApplicationContext(), "Se ha eliminado al usuario correctamente de la DB.", Toast.LENGTH_LONG).show();
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //Toast.makeText(getApplicationContext(), "No se ha podido eliminar al usuario de la DB.", Toast.LENGTH_LONG).show();
+                .addOnFailureListener(e -> {
+                    //Toast.makeText(getApplicationContext(), "No se ha podido eliminar al usuario de la DB.", Toast.LENGTH_LONG).show();
 
-                    }
                 });
 
     }

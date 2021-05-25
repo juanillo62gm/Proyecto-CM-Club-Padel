@@ -1,8 +1,8 @@
 package com.proyectocm.clubpadel;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ForgottenPasswordActivity extends AppCompatActivity {
 

@@ -55,11 +55,11 @@ public class Booking {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public String toString() {
-        return "Pista " + nFloor + " "+ getDate(time);
+        return "Pista " + nFloor + " " + getDate(time);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public String getDate(Timestamp time){
+    public String getDate(Timestamp time) {
         String res;
         String min;
         LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochSecond(time.getSeconds()), TimeZone.getDefault().toZoneId());
@@ -68,9 +68,9 @@ public class Booking {
         int y = date.getYear();
         int hour = date.getHour();
         int minute = date.getMinute();
-        if(minute ==0){
-           min = "00";
-        }else{
+        if (minute == 0) {
+            min = "00";
+        } else {
             min = "30";
         }
         res = e + "/" + m + "/" + y + " " + hour + ":" + min;

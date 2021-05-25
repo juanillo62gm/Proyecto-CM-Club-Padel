@@ -78,3 +78,4 @@ Para la tabla partidos (Parejas):
   4. https://www.youtube.com/watch?v=HTsIBm4kjqE
   5. https://www.youtube.com/watch?v=wa8OrQ_e76M
   6. https://www.youtube.com/watch?v=fl2huoGxvic
+  7. https://www.youtube.com/watch?v=2duc77R4Hqw

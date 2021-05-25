@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
         });
 
         Button my_bookings = root.findViewById(R.id.buttonMyBookings);
-        my_bookings.setOnClickListener(v-> {
+        my_bookings.setOnClickListener(v -> {
             Intent jumpTo = new Intent(getActivity(), MyBookingsActivity.class);
             startActivity(jumpTo);
         });
