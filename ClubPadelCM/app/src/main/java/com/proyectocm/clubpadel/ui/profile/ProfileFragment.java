@@ -85,15 +85,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        // Link FaceBook Button
-        final Button buttonFB = root.findViewById(R.id.buttonLinkFB);
-        buttonFB.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "Botón Link Facebook", Toast.LENGTH_LONG).show();
-        });
-
-        // Link Google Button
-        final Button buttonGoogle = root.findViewById(R.id.buttonLinkGoogle);
-        buttonGoogle.setOnClickListener(v -> Toast.makeText(getActivity(), "Botón Link Google", Toast.LENGTH_LONG).show());
 
         return root;
     }
