@@ -672,7 +672,7 @@ public class BookingActivity extends AppCompatActivity {
             int d = Day_selected.getDayOfMonth();
             int m = Day_selected.getMonthValue();
             int y = Day_selected.getYear();
-            String aux = d + "/" + m + "/" + y + " "+hora;
+            String aux = d + "/" + m + "/" + y + " " + hora;
             String aux2 = d + "/" + m + "/" + y;
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)

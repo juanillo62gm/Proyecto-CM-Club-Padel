@@ -10,13 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.LoggingBehavior;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,25 +21,21 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class ModifyUserAccountActivity extends AppCompatActivity {
 
-    // Google SignIn
-    private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 111;
-
     // Firebase Firestore
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    // Google SignIn
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +60,7 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         buttonRemoveAccount();
         buttonLinkFacebook();
         buttonLinkGoogle();
-        
+
     }
 
     private void fetchUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone) {
@@ -201,7 +190,7 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         });
     }
 
-    private void LinkGoogle(String idToken){
+    private void LinkGoogle(String idToken) {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         // [END auth_google_cred]
@@ -225,7 +214,6 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
                 });
     }
 
-    // Start Google SignIn
     private void SignInGoogle() {
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -242,7 +230,6 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
