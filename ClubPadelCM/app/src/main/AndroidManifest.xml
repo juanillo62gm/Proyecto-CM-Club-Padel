@@ -11,17 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubPadel">
-        <activity android:name=".MyBookingsActivity" />
-        <activity android:name=".ForgottenPasswordActivity" />
-        <activity android:name=".RemoveAccountActivity" />
-        <activity android:name=".EditPasswordActivity" />
-        <activity android:name=".EditEmailActivity" />
-        <activity android:name=".ModifyUserAccountActivity" />
-        <activity android:name=".BookingActivity" />
-        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".ui.home.MyBookingsActivity" />
+        <activity android:name=".ui.start.ForgottenPasswordActivity" />
+        <activity android:name=".ui.profile.RemoveAccountActivity" />
+        <activity android:name=".ui.profile.EditPasswordActivity" />
+        <activity android:name=".ui.profile.EditEmailActivity" />
+        <activity android:name=".ui.profile.ModifyUserAccountActivity" />
+        <activity android:name=".ui.home.BookingActivity" />
+        <activity android:name=".ui.start.CreateAccountActivity" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.start.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

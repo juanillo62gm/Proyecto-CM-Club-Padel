@@ -1,4 +1,4 @@
-package com.proyectocm.clubpadel;
+package com.proyectocm.clubpadel.ui.start;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.proyectocm.clubpadel.MainActivity;
+import com.proyectocm.clubpadel.R;
+import com.proyectocm.clubpadel.User;
 
 import java.util.Objects;
 

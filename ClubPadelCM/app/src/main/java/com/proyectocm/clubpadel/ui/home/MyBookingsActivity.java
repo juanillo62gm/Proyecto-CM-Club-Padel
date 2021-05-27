@@ -1,4 +1,4 @@
-package com.proyectocm.clubpadel;
+package com.proyectocm.clubpadel.ui.home;
 
 import android.content.Intent;
 import android.os.Build;
@@ -16,6 +16,9 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.proyectocm.clubpadel.Booking;
+import com.proyectocm.clubpadel.MainActivity;
+import com.proyectocm.clubpadel.R;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

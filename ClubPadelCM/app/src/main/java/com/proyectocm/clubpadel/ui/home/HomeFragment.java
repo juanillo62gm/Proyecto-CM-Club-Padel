@@ -10,20 +10,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.proyectocm.clubpadel.BookingActivity;
-import com.proyectocm.clubpadel.LoginActivity;
-import com.proyectocm.clubpadel.MyBookingsActivity;
 import com.proyectocm.clubpadel.R;
+import com.proyectocm.clubpadel.ui.start.LoginActivity;
 
 public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         Button booking_button = root.findViewById(R.id.buttonBooking);

@@ -1,4 +1,4 @@
-package com.proyectocm.clubpadel;
+package com.proyectocm.clubpadel.ui.start;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +27,9 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.proyectocm.clubpadel.BuildConfig;
+import com.proyectocm.clubpadel.MainActivity;
+import com.proyectocm.clubpadel.R;
 
 import java.util.Arrays;
 

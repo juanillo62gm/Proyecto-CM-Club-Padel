@@ -1,4 +1,4 @@
-package com.proyectocm.clubpadel;
+package com.proyectocm.clubpadel.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +15,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.proyectocm.clubpadel.R;
+import com.proyectocm.clubpadel.ui.start.LoginActivity;
 
 import java.util.Objects;
 
-public class EditPasswordActivity extends AppCompatActivity {
+public class RemoveAccountActivity extends AppCompatActivity {
 
     // Firebase Firestore
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -28,25 +30,24 @@ public class EditPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_password);
-        setTitle("Cambiar contraseña");
+        setContentView(R.layout.activity_remove_account);
+        setTitle("Eliminar cuenta");
 
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-        final TextView dataEmail = findViewById(R.id.insertRememberEmail);
-        final TextView dataNewPass = findViewById(R.id.insertNewPass);
-        final TextView dataOldPass = findViewById(R.id.insertOldPass);
+        final TextView dataEmail = findViewById(R.id.insertRemoveEmail);
+        final TextView dataPass = findViewById(R.id.insertRemovePass);
 
         fetchUserEmail(userId, dataEmail);
 
-        buttonChangePassword(dataEmail, dataOldPass, dataNewPass);
+        buttonRemoveAccount(userId, dataEmail, dataPass);
     }
 
-    private void buttonChangePassword(TextView dataEmail, TextView dataOldPass, TextView dataNewPass) {
-        final Button bChangePassword = findViewById(R.id.buttonRequestEditPass);
-        bChangePassword.setOnClickListener(v -> {
-            changePassword(dataEmail, dataOldPass, dataNewPass);
-            Intent jumpTo = new Intent(EditPasswordActivity.this, MainActivity.class);
+    private void buttonRemoveAccount(String userId, TextView dataEmail, TextView dataPass) {
+        final Button bRemoveAccount = findViewById(R.id.buttonRequestRemoveAccount);
+        bRemoveAccount.setOnClickListener(v -> {
+            removeUser(userId, dataEmail, dataPass);
+            Intent jumpTo = new Intent(RemoveAccountActivity.this, LoginActivity.class);
             startActivity(jumpTo);
             finish();
         });
@@ -66,15 +67,16 @@ public class EditPasswordActivity extends AppCompatActivity {
         });
     }
 
-    private void changePassword(TextView dataEmail, TextView dataOldPass, TextView dataNewPass) {
-        reauthenticate(dataEmail.getText().toString(), dataOldPass.getText().toString());
+    private void removeUser(String userId, TextView dataEmail, TextView dataPass) {
+        reauthenticate(dataEmail.getText().toString(), dataPass.getText().toString());
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        Objects.requireNonNull(user).updatePassword(dataNewPass.getText().toString())
+        Objects.requireNonNull(user).delete()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Se ha actualizado la contraseña.", Toast.LENGTH_LONG).show();
+                        removeUserFromDB(userId);
+                        Toast.makeText(getApplicationContext(), "Se ha eliminado la cuenta.", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -88,6 +90,19 @@ public class EditPasswordActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     //Toast.makeText(getApplicationContext(), "Re-Autenticado el usuario", Toast.LENGTH_LONG).show();
                 });
+    }
+
+    private void removeUserFromDB(String userId) {
+        db.collection("Users").document(userId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    //Toast.makeText(getApplicationContext(), "Se ha eliminado al usuario correctamente de la DB.", Toast.LENGTH_LONG).show();
+                })
+                .addOnFailureListener(e -> {
+                    //Toast.makeText(getApplicationContext(), "No se ha podido eliminar al usuario de la DB.", Toast.LENGTH_LONG).show();
+
+                });
+
     }
 
 }

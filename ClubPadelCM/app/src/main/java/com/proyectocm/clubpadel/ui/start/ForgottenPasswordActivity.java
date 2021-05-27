@@ -1,4 +1,4 @@
-package com.proyectocm.clubpadel;
+package com.proyectocm.clubpadel.ui.start;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.proyectocm.clubpadel.R;
 
 public class ForgottenPasswordActivity extends AppCompatActivity {
 
