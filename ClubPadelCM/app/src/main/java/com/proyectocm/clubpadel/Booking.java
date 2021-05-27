@@ -80,7 +80,6 @@ public class Booking implements Comparable {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int compareTo(Object o) {
-        Booking booking = (Booking) o;
         LocalDateTime fecha = LocalDateTime.ofInstant(Instant.ofEpochSecond(this.time.getSeconds()), TimeZone.getDefault().toZoneId());
         LocalDateTime fecha2 = LocalDateTime.ofInstant(Instant.ofEpochSecond(((Booking) o).getTime().getSeconds()), TimeZone.getDefault().toZoneId());
         return fecha.compareTo(fecha2);

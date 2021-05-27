@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
@@ -15,10 +14,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -161,33 +158,26 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         // [END auth_fb_cred]
 
-        buttonFacebook.setOnClickListener(v -> {
-            mAuth.getCurrentUser().linkWithCredential(credential)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Funciona.", Toast.LENGTH_LONG).show();
-                                //Log.d(TAG, "linkWithCredential:success");
-                                //FirebaseUser user = task.getResult().getUser();
-                                //updateUI(user);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "No Funciona.", Toast.LENGTH_LONG).show();
-                                //Log.w(TAG, "linkWithCredential:failure", task.getException());
-                                //Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                //updateUI(null);
-                            }
-                        }
-                    });
-        });
+        buttonFacebook.setOnClickListener(v -> Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Funciona.", Toast.LENGTH_LONG).show();
+                        //Log.d(TAG, "linkWithCredential:success");
+                        //FirebaseUser user = task.getResult().getUser();
+                        //updateUI(user);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No Funciona.", Toast.LENGTH_LONG).show();
+                        //Log.w(TAG, "linkWithCredential:failure", task.getException());
+                        //Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        //updateUI(null);
+                    }
+                }));
     }
 
     private void buttonLinkGoogle() {
         final Button buttonGoogle = findViewById(R.id.buttonLinkGoogle);
 
-        buttonGoogle.setOnClickListener(v -> {
-            signIn();
-        });
+        buttonGoogle.setOnClickListener(v -> signIn());
     }
 
     private void LinkGoogle(String idToken) {
@@ -195,21 +185,18 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         // [END auth_google_cred]
 
-        mAuth.getCurrentUser().linkWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Funciona.", Toast.LENGTH_LONG).show();
-                            //Log.d(TAG, "linkWithCredential:success");
-                            //FirebaseUser user = task.getResult().getUser();
-                            //updateUI(user);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "No Funciona.", Toast.LENGTH_LONG).show();
-                            //Log.w(TAG, "linkWithCredential:failure", task.getException());
-                            //Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
+        Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Funciona.", Toast.LENGTH_LONG).show();
+                        //Log.d(TAG, "linkWithCredential:success");
+                        //FirebaseUser user = task.getResult().getUser();
+                        //updateUI(user);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No Funciona.", Toast.LENGTH_LONG).show();
+                        //Log.w(TAG, "linkWithCredential:failure", task.getException());
+                        //Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        //updateUI(null);
                     }
                 });
     }

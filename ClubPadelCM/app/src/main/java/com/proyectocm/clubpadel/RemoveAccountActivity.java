@@ -60,14 +60,9 @@ public class RemoveAccountActivity extends AppCompatActivity {
                 if (Objects.requireNonNull(document).exists()) {
                     String fbEmail = Objects.requireNonNull(document.get("email")).toString();
                     dataEmail.setText(fbEmail);
-                } else {
-                    //Toast.makeText(getApplicationContext(), "No existe el email.", Toast.LENGTH_LONG).show();
                 }
-            } else {
-                //Toast.makeText(getApplicationContext(), "Error en la solicitud." + task.getException(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     private void removeUser(String userId, TextView dataEmail, TextView dataPass) {
