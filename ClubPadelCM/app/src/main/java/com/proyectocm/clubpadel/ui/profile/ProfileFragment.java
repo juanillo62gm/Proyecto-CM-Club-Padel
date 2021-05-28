@@ -63,7 +63,7 @@ public class ProfileFragment extends Fragment {
         // Edit Profile Button
         final Button bEditProfile = root.findViewById(R.id.buttonEditProfile);
         bEditProfile.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(getActivity(), ModifyUserAccountActivity.class);
+            Intent jumpTo = new Intent(getActivity(), EditUserProfileActivity.class);
             startActivity(jumpTo);
         });
 

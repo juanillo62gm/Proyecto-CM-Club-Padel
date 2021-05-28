@@ -111,8 +111,8 @@
     <string name="buttonStoreNewProfileInfo">Editar Perfil</string>
     <string name="buttonEditEmail">Cambiar Correo</string>
     <string name="buttonEditPass">Cambiar Contraseña</string>
-    <string name="buttonLinkFB">Link FB</string>
-    <string name="buttonLinkGoogle">Link G</string>
+    <string name="buttonLinkFB">Vincular Facebook</string>
+    <string name="buttonLinkGoogle">Vincular Google</string>
     <string name="buttonRemoveAccount">Eliminar Cuenta</string>
 
     <!-- Activity My Bookings -->

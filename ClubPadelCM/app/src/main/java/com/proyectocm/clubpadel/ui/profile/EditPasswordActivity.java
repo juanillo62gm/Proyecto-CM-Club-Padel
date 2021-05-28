@@ -88,7 +88,7 @@ public class EditPasswordActivity extends AppCompatActivity {
 
         Objects.requireNonNull(user).reauthenticate(credential)
                 .addOnCompleteListener(task -> {
-                    //Toast.makeText(getApplicationContext(), "Re-Autenticado el usuario", Toast.LENGTH_LONG).show();
+
                 });
     }
 

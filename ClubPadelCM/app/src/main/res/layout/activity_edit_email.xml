@@ -31,8 +31,8 @@
             android:id="@+id/insertOldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
             android:hint="@string/insertOldEmail"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -49,8 +49,8 @@
             android:id="@+id/insertModifiedEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
             android:hint="@string/insertModifiedEmail"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -68,8 +68,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:importantForAutofill="no"
             android:hint="@string/insertPass"
+            android:importantForAutofill="no"
             android:inputType="textPassword" />
 
         <Space
@@ -80,6 +80,8 @@
             android:id="@+id/buttonRequestEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/buttonRequestEditEmail" />
+            android:backgroundTint="@color/success"
+            android:text="@string/buttonRequestEditEmail"
+            tools:targetApi="lollipop" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

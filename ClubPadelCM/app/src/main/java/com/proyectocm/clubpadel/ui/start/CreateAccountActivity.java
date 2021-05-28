@@ -67,7 +67,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 loginUser();
 
-                // Start Database Store User Data
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                 String name = dataName.getText().toString();
                 String surname = dataSurname.getText().toString();
@@ -80,7 +79,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                         .set(user)
                         .addOnSuccessListener(aVoid -> Toast.makeText(getApplicationContext(), "Los datos del usuario se han almacenado correctamente.", Toast.LENGTH_LONG).show())
                         .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Error al almacenar los datos del usuario.", Toast.LENGTH_LONG).show());
-                // End Database Store User Data
 
                 Toast.makeText(getApplicationContext(), "Su cuenta ha sido creada.", Toast.LENGTH_LONG).show();
             } else {

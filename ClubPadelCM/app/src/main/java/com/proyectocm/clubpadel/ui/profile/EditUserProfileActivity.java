@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
@@ -27,7 +28,7 @@ import com.proyectocm.clubpadel.R;
 
 import java.util.Objects;
 
-public class ModifyUserAccountActivity extends AppCompatActivity {
+public class EditUserProfileActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 111;
     // Firebase Firestore
@@ -39,7 +40,7 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify_user_account);
+        setContentView(R.layout.activity_edit_user_profile);
         setTitle("Editar perfil");
 
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -48,23 +49,23 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
         final TextView dataSurname = findViewById(R.id.insertModifiedSurname);
         final TextView dataPhone = findViewById(R.id.insertModifiedPhone);
 
-        fetchUserData(userId, dataName, dataSurname, dataPhone);
-
-        buttonSendUserData(userId, dataName, dataSurname, dataPhone);
-
         SignInGoogle();
+
+        fetchUserDataFromDB(userId, dataName, dataSurname, dataPhone);
+
+        buttonEditProfile(userId, dataName, dataSurname, dataPhone);
 
         buttonEditEmail();
         buttonEditPass();
-        buttonRemoveAccount();
+
         buttonLinkFacebook();
         buttonLinkGoogle();
 
+        buttonRemoveAccount();
+
     }
 
-    private void fetchUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone) {
-
-        // Request stored info from DB
+    private void fetchUserDataFromDB(String userId, TextView dataName, TextView dataSurname, TextView dataPhone) {
         DocumentReference docRef = db.collection("Users").document(userId);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -76,7 +77,6 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
                     dataName.setText(fbName);
                     dataSurname.setText(fbSurname);
                     dataPhone.setText(fbPhone);
-
                 } else {
                     Toast.makeText(getApplicationContext(), "No existe el usuario.", Toast.LENGTH_LONG).show();
                 }
@@ -87,50 +87,41 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
 
     }
 
-    private void modifyUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone) {
-
-        DocumentReference modifiedData = db.collection("Users").document(userId);
-        modifiedData
-                .update("name", dataName.getText().toString())
-                .addOnSuccessListener(aVoid -> {
-                    //Toast.makeText(getApplicationContext(), "Se ha actualizado el campo nombre.", Toast.LENGTH_LONG).show();
-                })
-                .addOnFailureListener(e -> {
-                    //Toast.makeText(getApplicationContext(), "Error al actualizar el campo nombre.", Toast.LENGTH_LONG).show();
-                });
-        modifiedData
-                .update("surname", dataSurname.getText().toString())
-                .addOnSuccessListener(aVoid -> {
-                    //Toast.makeText(getApplicationContext(), "Se ha actualizado el campo apellidos.", Toast.LENGTH_LONG).show();
-                })
-                .addOnFailureListener(e -> {
-                    //Toast.makeText(getApplicationContext(), "Error al actualizar el campo apellidos.", Toast.LENGTH_LONG).show();
-                });
-        modifiedData
-                .update("phone", dataPhone.getText().toString())
-                .addOnSuccessListener(aVoid -> {
-                    //Toast.makeText(getApplicationContext(), "Se ha actualizado el campo móvil.", Toast.LENGTH_LONG).show();
-                })
-                .addOnFailureListener(e -> {
-                    //Toast.makeText(getApplicationContext(), "Error al actualizar el campo móvil.", Toast.LENGTH_LONG).show();
-                });
-    }
-
-    private void buttonSendUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone) {
+    private void buttonEditProfile(String userId, TextView dataName, TextView dataSurname, TextView dataPhone) {
         final Button bEditProfile = findViewById(R.id.buttonStoreNewProfileInfo);
         bEditProfile.setOnClickListener(v -> {
-            modifyUserData(userId, dataName, dataSurname, dataPhone);
-            Toast.makeText(getApplicationContext(), "Se han modificado los datos del perfil.", Toast.LENGTH_LONG).show();
-            Intent jumpTo = new Intent(ModifyUserAccountActivity.this, MainActivity.class);
-            startActivity(jumpTo);
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditUserProfileActivity.this)
+                    .setTitle("Se van a modificar su perfil").setMessage("¿Está seguro?")
+                    .setPositiveButton(R.string.ok, (dialog, which) -> {
+                        modifyUserData(userId, dataName, dataSurname, dataPhone);
+                        Toast.makeText(getApplicationContext(), "Se han modificado los datos del perfil.", Toast.LENGTH_LONG).show();
+                        Intent jumpTo = new Intent(EditUserProfileActivity.this, MainActivity.class);
+                        startActivity(jumpTo);
+                        finish();
+                    })
+                    .setNegativeButton(R.string.decline, (dialog, which) -> {
+
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
+    }
+
+    private void modifyUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone) {
+        DocumentReference modifiedData = db.collection("Users").document(userId);
+        modifiedData
+                .update("name", dataName.getText().toString());
+        modifiedData
+                .update("surname", dataSurname.getText().toString());
+        modifiedData
+                .update("phone", dataPhone.getText().toString());
     }
 
     private void buttonEditEmail() {
         final Button bEditEmail = findViewById(R.id.buttonEditEmail);
         bEditEmail.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(ModifyUserAccountActivity.this, EditEmailActivity.class);
+            Intent jumpTo = new Intent(EditUserProfileActivity.this, EditEmailActivity.class);
             startActivity(jumpTo);
         });
     }
@@ -138,67 +129,49 @@ public class ModifyUserAccountActivity extends AppCompatActivity {
     private void buttonEditPass() {
         final Button bEditEmail = findViewById(R.id.buttonEditPass);
         bEditEmail.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(ModifyUserAccountActivity.this, EditPasswordActivity.class);
+            Intent jumpTo = new Intent(EditUserProfileActivity.this, EditPasswordActivity.class);
             startActivity(jumpTo);
-        });
-    }
-
-    private void buttonRemoveAccount() {
-        final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
-        bRemoveAccount.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(ModifyUserAccountActivity.this, RemoveAccountActivity.class);
-            startActivity(jumpTo);
-            finish();
         });
     }
 
     private void buttonLinkFacebook() {
         final Button buttonFacebook = findViewById(R.id.buttonLinkFB);
-
         AccessToken token = AccessToken.getCurrentAccessToken();
-        // [START auth_fb_cred]
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        // [END auth_fb_cred]
 
         buttonFacebook.setOnClickListener(v -> Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Funciona.", Toast.LENGTH_LONG).show();
-                        //Log.d(TAG, "linkWithCredential:success");
-                        //FirebaseUser user = task.getResult().getUser();
-                        //updateUI(user);
+                        Toast.makeText(getApplicationContext(), "Se ha vinculado correctamente la cuenta de Facebook.", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "No Funciona.", Toast.LENGTH_LONG).show();
-                        //Log.w(TAG, "linkWithCredential:failure", task.getException());
-                        //Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        //updateUI(null);
+                        Toast.makeText(getApplicationContext(), "No se ha podido vincular la cuenta de Facebook", Toast.LENGTH_LONG).show();
                     }
                 }));
     }
 
     private void buttonLinkGoogle() {
         final Button buttonGoogle = findViewById(R.id.buttonLinkGoogle);
-
         buttonGoogle.setOnClickListener(v -> signIn());
     }
 
-    private void LinkGoogle(String idToken) {
+    private void buttonRemoveAccount() {
+        final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
+        bRemoveAccount.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(EditUserProfileActivity.this, RemoveAccountActivity.class);
+            startActivity(jumpTo);
+            finish();
+        });
+    }
 
+    private void LinkGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        // [END auth_google_cred]
 
         Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Funciona.", Toast.LENGTH_LONG).show();
-                        //Log.d(TAG, "linkWithCredential:success");
-                        //FirebaseUser user = task.getResult().getUser();
-                        //updateUI(user);
+                        Toast.makeText(getApplicationContext(), "Se ha vinculado correctamente la cuenta de Google.", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "No Funciona.", Toast.LENGTH_LONG).show();
-                        //Log.w(TAG, "linkWithCredential:failure", task.getException());
-                        //Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        //updateUI(null);
+                        Toast.makeText(getApplicationContext(), "No se ha podido vincular la cuenta de Google", Toast.LENGTH_LONG).show();
                     }
                 });
     }

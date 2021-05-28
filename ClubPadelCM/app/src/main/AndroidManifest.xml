@@ -16,7 +16,7 @@
         <activity android:name=".ui.profile.RemoveAccountActivity" />
         <activity android:name=".ui.profile.EditPasswordActivity" />
         <activity android:name=".ui.profile.EditEmailActivity" />
-        <activity android:name=".ui.profile.ModifyUserAccountActivity" />
+        <activity android:name=".ui.profile.EditUserProfileActivity" />
         <activity android:name=".ui.home.BookingActivity" />
         <activity android:name=".ui.start.CreateAccountActivity" />
         <activity android:name=".MainActivity" />

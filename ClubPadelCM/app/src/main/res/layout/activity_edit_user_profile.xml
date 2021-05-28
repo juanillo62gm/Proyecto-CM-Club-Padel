@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ModifyUserAccountActivity">
+    tools:context=".ui.profile.EditUserProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,8 +31,8 @@
             android:id="@+id/insertModifiedName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
             android:hint="@string/insertModifiedName"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -49,8 +49,8 @@
             android:id="@+id/insertModifiedSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
             android:hint="@string/insertModifiedSurname"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -67,8 +67,8 @@
             android:id="@+id/insertModifiedPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
             android:hint="@string/insertModifiedPhone"
+            android:importantForAutofill="no"
             android:inputType="phone" />
 
         <Space
@@ -79,7 +79,9 @@
             android:id="@+id/buttonStoreNewProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/buttonStoreNewProfileInfo" />
+            android:backgroundTint="@color/success"
+            android:text="@string/buttonStoreNewProfileInfo"
+            tools:targetApi="lollipop" />
 
         <Space
             android:layout_width="match_parent"
@@ -113,8 +115,10 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/marine"
                 android:text="@string/buttonLinkFB"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                tools:targetApi="lollipop" />
 
             <Button
                 android:id="@+id/buttonLinkGoogle"
@@ -123,8 +127,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/marine"
                 android:text="@string/buttonLinkGoogle"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                tools:targetApi="lollipop" />
         </LinearLayout>
 
         <Space
@@ -135,7 +141,9 @@
             android:id="@+id/buttonRemoveAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/buttonRemoveAccount" />
+            android:backgroundTint="@color/danger"
+            android:text="@string/buttonRemoveAccount"
+            tools:targetApi="lollipop" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

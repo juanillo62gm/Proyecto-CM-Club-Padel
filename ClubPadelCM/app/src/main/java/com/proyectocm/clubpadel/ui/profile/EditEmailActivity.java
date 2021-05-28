@@ -63,8 +63,6 @@ public class EditEmailActivity extends AppCompatActivity {
 
     }
 
-    // https://firebase.google.com/docs/auth/android/manage-users#set_a_users_email_address
-    // https://firebase.google.com/docs/auth/android/manage-users#re-authenticate_a_user
     private void modifyUserEmail(String userId, TextView dataOldEmail, TextView dataPass, TextView dataNewEmail) {
         reauthenticate(dataOldEmail.getText().toString(), dataPass.getText().toString());
 
@@ -75,13 +73,7 @@ public class EditEmailActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentReference modifiedData = db.collection("Users").document(userId);
                         modifiedData
-                                .update("email", dataNewEmail.getText().toString())
-                                .addOnSuccessListener(aVoid -> {
-                                    //Toast.makeText(getApplicationContext(), "Se ha actualizado el campo email.", Toast.LENGTH_LONG).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    //Toast.makeText(getApplicationContext(), "Error al actualizar el campo email.", Toast.LENGTH_LONG).show();
-                                });
+                                .update("email", dataNewEmail.getText().toString());
                         Toast.makeText(getApplicationContext(), "La dirección de correo se ha actualizado correctamente, se le ha enviado un correo para verificar la nueva dirección.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Contraseña incorrecta, no se ha podido actualizar la dirección de correo.", Toast.LENGTH_LONG).show();
@@ -106,7 +98,7 @@ public class EditEmailActivity extends AppCompatActivity {
 
         Objects.requireNonNull(user).reauthenticate(credential)
                 .addOnCompleteListener(task -> {
-                    //Toast.makeText(getApplicationContext(), "Re-Autenticado el usuario", Toast.LENGTH_LONG).show();
+
                 });
     }
 }

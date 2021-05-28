@@ -218,35 +218,35 @@ public class BookingActivity extends AppCompatActivity {
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking1_1);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking1_2);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking1_3);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking1_4);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking1_5);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                 }
@@ -257,35 +257,35 @@ public class BookingActivity extends AppCompatActivity {
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking2_1);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking2_2);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking2_3);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking2_4);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking2_5);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                 }
@@ -296,35 +296,35 @@ public class BookingActivity extends AppCompatActivity {
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking3_1);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking3_2);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking3_3);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking3_4);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking3_5);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                 }
@@ -335,35 +335,35 @@ public class BookingActivity extends AppCompatActivity {
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking4_1);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking4_2);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking4_3);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking4_4);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking4_5);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                 }
@@ -374,35 +374,35 @@ public class BookingActivity extends AppCompatActivity {
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking5_1);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking5_2);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking5_3);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking5_4);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking5_5);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                 }
@@ -413,35 +413,35 @@ public class BookingActivity extends AppCompatActivity {
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking6_1);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking6_2);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking6_3);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking6_4);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
                         button = findViewById(R.id.booking6_5);
-                        button.setBackgroundColor(0xffff0000);
+                        button.setBackgroundColor(Color.parseColor("#FFFF9999"));
                         button.setEnabled(false);
                         break;
                 }
