@@ -58,18 +58,23 @@
     <string name="booking6_5">21:00</string>
 
     <!-- Activity Create Account -->
+    <string name="textInsertSignUpName">Nombre</string>
     <string name="insertSignUpName">Nombre</string>
+    <string name="textInsertSignUpSurname">Apellidos</string>
     <string name="insertSignUpSurname">Apellidos</string>
+    <string name="textInsertSignUpPhone">Móvil</string>
     <string name="insertSignUpPhone">Móvil</string>
+    <string name="textInsertSignUpEmail">Correo</string>
     <string name="insertSignUpEmail">Correo</string>
+    <string name="textInsertSignUpPass">Contraseña</string>
     <string name="insertSignUpPass">Contraseña</string>
-    <string name="buttonNewAccount">Crear Cuenta</string>
+    <string name="buttonNewAccount">Aceptar</string>
 
     <!-- Activity Edit Email -->
-    <string name="textOldEmail">Correo Actual</string>
-    <string name="insertOldEmail">Correo Actual</string>
-    <string name="textModifyEmail">Correo Nuevo</string>
-    <string name="insertModifiedEmail">Correo Nuevo</string>
+    <string name="textOldEmail">Correo actual</string>
+    <string name="insertOldEmail">Correo actual</string>
+    <string name="textModifyEmail">Correo nuevo</string>
+    <string name="insertModifiedEmail">Correo nuevo</string>
     <string name="textPass">Contraseña</string>
     <string name="insertPass">Contraseña</string>
     <string name="buttonRequestEditEmail">Aceptar</string>
@@ -77,10 +82,10 @@
     <!-- Activity Edit Password -->
     <string name="textRememberEmail">Correo</string>
     <string name="insertRememberEmail">Correo</string>
-    <string name="textOldPass">Constraseña Actual</string>
-    <string name="insertOldPass">Contraseña Actual</string>
-    <string name="textNewPass">Contraseña Nueva</string>
-    <string name="insertNewPass">Contraseña Nueva</string>
+    <string name="textOldPass">Contraseña actual</string>
+    <string name="insertOldPass">Contraseña actual</string>
+    <string name="textNewPass">Contraseña nueva</string>
+    <string name="insertNewPass">Contraseña nueva</string>
     <string name="buttonRequestEditPass">Aceptar</string>
 
     <!-- Activity Forgotten Password -->
@@ -96,7 +101,7 @@
     <string name="textSignInEmail">Inicia sesión con tu dirección de correo electrónico</string>
     <string name="insertSignInEmail">Correo</string>
     <string name="insertSignInPass">Contraseña</string>
-    <string name="buttonSignInEmail">Iniciar Sesión con Correo</string>
+    <string name="buttonSignInEmail">Iniciar sesión con correo</string>
     <string name="textSignUp">¿Aún no tienes una cuenta?</string>
     <string name="buttonSignUp">Crear cuenta</string>
     <string name="buttonForgottenPass">Olvidé mi contraseña</string>
@@ -108,16 +113,16 @@
     <string name="insertModifiedSurname">Apellidos</string>
     <string name="textModifyPhone">Móvil</string>
     <string name="insertModifiedPhone">Móvil</string>
-    <string name="buttonStoreNewProfileInfo">Editar Perfil</string>
-    <string name="buttonEditEmail">Cambiar Correo</string>
-    <string name="buttonEditPass">Cambiar Contraseña</string>
-    <string name="buttonLinkFB">Vincular Facebook</string>
-    <string name="buttonLinkGoogle">Vincular Google</string>
-    <string name="buttonRemoveAccount">Eliminar Cuenta</string>
+    <string name="buttonStoreNewProfileInfo">Editar perfil</string>
+    <string name="buttonEditEmail">Cambiar correo</string>
+    <string name="buttonEditPass">Cambiar contraseña</string>
+    <string name="buttonLinkFB">Vincular facebook</string>
+    <string name="buttonLinkGoogle">Vincular google</string>
+    <string name="buttonRemoveAccount">Eliminar cuenta</string>
 
     <!-- Activity My Bookings -->
-    <string name="textReservasPendiente">Reservas Pendientes</string>
-    <string name="textReservasFinalizada">Reservas Finalizadas</string>
+    <string name="textReservasPendiente">Reservas pendientes</string>
+    <string name="textReservasFinalizada">Reservas finalizadas</string>
 
     <!-- Activity Remove Account -->
     <string name="textRemoveEmail">Correo</string>
@@ -128,14 +133,14 @@
 
     <!-- Fragment Home -->
     <string name="buttonBooking">Realizar una reserva</string>
-    <string name="buttonMyBookings">Mis Reservas</string>
+    <string name="buttonMyBookings">Mis reservas</string>
 
     <!-- Fragment Profile -->
     <string name="textFetchName">Nombre</string>
     <string name="textFetchSurname">Apellidos</string>
     <string name="textFetchPhone">Móvil</string>
     <string name="textFetchEmail">Correo</string>
-    <string name="buttonEditProfile">Editar Perfil</string>
-    <string name="buttonSignOut">Cerrar Sesión</string>
+    <string name="buttonEditProfile">Editar perfil</string>
+    <string name="buttonSignOut">Cerrar sesión</string>
 
 </resources>

@@ -23,7 +23,8 @@
             android:id="@+id/textFetchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textFetchName" />
+            android:text="@string/textFetchName"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
@@ -42,7 +43,8 @@
             android:id="@+id/textFetchSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textFetchSurname" />
+            android:text="@string/textFetchSurname"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
@@ -61,7 +63,8 @@
             android:id="@+id/textFetchPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textFetchPhone" />
+            android:text="@string/textFetchPhone"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
@@ -80,7 +83,8 @@
             android:id="@+id/textFetchEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textFetchEmail" />
+            android:text="@string/textFetchEmail"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
@@ -107,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/warning"
+            android:backgroundTint="@color/danger"
             android:text="@string/buttonSignOut" />
 
     </LinearLayout>

@@ -21,6 +21,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textInsertSignUpName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textInsertSignUpName"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/insertSignUpName"
             android:layout_width="match_parent"
@@ -33,6 +40,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/textInsertSignUpSurname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textInsertSignUpSurname"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertSignUpSurname"
@@ -47,6 +61,13 @@
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
+        <TextView
+            android:id="@+id/textInsertSignUpPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textInsertSignUpPhone"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/insertSignUpPhone"
             android:layout_width="match_parent"
@@ -60,6 +81,13 @@
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
+        <TextView
+            android:id="@+id/textInsertSignUpEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textInsertSignUpEmail"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/insertSignUpEmail"
             android:layout_width="match_parent"
@@ -72,6 +100,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/textInsertSignUpPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textInsertSignUpPass"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertSignUpPass"
@@ -90,7 +125,9 @@
             android:id="@+id/buttonNewAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/buttonNewAccount" />
+            android:backgroundTint="@color/success"
+            android:text="@string/buttonNewAccount"
+            tools:targetApi="lollipop" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

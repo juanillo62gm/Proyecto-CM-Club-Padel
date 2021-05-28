@@ -74,35 +74,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/textFloor1" />
+                    android:text="@string/textFloor1"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textFloor2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/textFloor2" />
+                    android:text="@string/textFloor2"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textFloor3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/textFloor3" />
+                    android:text="@string/textFloor3"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textFloor4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/textFloor4" />
+                    android:text="@string/textFloor4"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textFloor5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/textFloor5" />
+                    android:text="@string/textFloor5"
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow

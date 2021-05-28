@@ -25,7 +25,8 @@
             android:id="@+id/textModifyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textModifyName" />
+            android:text="@string/textModifyName"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertModifiedName"
@@ -43,7 +44,8 @@
             android:id="@+id/textModifySurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textModifySurname" />
+            android:text="@string/textModifySurname"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertModifiedSurname"
@@ -61,7 +63,8 @@
             android:id="@+id/textModifyPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textModifyPhone" />
+            android:text="@string/textModifyPhone"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertModifiedPhone"

@@ -143,6 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/marine"
             android:text="@string/buttonSignUp" />
 
         <Button
@@ -150,7 +151,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/buttonForgottenPass" />
+            android:backgroundTint="@color/danger"
+            android:text="@string/buttonForgottenPass"
+            tools:targetApi="lollipop" />
 
     </LinearLayout>
 

@@ -25,7 +25,8 @@
             android:id="@+id/textOldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textOldEmail" />
+            android:text="@string/textOldEmail"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertOldEmail"
@@ -43,7 +44,8 @@
             android:id="@+id/textModifyEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textModifyEmail" />
+            android:text="@string/textModifyEmail"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertModifiedEmail"
@@ -61,7 +63,8 @@
             android:id="@+id/textPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textPass" />
+            android:text="@string/textPass"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertPass"

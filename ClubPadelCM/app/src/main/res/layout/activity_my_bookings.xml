@@ -25,7 +25,8 @@
             android:id="@+id/textReservasPendiente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textReservasPendiente" />
+            android:text="@string/textReservasPendiente"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/listViewPendiente"
@@ -36,7 +37,8 @@
             android:id="@+id/textReservasFinalizada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textReservasFinalizada" />
+            android:text="@string/textReservasFinalizada"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/listViewFinalizada"

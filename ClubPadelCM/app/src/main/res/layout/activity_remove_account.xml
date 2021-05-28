@@ -25,7 +25,8 @@
             android:id="@+id/textRemoveEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textRemoveEmail" />
+            android:text="@string/textRemoveEmail"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertRemoveEmail"
@@ -43,7 +44,8 @@
             android:id="@+id/textRemovePass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textRemovePass" />
+            android:text="@string/textRemovePass"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/insertRemovePass"
