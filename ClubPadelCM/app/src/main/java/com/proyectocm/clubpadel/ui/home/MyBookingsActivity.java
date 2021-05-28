@@ -46,7 +46,7 @@ public class MyBookingsActivity extends AppCompatActivity {
         db.collection("Bookings").whereEqualTo("idUser", userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                    int nFloor = Integer.valueOf(Objects.requireNonNull(d.getData().get("nFloor")).toString());
+                    int nFloor = Integer.parseInt(Objects.requireNonNull(d.getData().get("nFloor")).toString());
                     Timestamp time = (Timestamp) d.getData().get("time");
                     String id = Objects.requireNonNull(d.getData().get("idUser")).toString();
                     Booking booking = new Booking(nFloor, id, time);
@@ -111,15 +111,6 @@ public class MyBookingsActivity extends AppCompatActivity {
         String hora = hour + ":" + min;
         tupla = Pair.create(res, hora);
         return tupla;
-    }
-
-    private Boolean pistaCancelable(Timestamp time) {
-        boolean res = false;
-        LocalDateTime aux = LocalDateTime.ofInstant(Instant.ofEpochSecond(time.getSeconds()), TimeZone.getDefault().toZoneId());
-        if (aux.isAfter(LocalDateTime.now())) {
-            res = true;
-        }
-        return res;
     }
 
 }
