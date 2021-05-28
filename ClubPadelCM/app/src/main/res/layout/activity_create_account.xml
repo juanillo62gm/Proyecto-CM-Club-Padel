@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertSignUpName"
             android:inputType="textEmailAddress" />
 
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertSignUpSurname"
             android:inputType="textEmailAddress" />
 
@@ -50,8 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertSignUpPhone"
-            android:inputType="textEmailAddress" />
+            android:inputType="phone" />
 
         <Space
             android:layout_width="match_parent"
@@ -62,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertSignUpEmail"
             android:inputType="textEmailAddress" />
 
@@ -74,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertSignUpPass"
             android:inputType="textPassword" />
 

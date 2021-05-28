@@ -28,7 +28,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_logo" />
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/ic_logo"
+            tools:ignore="VectorDrawableCompat" />
 
         <Space
             android:layout_width="match_parent"
@@ -93,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertSignInEmail"
             android:inputType="textEmailAddress" />
 
@@ -105,6 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertSignInPass"
             android:inputType="textPassword" />
 

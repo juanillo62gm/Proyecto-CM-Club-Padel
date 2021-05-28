@@ -217,7 +217,7 @@ public class BookingActivity extends AppCompatActivity {
                     case 1:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_1);
+                        button = findViewById(R.id.booking1_1);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
@@ -456,7 +456,7 @@ public class BookingActivity extends AppCompatActivity {
                 case 0:
                     switch (j) {
                         case 1:
-                            button = findViewById(R.id.reserva_1_1);
+                            button = findViewById(R.id.booking1_1);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
@@ -634,7 +634,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void asociaButton() {
-        button1_1 = findViewById(R.id.reserva_1_1);
+        button1_1 = findViewById(R.id.booking1_1);
         button1_2 = findViewById(R.id.booking1_2);
         button1_3 = findViewById(R.id.booking1_3);
         button1_4 = findViewById(R.id.booking1_4);

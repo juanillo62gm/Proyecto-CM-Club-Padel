@@ -31,6 +31,7 @@
             android:id="@+id/insertRemoveEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:importantForAutofill="no"
             android:hint="@string/insertRemoveEmail"
             android:inputType="textEmailAddress" />
 
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:hint="@string/insertRemovePass"
             android:inputType="textPassword" />
 
