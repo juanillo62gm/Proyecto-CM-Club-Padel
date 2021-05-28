@@ -101,11 +101,11 @@ public class BookingActivity extends AppCompatActivity {
         botonReserva(button5_4, 4, "pista 4", "19:30");
         botonReserva(button5_5, 5, "pista 5", "19:30");
 
-        botonReserva(button6_1, 1, "pista 1", "21:30");
-        botonReserva(button6_2, 2, "pista 2", "21:30");
-        botonReserva(button6_3, 3, "pista 3", "21:30");
-        botonReserva(button6_4, 4, "pista 4", "21:30");
-        botonReserva(button6_5, 5, "pista 5", "21:30");
+        botonReserva(button6_1, 1, "pista 1", "21:00");
+        botonReserva(button6_2, 2, "pista 2", "21:00");
+        botonReserva(button6_3, 3, "pista 3", "21:00");
+        botonReserva(button6_4, 4, "pista 4", "21:00");
+        botonReserva(button6_5, 5, "pista 5", "21:00");
     }
 
     public void checkButton(View v) {
