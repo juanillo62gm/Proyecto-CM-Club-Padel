@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
@@ -25,18 +24,18 @@
             android:id="@+id/buttonBooking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonBooking"
-            android:drawableLeft="@drawable/ic_booking"
             android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_booking"
+            android:text="@string/buttonBooking"
             tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/buttonMyBookings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonMyBookings"
-            android:drawableLeft="@drawable/ic_booked"
             android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_booked"
+            android:text="@string/buttonMyBookings"
             tools:ignore="RtlHardcoded" />
 
     </LinearLayout>

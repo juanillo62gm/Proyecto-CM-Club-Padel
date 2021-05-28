@@ -47,9 +47,8 @@ public class RemoveAccountActivity extends AppCompatActivity {
         final Button bRemoveAccount = findViewById(R.id.buttonRequestRemoveAccount);
         bRemoveAccount.setOnClickListener(v -> {
             removeUser(userId, dataEmail, dataPass);
-            Intent jumpTo = new Intent(RemoveAccountActivity.this, LoginActivity.class);
-            startActivity(jumpTo);
             finish();
+            this.finishAffinity();
         });
     }
 

@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="vertical"
@@ -103,23 +102,23 @@
             android:id="@+id/buttonEditProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/buttonEditProfile"
-            android:drawableLeft="@drawable/ic_pencil"
             android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_pencil"
+            android:text="@string/buttonEditProfile"
             tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/buttonSignOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:backgroundTint="@color/danger"
-            android:text="@string/buttonSignOut"
             android:drawableLeft="@drawable/ic_logout"
-            android:layout_gravity="center"
-            tools:targetApi="lollipop"
-            tools:ignore="RtlHardcoded" />
+            android:text="@string/buttonSignOut"
+            tools:ignore="RtlHardcoded"
+            tools:targetApi="lollipop" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

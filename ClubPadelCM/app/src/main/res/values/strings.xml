@@ -98,7 +98,7 @@
     <string name="buttonSignInFacebook">Iniciar sesión con Facebook</string>
     <string name="buttonSignInGoogle">Iniciar sesión con Google</string>
     <string name="textO">o</string>
-    <string name="textSignInEmail">Inicia sesión con tu dirección de correo electrónico</string>
+    <string name="textSignInEmail">Inicia sesión con tu dirección de correo</string>
     <string name="insertSignInEmail">Correo</string>
     <string name="insertSignInPass">Contraseña</string>
     <string name="buttonSignInEmail">Iniciar sesión con correo</string>

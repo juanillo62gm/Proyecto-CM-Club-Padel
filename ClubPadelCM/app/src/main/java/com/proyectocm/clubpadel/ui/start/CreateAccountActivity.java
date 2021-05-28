@@ -75,14 +75,11 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 User user = new User(name, surname, phone, email);
 
-                db.collection("Users").document(userId)
-                        .set(user)
-                        .addOnSuccessListener(aVoid -> Toast.makeText(getApplicationContext(), "Los datos del usuario se han almacenado correctamente.", Toast.LENGTH_LONG).show())
-                        .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Error al almacenar los datos del usuario.", Toast.LENGTH_LONG).show());
+                db.collection("Users").document(userId).set(user);
 
                 Toast.makeText(getApplicationContext(), "Su cuenta ha sido creada.", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Cuenta ya existente, inicie sesión con Google o Facebook.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Cuenta ya existente, inicie sesión con Correo, Google o Facebook.", Toast.LENGTH_LONG).show();
             }
         });
     }

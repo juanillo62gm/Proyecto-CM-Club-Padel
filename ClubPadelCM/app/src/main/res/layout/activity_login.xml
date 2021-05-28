@@ -166,7 +166,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/danger"
             android:text="@string/buttonForgottenPass"
-            android:drawableLeft="@drawable/ic_question"
+            android:drawableLeft="@drawable/ic_padlock"
             android:layout_gravity="center"
             tools:targetApi="lollipop"
             tools:ignore="RtlHardcoded" />
