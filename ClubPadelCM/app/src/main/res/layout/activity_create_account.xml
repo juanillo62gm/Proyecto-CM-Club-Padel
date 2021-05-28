@@ -123,11 +123,14 @@
 
         <Button
             android:id="@+id/buttonNewAccount"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/success"
             android:text="@string/buttonNewAccount"
-            tools:targetApi="lollipop" />
+            android:drawableLeft="@drawable/ic_check_mark"
+            android:layout_gravity="center"
+            tools:targetApi="lollipop"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

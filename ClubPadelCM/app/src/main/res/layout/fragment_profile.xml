@@ -101,18 +101,25 @@
 
         <Button
             android:id="@+id/buttonEditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/buttonEditProfile" />
+            android:text="@string/buttonEditProfile"
+            android:drawableLeft="@drawable/ic_pencil"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/buttonSignOut"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/danger"
-            android:text="@string/buttonSignOut" />
+            android:text="@string/buttonSignOut"
+            android:drawableLeft="@drawable/ic_logout"
+            android:layout_gravity="center"
+            tools:targetApi="lollipop"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

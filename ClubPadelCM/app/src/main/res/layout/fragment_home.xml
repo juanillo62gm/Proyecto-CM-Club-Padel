@@ -23,15 +23,21 @@
 
         <Button
             android:id="@+id/buttonBooking"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonBooking" />
+            android:text="@string/buttonBooking"
+            android:drawableLeft="@drawable/ic_booking"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/buttonMyBookings"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonMyBookings" />
+            android:text="@string/buttonMyBookings"
+            android:drawableLeft="@drawable/ic_booked"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 

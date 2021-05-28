@@ -80,11 +80,14 @@
 
         <Button
             android:id="@+id/buttonStoreNewProfileInfo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/success"
             android:text="@string/buttonStoreNewProfileInfo"
-            tools:targetApi="lollipop" />
+            android:drawableLeft="@drawable/ic_check_mark"
+            android:layout_gravity="center"
+            tools:targetApi="lollipop"
+            tools:ignore="RtlHardcoded" />
 
         <Space
             android:layout_width="match_parent"
@@ -92,15 +95,21 @@
 
         <Button
             android:id="@+id/buttonEditEmail"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonEditEmail" />
+            android:text="@string/buttonEditEmail"
+            android:drawableLeft="@drawable/ic_mail"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/buttonEditPass"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonEditPass" />
+            android:text="@string/buttonEditPass"
+            android:drawableLeft="@drawable/ic_key"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
         <Space
             android:layout_width="match_parent"
@@ -114,25 +123,29 @@
             <Button
                 android:id="@+id/buttonLinkFB"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/marine"
                 android:text="@string/buttonLinkFB"
-                tools:ignore="ButtonStyle"
+                tools:ignore="ButtonStyle,RtlHardcoded"
+                android:drawableLeft="@drawable/ic_facebook"
+                android:layout_gravity="center"
                 tools:targetApi="lollipop" />
 
             <Button
                 android:id="@+id/buttonLinkGoogle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/marine"
                 android:text="@string/buttonLinkGoogle"
-                tools:ignore="ButtonStyle"
+                tools:ignore="ButtonStyle,RtlHardcoded"
+                android:drawableLeft="@drawable/ic_google"
+                android:layout_gravity="center"
                 tools:targetApi="lollipop" />
         </LinearLayout>
 
@@ -142,11 +155,14 @@
 
         <Button
             android:id="@+id/buttonRemoveAccount"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/danger"
             android:text="@string/buttonRemoveAccount"
-            tools:targetApi="lollipop" />
+            android:drawableLeft="@drawable/ic_remove_mark"
+            android:layout_gravity="center"
+            tools:targetApi="lollipop"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

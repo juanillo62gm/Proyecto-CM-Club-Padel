@@ -50,9 +50,12 @@
 
         <Button
             android:id="@+id/buttonSignInFacebook"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonSignInFacebook" />
+            android:text="@string/buttonSignInFacebook"
+            android:drawableLeft="@drawable/ic_facebook"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
         <Space
             android:layout_width="match_parent"
@@ -60,9 +63,12 @@
 
         <Button
             android:id="@+id/buttonSignInGoogle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonSignInGoogle" />
+            android:text="@string/buttonSignInGoogle"
+            android:drawableLeft="@drawable/ic_google"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
         <Space
             android:layout_width="match_parent"
@@ -106,7 +112,7 @@
         <EditText
             android:id="@+id/insertSignInPass"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
             android:hint="@string/insertSignInPass"
             android:importantForAutofill="no"
@@ -118,10 +124,13 @@
 
         <Button
             android:id="@+id/buttonSignInEmail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/buttonSignInEmail" />
+            android:text="@string/buttonSignInEmail"
+            android:drawableLeft="@drawable/ic_mail"
+            android:layout_gravity="center"
+            tools:ignore="RtlHardcoded" />
 
         <Space
             android:layout_width="match_parent"
@@ -140,20 +149,27 @@
 
         <Button
             android:id="@+id/buttonSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/marine"
-            android:text="@string/buttonSignUp" />
+            android:text="@string/buttonSignUp"
+            android:drawableLeft="@drawable/ic_dashboard_black_24dp"
+            android:layout_gravity="center"
+            tools:targetApi="lollipop"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/buttonForgottenPass"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/danger"
             android:text="@string/buttonForgottenPass"
-            tools:targetApi="lollipop" />
+            android:drawableLeft="@drawable/ic_question"
+            android:layout_gravity="center"
+            tools:targetApi="lollipop"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 
