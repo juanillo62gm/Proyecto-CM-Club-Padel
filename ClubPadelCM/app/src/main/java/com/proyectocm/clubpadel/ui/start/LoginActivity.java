@@ -52,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        Button bGoogle = findViewById(R.id.buttonGoogle);
-        Button bFacebook = findViewById(R.id.buttonFacebook);
+        Button bGoogle = findViewById(R.id.buttonSignInGoogle);
+        Button bFacebook = findViewById(R.id.buttonSignInFacebook);
         Button bSignUp = findViewById(R.id.buttonSignUp);
         Button bForgottenPass = findViewById(R.id.buttonForgottenPass);
 
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google.", Toast.LENGTH_LONG).show();
         });
 
-        Button bEmail = findViewById(R.id.buttonSignIn);
+        Button bEmail = findViewById(R.id.buttonSignInEmail);
         dataEmail = findViewById(R.id.insertSignInEmail);
         dataPassword = findViewById(R.id.insertSignInPass);
 

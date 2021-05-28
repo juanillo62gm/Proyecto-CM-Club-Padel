@@ -28,7 +28,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
-                android:id="@+id/radio_group"
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -36,34 +36,35 @@
                 android:textAlignment="center">
 
                 <RadioButton
-                    android:id="@+id/radio_button_today"
+                    android:id="@+id/buttonToday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:onClick="checkButton"
-                    android:text="Hoy"
+                    android:text="@string/buttonToday"
 
                     />
 
                 <RadioButton
-                    android:id="@+id/radio_button_tomorrow"
+                    android:id="@+id/buttonTomorrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="checkButton"
-                    android:text="Mañana"
+                    android:text="@string/buttonTomorrow"
 
                     />
 
                 <RadioButton
-                    android:id="@+id/radio_button_nextDay"
+                    android:id="@+id/buttonNextDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="checkButton"
-                    android:text="Pasado mañana"
+                    android:text="@string/buttonNextDay"
 
                     />
 
             </RadioGroup>
+
         </LinearLayout>
 
         <LinearLayout
@@ -83,39 +84,39 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView_pista1"
+                        android:id="@+id/textFloor1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Pista 1" />
+                        android:text="@string/textFloor1" />
 
                     <TextView
-                        android:id="@+id/textView_pista2"
+                        android:id="@+id/textFloor2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Pista 2" />
+                        android:text="@string/textFloor2" />
 
                     <TextView
-                        android:id="@+id/textView_pista3"
+                        android:id="@+id/textFloor3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Pista 3" />
+                        android:text="@string/textFloor3" />
 
                     <TextView
-                        android:id="@+id/textView_pista4"
+                        android:id="@+id/textFloor4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Pista 4" />
+                        android:text="@string/textFloor4" />
 
                     <TextView
-                        android:id="@+id/textView_pista5"
+                        android:id="@+id/textFloor5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Pista 5" />
+                        android:text="@string/textFloor5" />
                 </TableRow>
 
                 <TableRow
@@ -123,57 +124,57 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/reserva_1_1"
+                        android:id="@+id/booking1_1"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="09:00"
+                        android:text="@string/booking1_1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_1_2"
+                        android:id="@+id/booking1_2"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="09:00"
+                        android:text="@string/booking1_2"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_1_3"
+                        android:id="@+id/booking1_3"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="09:00"
+                        android:text="@string/booking1_3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_1_4"
+                        android:id="@+id/booking1_4"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="09:00"
+                        android:text="@string/booking1_4"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     :
 
                     <Button
-                        android:id="@+id/reserva_1_5"
+                        android:id="@+id/booking1_5"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#99FF99"
-                        android:text="09:00"
+                        android:text="@string/booking1_5"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </TableRow>
@@ -184,57 +185,57 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/reserva_2_1"
+                        android:id="@+id/booking2_1"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="10:30"
+                        android:text="@string/booking2_1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_2_2"
+                        android:id="@+id/booking2_2"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="10:30"
+                        android:text="@string/booking2_2"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_2_3"
+                        android:id="@+id/booking2_3"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="10:30"
+                        android:text="@string/booking2_3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_2_4"
+                        android:id="@+id/booking2_4"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="10:30"
+                        android:text="@string/booking2_4"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     :
 
                     <Button
-                        android:id="@+id/reserva_2_5"
+                        android:id="@+id/booking2_5"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#99FF99"
-                        android:text="10:30"
+                        android:text="@string/booking2_5"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </TableRow>
@@ -245,57 +246,57 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/reserva_3_1"
+                        android:id="@+id/booking3_1"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="12:00"
+                        android:text="@string/booking3_1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_3_2"
+                        android:id="@+id/booking3_2"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="12:00"
+                        android:text="@string/booking3_2"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_3_3"
+                        android:id="@+id/booking3_3"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="12:00"
+                        android:text="@string/booking3_3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_3_4"
+                        android:id="@+id/booking3_4"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="12:00"
+                        android:text="@string/booking3_4"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     :
 
                     <Button
-                        android:id="@+id/reserva_3_5"
+                        android:id="@+id/booking3_5"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#99FF99"
-                        android:text="12:00"
+                        android:text="@string/booking3_5"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </TableRow>
@@ -305,57 +306,57 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/reserva_4_1"
+                        android:id="@+id/booking4_1"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="18:00"
+                        android:text="@string/booking4_1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_4_2"
+                        android:id="@+id/booking4_2"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="18:00"
+                        android:text="@string/booking4_2"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_4_3"
+                        android:id="@+id/booking4_3"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="18:00"
+                        android:text="@string/booking4_3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_4_4"
+                        android:id="@+id/booking4_4"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="18:00"
+                        android:text="@string/booking4_4"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     :
 
                     <Button
-                        android:id="@+id/reserva_4_5"
+                        android:id="@+id/booking4_5"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#99FF99"
-                        android:text="18:00"
+                        android:text="@string/booking4_5"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </TableRow>
@@ -365,57 +366,57 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/reserva_5_1"
+                        android:id="@+id/booking5_1"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="19:30"
+                        android:text="@string/booking5_1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_5_2"
+                        android:id="@+id/booking5_2"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="19:30"
+                        android:text="@string/booking5_2"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_5_3"
+                        android:id="@+id/booking5_3"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="19:30"
+                        android:text="@string/booking5_3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_5_4"
+                        android:id="@+id/booking5_4"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="19:30"
+                        android:text="@string/booking5_4"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     :
 
                     <Button
-                        android:id="@+id/reserva_5_5"
+                        android:id="@+id/booking5_5"
                         android:layout_width="60dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#99FF99"
-                        android:text="19:30"
+                        android:text="@string/booking5_5"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </TableRow>
@@ -426,57 +427,57 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/reserva_6_1"
+                        android:id="@+id/booking6_1"
                         android:layout_width="70dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="21:00"
+                        android:text="@string/booking6_1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_6_2"
+                        android:id="@+id/booking6_2"
                         android:layout_width="70dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="21:00"
+                        android:text="@string/booking6_2"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_6_3"
+                        android:id="@+id/booking6_3"
                         android:layout_width="70dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="21:00"
+                        android:text="@string/booking6_3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <Button
-                        android:id="@+id/reserva_6_4"
+                        android:id="@+id/booking6_4"
                         android:layout_width="70dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginRight="2dp"
                         android:backgroundTint="#99FF99"
-                        android:text="21:00"
+                        android:text="@string/booking6_4"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     :
 
                     <Button
-                        android:id="@+id/reserva_6_5"
+                        android:id="@+id/booking6_5"
                         android:layout_width="70dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#99FF99"
-                        android:text="21:00"
+                        android:text="@string/booking6_5"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </TableRow>

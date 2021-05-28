@@ -54,12 +54,12 @@ public class BookingActivity extends AppCompatActivity {
         espacioTemporal();
         obtenerDatos(Day_selected);
 
-        radioGroup = findViewById(R.id.radio_group);
+        radioGroup = findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.radio_button_today) {
+            if (checkedId == R.id.buttonToday) {
                 Day_selected = Today;
                 obtenerDatos(Day_selected);
-            } else if (checkedId == R.id.radio_button_tomorrow) {
+            } else if (checkedId == R.id.buttonTomorrow) {
                 Day_selected = Today.plusDays(1);
                 obtenerDatos(Day_selected);
             } else {
@@ -114,9 +114,9 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void espacioTemporal() {
-        RadioButton day1 = findViewById(R.id.radio_button_today);
-        RadioButton day2 = findViewById(R.id.radio_button_tomorrow);
-        RadioButton day3 = findViewById(R.id.radio_button_nextDay);
+        RadioButton day1 = findViewById(R.id.buttonToday);
+        RadioButton day2 = findViewById(R.id.buttonTomorrow);
+        RadioButton day3 = findViewById(R.id.buttonNextDay);
 
         LocalDateTime currentDay = LocalDateTime.now(ZoneId.of("Europe/Madrid"));
         String aux = currentDay.getDayOfMonth() + " " + currentDay.getMonth().toString();
@@ -224,28 +224,28 @@ public class BookingActivity extends AppCompatActivity {
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_2);
+                        button = findViewById(R.id.booking1_2);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_3);
+                        button = findViewById(R.id.booking1_3);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_4);
+                        button = findViewById(R.id.booking1_4);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_1_5);
+                        button = findViewById(R.id.booking1_5);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
@@ -256,35 +256,35 @@ public class BookingActivity extends AppCompatActivity {
                     case 1:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_1);
+                        button = findViewById(R.id.booking2_1);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_2);
+                        button = findViewById(R.id.booking2_2);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_3);
+                        button = findViewById(R.id.booking2_3);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_4);
+                        button = findViewById(R.id.booking2_4);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_2_5);
+                        button = findViewById(R.id.booking2_5);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
@@ -295,35 +295,35 @@ public class BookingActivity extends AppCompatActivity {
                     case 1:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_1);
+                        button = findViewById(R.id.booking3_1);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_2);
+                        button = findViewById(R.id.booking3_2);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_3);
+                        button = findViewById(R.id.booking3_3);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_4);
+                        button = findViewById(R.id.booking3_4);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_3_5);
+                        button = findViewById(R.id.booking3_5);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
@@ -334,35 +334,35 @@ public class BookingActivity extends AppCompatActivity {
                     case 1:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_1);
+                        button = findViewById(R.id.booking4_1);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_2);
+                        button = findViewById(R.id.booking4_2);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_3);
+                        button = findViewById(R.id.booking4_3);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_4);
+                        button = findViewById(R.id.booking4_4);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_4_5);
+                        button = findViewById(R.id.booking4_5);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
@@ -373,35 +373,35 @@ public class BookingActivity extends AppCompatActivity {
                     case 1:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_1);
+                        button = findViewById(R.id.booking5_1);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_2);
+                        button = findViewById(R.id.booking5_2);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_3);
+                        button = findViewById(R.id.booking5_3);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_4);
+                        button = findViewById(R.id.booking5_4);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_5_5);
+                        button = findViewById(R.id.booking5_5);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
@@ -412,35 +412,35 @@ public class BookingActivity extends AppCompatActivity {
                     case 1:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_1);
+                        button = findViewById(R.id.booking6_1);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 2:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_2);
+                        button = findViewById(R.id.booking6_2);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 3:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_3);
+                        button = findViewById(R.id.booking6_3);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 4:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_4);
+                        button = findViewById(R.id.booking6_4);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
                     case 5:
                         tupla = Pair.create(i, j);
                         lsTuple.add(tupla);
-                        button = findViewById(R.id.reserva_6_5);
+                        button = findViewById(R.id.booking6_5);
                         button.setBackgroundColor(0xffff0000);
                         button.setEnabled(false);
                         break;
@@ -461,23 +461,23 @@ public class BookingActivity extends AppCompatActivity {
                             button.setEnabled(true);
                             break;
                         case 2:
-                            button = findViewById(R.id.reserva_1_2);
+                            button = findViewById(R.id.booking1_2);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 3:
 
-                            button = findViewById(R.id.reserva_1_3);
+                            button = findViewById(R.id.booking1_3);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 4:
-                            button = findViewById(R.id.reserva_1_4);
+                            button = findViewById(R.id.booking1_4);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 5:
-                            button = findViewById(R.id.reserva_1_5);
+                            button = findViewById(R.id.booking1_5);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
@@ -486,27 +486,27 @@ public class BookingActivity extends AppCompatActivity {
                 case 1:
                     switch (j) {
                         case 1:
-                            button = findViewById(R.id.reserva_2_1);
+                            button = findViewById(R.id.booking2_1);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 2:
-                            button = findViewById(R.id.reserva_2_2);
+                            button = findViewById(R.id.booking2_2);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 3:
-                            button = findViewById(R.id.reserva_2_3);
+                            button = findViewById(R.id.booking2_3);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 4:
-                            button = findViewById(R.id.reserva_2_4);
+                            button = findViewById(R.id.booking2_4);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 5:
-                            button = findViewById(R.id.reserva_2_5);
+                            button = findViewById(R.id.booking2_5);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
@@ -515,27 +515,27 @@ public class BookingActivity extends AppCompatActivity {
                 case 2:
                     switch (j) {
                         case 1:
-                            button = findViewById(R.id.reserva_3_1);
+                            button = findViewById(R.id.booking3_1);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 2:
-                            button = findViewById(R.id.reserva_3_2);
+                            button = findViewById(R.id.booking3_2);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 3:
-                            button = findViewById(R.id.reserva_3_3);
+                            button = findViewById(R.id.booking3_3);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 4:
-                            button = findViewById(R.id.reserva_3_4);
+                            button = findViewById(R.id.booking3_4);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 5:
-                            button = findViewById(R.id.reserva_3_5);
+                            button = findViewById(R.id.booking3_5);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
 
                             button.setEnabled(true);
@@ -545,27 +545,27 @@ public class BookingActivity extends AppCompatActivity {
                 case 3:
                     switch (j) {
                         case 1:
-                            button = findViewById(R.id.reserva_4_1);
+                            button = findViewById(R.id.booking4_1);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 2:
-                            button = findViewById(R.id.reserva_4_2);
+                            button = findViewById(R.id.booking4_2);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 3:
-                            button = findViewById(R.id.reserva_4_3);
+                            button = findViewById(R.id.booking4_3);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 4:
-                            button = findViewById(R.id.reserva_4_4);
+                            button = findViewById(R.id.booking4_4);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 5:
-                            button = findViewById(R.id.reserva_4_5);
+                            button = findViewById(R.id.booking4_5);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
@@ -574,27 +574,27 @@ public class BookingActivity extends AppCompatActivity {
                 case 4:
                     switch (j) {
                         case 1:
-                            button = findViewById(R.id.reserva_5_1);
+                            button = findViewById(R.id.booking5_1);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 2:
-                            button = findViewById(R.id.reserva_5_2);
+                            button = findViewById(R.id.booking5_2);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 3:
-                            button = findViewById(R.id.reserva_5_3);
+                            button = findViewById(R.id.booking5_3);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 4:
-                            button = findViewById(R.id.reserva_5_4);
+                            button = findViewById(R.id.booking5_4);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 5:
-                            button = findViewById(R.id.reserva_5_5);
+                            button = findViewById(R.id.booking5_5);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
@@ -603,27 +603,27 @@ public class BookingActivity extends AppCompatActivity {
                 case 5:
                     switch (j) {
                         case 1:
-                            button = findViewById(R.id.reserva_6_1);
+                            button = findViewById(R.id.booking6_1);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 2:
-                            button = findViewById(R.id.reserva_6_2);
+                            button = findViewById(R.id.booking6_2);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 3:
-                            button = findViewById(R.id.reserva_6_3);
+                            button = findViewById(R.id.booking6_3);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 4:
-                            button = findViewById(R.id.reserva_6_4);
+                            button = findViewById(R.id.booking6_4);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
                         case 5:
-                            button = findViewById(R.id.reserva_6_5);
+                            button = findViewById(R.id.booking6_5);
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
@@ -635,35 +635,35 @@ public class BookingActivity extends AppCompatActivity {
 
     private void asociaButton() {
         button1_1 = findViewById(R.id.reserva_1_1);
-        button1_2 = findViewById(R.id.reserva_1_2);
-        button1_3 = findViewById(R.id.reserva_1_3);
-        button1_4 = findViewById(R.id.reserva_1_4);
-        button1_5 = findViewById(R.id.reserva_1_5);
-        button2_1 = findViewById(R.id.reserva_2_1);
-        button2_2 = findViewById(R.id.reserva_2_2);
-        button2_3 = findViewById(R.id.reserva_2_3);
-        button2_4 = findViewById(R.id.reserva_2_4);
-        button2_5 = findViewById(R.id.reserva_2_5);
-        button3_1 = findViewById(R.id.reserva_3_1);
-        button3_2 = findViewById(R.id.reserva_3_2);
-        button3_3 = findViewById(R.id.reserva_3_3);
-        button3_4 = findViewById(R.id.reserva_3_4);
-        button3_5 = findViewById(R.id.reserva_3_5);
-        button4_1 = findViewById(R.id.reserva_4_1);
-        button4_2 = findViewById(R.id.reserva_4_2);
-        button4_3 = findViewById(R.id.reserva_4_3);
-        button4_4 = findViewById(R.id.reserva_4_4);
-        button4_5 = findViewById(R.id.reserva_4_5);
-        button5_1 = findViewById(R.id.reserva_5_1);
-        button5_2 = findViewById(R.id.reserva_5_2);
-        button5_3 = findViewById(R.id.reserva_5_3);
-        button5_4 = findViewById(R.id.reserva_5_4);
-        button5_5 = findViewById(R.id.reserva_5_5);
-        button6_1 = findViewById(R.id.reserva_6_1);
-        button6_2 = findViewById(R.id.reserva_6_2);
-        button6_3 = findViewById(R.id.reserva_6_3);
-        button6_4 = findViewById(R.id.reserva_6_4);
-        button6_5 = findViewById(R.id.reserva_6_5);
+        button1_2 = findViewById(R.id.booking1_2);
+        button1_3 = findViewById(R.id.booking1_3);
+        button1_4 = findViewById(R.id.booking1_4);
+        button1_5 = findViewById(R.id.booking1_5);
+        button2_1 = findViewById(R.id.booking2_1);
+        button2_2 = findViewById(R.id.booking2_2);
+        button2_3 = findViewById(R.id.booking2_3);
+        button2_4 = findViewById(R.id.booking2_4);
+        button2_5 = findViewById(R.id.booking2_5);
+        button3_1 = findViewById(R.id.booking3_1);
+        button3_2 = findViewById(R.id.booking3_2);
+        button3_3 = findViewById(R.id.booking3_3);
+        button3_4 = findViewById(R.id.booking3_4);
+        button3_5 = findViewById(R.id.booking3_5);
+        button4_1 = findViewById(R.id.booking4_1);
+        button4_2 = findViewById(R.id.booking4_2);
+        button4_3 = findViewById(R.id.booking4_3);
+        button4_4 = findViewById(R.id.booking4_4);
+        button4_5 = findViewById(R.id.booking4_5);
+        button5_1 = findViewById(R.id.booking5_1);
+        button5_2 = findViewById(R.id.booking5_2);
+        button5_3 = findViewById(R.id.booking5_3);
+        button5_4 = findViewById(R.id.booking5_4);
+        button5_5 = findViewById(R.id.booking5_5);
+        button6_1 = findViewById(R.id.booking6_1);
+        button6_2 = findViewById(R.id.booking6_2);
+        button6_3 = findViewById(R.id.booking6_3);
+        button6_4 = findViewById(R.id.booking6_4);
+        button6_5 = findViewById(R.id.booking6_5);
 
 
     }

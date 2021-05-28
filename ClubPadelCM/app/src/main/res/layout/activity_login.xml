@@ -35,11 +35,11 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:id="@+id/text01"
+            android:id="@+id/textSocialLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Inicia sesión con tu red social" />
+            android:text="@string/textSocialLogin" />
 
         <Space
             android:layout_width="match_parent"
@@ -47,42 +47,42 @@
 
 
         <Button
-            android:id="@+id/buttonFacebook"
+            android:id="@+id/buttonSignInFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar sesión con Facebook" />
+            android:text="@string/buttonSignInFacebook" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <Button
-            android:id="@+id/buttonGoogle"
+            android:id="@+id/buttonSignInGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar sesión con Google" />
+            android:text="@string/buttonSignInGoogle" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <TextView
-            android:id="@+id/text02"
+            android:id="@+id/textO"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="o" />
+            android:text="@string/textO" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <TextView
-            android:id="@+id/text03"
+            android:id="@+id/textSignInEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Inicia sesión con tu dirección de correo electrónico" />
+            android:text="@string/textSignInEmail" />
 
         <Space
             android:layout_width="match_parent"
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Correo"
+            android:hint="@string/insertSignInEmail"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/insertSignInPass"
             android:inputType="textPassword" />
 
         <Space
@@ -113,22 +113,22 @@
             android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/buttonSignIn"
+            android:id="@+id/buttonSignInEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Iniciar Sesión con Correo" />
+            android:text="@string/buttonSignInEmail" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/text04"
+            android:id="@+id/textSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="¿Aún no tienes una cuenta?" />
+            android:text="@string/textSignUp" />
 
         <Space
             android:layout_width="match_parent"
@@ -139,14 +139,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Crear cuenta" />
+            android:text="@string/buttonSignUp" />
 
         <Button
             android:id="@+id/buttonForgottenPass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Olvidé mi contraseña" />
+            android:text="@string/buttonForgottenPass" />
 
     </LinearLayout>
 

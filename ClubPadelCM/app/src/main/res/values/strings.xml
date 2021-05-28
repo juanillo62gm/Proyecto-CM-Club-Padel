@@ -11,7 +11,51 @@
     <string name="decline">No</string>
 
     <!-- Activity Booking -->
-    <!-- <string name=""></string> -->
+    <string name="buttonToday">Hoy</string>
+    <string name="buttonTomorrow">Mañana</string>
+    <string name="buttonNextDay">Pasado mañana</string>
+
+    <string name="textFloor1">Pista 1</string>
+    <string name="textFloor2">Pista 2</string>
+    <string name="textFloor3">Pista 3</string>
+    <string name="textFloor4">Pista 4</string>
+    <string name="textFloor5">Pista 5</string>
+
+    <string name="booking1_1">9:00</string>
+    <string name="booking1_2">9:00</string>
+    <string name="booking1_3">9:00</string>
+    <string name="booking1_4">9:00</string>
+    <string name="booking1_5">9:00</string>
+
+    <string name="booking2_1">10:30</string>
+    <string name="booking2_2">10:30</string>
+    <string name="booking2_3">10:30</string>
+    <string name="booking2_4">10:30</string>
+    <string name="booking2_5">10:30</string>
+
+    <string name="booking3_1">12:00</string>
+    <string name="booking3_2">12:00</string>
+    <string name="booking3_3">12:00</string>
+    <string name="booking3_4">12:00</string>
+    <string name="booking3_5">12:00</string>
+
+    <string name="booking4_1">18:00</string>
+    <string name="booking4_2">18:00</string>
+    <string name="booking4_3">18:00</string>
+    <string name="booking4_4">18:00</string>
+    <string name="booking4_5">18:00</string>
+
+    <string name="booking5_1">19:30</string>
+    <string name="booking5_2">19:30</string>
+    <string name="booking5_3">19:30</string>
+    <string name="booking5_4">19:30</string>
+    <string name="booking5_5">19:30</string>
+
+    <string name="booking6_1">21:00</string>
+    <string name="booking6_2">21:00</string>
+    <string name="booking6_3">21:00</string>
+    <string name="booking6_4">21:00</string>
+    <string name="booking6_5">21:00</string>
 
     <!-- Activity Create Account -->
     <string name="insertSignUpName">Nombre</string>
@@ -44,19 +88,18 @@
     <string name="insertEmailNewPass">Correo</string>
     <string name="buttonRequestNewPass">Aceptar</string>
 
-    <!-- Activity Login
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    -->
+    <!-- Activity Login -->
+    <string name="textSocialLogin">Inicia sesión con tu red social</string>
+    <string name="buttonSignInFacebook">Iniciar sesión con Facebook</string>
+    <string name="buttonSignInGoogle">Iniciar sesión con Google</string>
+    <string name="textO">o</string>
+    <string name="textSignInEmail">Inicia sesión con tu dirección de correo electrónico</string>
+    <string name="insertSignInEmail">Correo</string>
+    <string name="insertSignInPass">Contraseña</string>
+    <string name="buttonSignInEmail">Iniciar Sesión con Correo</string>
+    <string name="textSignUp">¿Aún no tienes una cuenta?</string>
+    <string name="buttonSignUp">Crear cuenta</string>
+    <string name="buttonForgottenPass">Olvidé mi contraseña</string>
 
     <!-- Activity Modify User Account -->
     <string name="textModifyName">Nombre</string>
