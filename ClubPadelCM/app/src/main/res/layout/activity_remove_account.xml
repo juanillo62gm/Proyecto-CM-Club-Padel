@@ -25,13 +25,13 @@
             android:id="@+id/textRemoveEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo" />
+            android:text="@string/textRemoveEmail" />
 
         <EditText
             android:id="@+id/insertRemoveEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo"
+            android:hint="@string/insertRemoveEmail"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -42,14 +42,14 @@
             android:id="@+id/textRemovePass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contraseña" />
+            android:text="@string/textRemovePass" />
 
         <EditText
             android:id="@+id/insertRemovePass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/insertRemovePass"
             android:inputType="textPassword" />
 
         <Space
@@ -60,6 +60,6 @@
             android:id="@+id/buttonRequestRemoveAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aceptar" />
+            android:text="@string/buttonRequestRemoveAccount" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,8 +40,8 @@ public class MyBookingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_bookings);
 
 
-        listView_pendiente = findViewById(R.id.list_view_pendiente);
-        listView_finalizada = findViewById(R.id.list_view_finalizada);
+        listView_pendiente = findViewById(R.id.listViewPendiente);
+        listView_finalizada = findViewById(R.id.listViewFinalizada);
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         db.collection("Bookings").whereEqualTo("idUser", userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

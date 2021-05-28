@@ -23,7 +23,7 @@
             android:id="@+id/textFetchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre" />
+            android:text="@string/textFetchName" />
 
         <Space
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:id="@+id/textFetchSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Apellidos" />
+            android:text="@string/textFetchSurname" />
 
         <Space
             android:layout_width="match_parent"
@@ -61,7 +61,7 @@
             android:id="@+id/textFetchPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Móvil" />
+            android:text="@string/textFetchPhone" />
 
         <Space
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
             android:id="@+id/textFetchEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo" />
+            android:text="@string/textFetchEmail" />
 
         <Space
             android:layout_width="match_parent"
@@ -100,14 +100,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Editar Perfil" />
+            android:text="@string/buttonEditProfile" />
 
         <Button
             android:id="@+id/buttonSignOut"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cerrar Sesión" />
+            android:text="@string/buttonSignOut" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

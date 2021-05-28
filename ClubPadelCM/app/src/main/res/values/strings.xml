@@ -1,11 +1,98 @@
 <resources>
+    <!-- Activities -->
     <string name="app_name">Club Padel</string>
     <string name="title_home">Inicio</string>
     <string name="title_notifications">Perfil</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Facebook Login -->
     <string name="facebook_app_id">762908117726151</string>
     <string name="fb_login_protocol_scheme">fb762908117726151</string>
     <string name="ok">Sí</string>
     <string name="decline">No</string>
+
+    <!-- Activity Booking -->
+    <!-- <string name=""></string> -->
+
+    <!-- Activity Create Account -->
+    <string name="insertSignUpName">Nombre</string>
+    <string name="insertSignUpSurname">Apellidos</string>
+    <string name="insertSignUpPhone">Móvil</string>
+    <string name="insertSignUpEmail">Correo</string>
+    <string name="insertSignUpPass">Contraseña</string>
+    <string name="buttonNewAccount">Crear Cuenta</string>
+
+    <!-- Activity Edit Email -->
+    <string name="textOldEmail">Correo Actual</string>
+    <string name="insertOldEmail">Correo Actual</string>
+    <string name="textModifyEmail">Correo Nuevo</string>
+    <string name="insertModifiedEmail">Correo Nuevo</string>
+    <string name="textPass">Contraseña</string>
+    <string name="insertPass">Contraseña</string>
+    <string name="buttonRequestEditEmail">Aceptar</string>
+
+    <!-- Activity Edit Password -->
+    <string name="textRememberEmail">Correo</string>
+    <string name="insertRememberEmail">Correo</string>
+    <string name="textOldPass">Constraseña Actual</string>
+    <string name="insertOldPass">Contraseña Actual</string>
+    <string name="textNewPass">Contraseña Nueva</string>
+    <string name="insertNewPass">Contraseña Nueva</string>
+    <string name="buttonRequestEditPass">Aceptar</string>
+
+    <!-- Activity Forgotten Password -->
+    <string name="textEmailNewPass">Correo</string>
+    <string name="insertEmailNewPass">Correo</string>
+    <string name="buttonRequestNewPass">Aceptar</string>
+
+    <!-- Activity Login
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    -->
+
+    <!-- Activity Modify User Account -->
+    <string name="textModifyName">Nombre</string>
+    <string name="insertModifiedName">Nombre</string>
+    <string name="textModifySurname">Apellidos</string>
+    <string name="insertModifiedSurname">Apellidos</string>
+    <string name="textModifyPhone">Móvil</string>
+    <string name="insertModifiedPhone">Móvil</string>
+    <string name="buttonStoreNewProfileInfo">Editar Perfil</string>
+    <string name="buttonEditEmail">Cambiar Correo</string>
+    <string name="buttonEditPass">Cambiar Contraseña</string>
+    <string name="buttonLinkFB">Link FB</string>
+    <string name="buttonLinkGoogle">Link G</string>
+    <string name="buttonRemoveAccount">Eliminar Cuenta</string>
+
+    <!-- Activity My Bookings -->
+    <string name="textReservasPendiente">Reservas Pendientes</string>
+    <string name="textReservasFinalizada">Reservas Finalizadas</string>
+
+    <!-- Activity Remove Account -->
+    <string name="textRemoveEmail">Correo</string>
+    <string name="insertRemoveEmail">Correo</string>
+    <string name="textRemovePass">Contraseña</string>
+    <string name="insertRemovePass">Contraseña</string>
+    <string name="buttonRequestRemoveAccount">Aceptar</string>
+
+    <!-- Fragment Home -->
+    <string name="buttonBooking">Realizar una reserva</string>
+    <string name="buttonMyBookings">Mis Reservas</string>
+
+    <!-- Fragment Profile -->
+    <string name="textFetchName">Nombre</string>
+    <string name="textFetchSurname">Apellidos</string>
+    <string name="textFetchPhone">Móvil</string>
+    <string name="textFetchEmail">Correo</string>
+    <string name="buttonEditProfile">Editar Perfil</string>
+    <string name="buttonSignOut">Cerrar Sesión</string>
+
 </resources>

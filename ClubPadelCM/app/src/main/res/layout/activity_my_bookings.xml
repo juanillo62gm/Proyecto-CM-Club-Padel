@@ -22,24 +22,24 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/text_reservas_pendiente"
+            android:id="@+id/textReservasPendiente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reservas Pendientes" />
+            android:text="@string/textReservasPendiente" />
 
         <ListView
-            android:id="@+id/list_view_pendiente"
+            android:id="@+id/listViewPendiente"
             android:layout_width="match_parent"
             android:layout_height="346dp" />
 
         <TextView
-            android:id="@+id/text_reservas_finalizada"
+            android:id="@+id/textReservasFinalizada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reservas finalizadas" />
+            android:text="@string/textReservasFinalizada" />
 
         <ListView
-            android:id="@+id/list_view_finalizada"
+            android:id="@+id/listViewFinalizada"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

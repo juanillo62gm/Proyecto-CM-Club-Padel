@@ -25,13 +25,13 @@
             android:id="@+id/textOldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo actual" />
+            android:text="@string/textOldEmail" />
 
         <EditText
             android:id="@+id/insertOldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo actual"
+            android:hint="@string/insertOldEmail"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -42,13 +42,13 @@
             android:id="@+id/textModifyEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Correo nuevo" />
+            android:text="@string/textModifyEmail" />
 
         <EditText
             android:id="@+id/insertModifiedEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo nuevo"
+            android:hint="@string/insertModifiedEmail"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -59,14 +59,14 @@
             android:id="@+id/textPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contraseña" />
+            android:text="@string/textPass" />
 
         <EditText
             android:id="@+id/insertPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/insertPass"
             android:inputType="textPassword" />
 
         <Space
@@ -77,6 +77,6 @@
             android:id="@+id/buttonRequestEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aceptar" />
+            android:text="@string/buttonRequestEditEmail" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

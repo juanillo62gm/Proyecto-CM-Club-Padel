@@ -21,16 +21,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
         <EditText
             android:id="@+id/insertSignUpName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Nombre"
+            android:hint="@string/insertSignUpName"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -42,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Apellidos"
+            android:hint="@string/insertSignUpSurname"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -54,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Móvil"
+            android:hint="@string/insertSignUpPhone"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -66,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Correo"
+            android:hint="@string/insertSignUpEmail"
             android:inputType="textEmailAddress" />
 
         <Space
@@ -78,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/insertSignUpPass"
             android:inputType="textPassword" />
 
         <Space
@@ -89,10 +85,7 @@
             android:id="@+id/buttonNewAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear Cuenta" />
+            android:text="@string/buttonNewAccount" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
