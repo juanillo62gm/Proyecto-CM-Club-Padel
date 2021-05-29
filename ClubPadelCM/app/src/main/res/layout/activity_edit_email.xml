@@ -83,11 +83,11 @@
             android:id="@+id/buttonRequestEditEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/success"
-            android:text="@string/buttonRequestEditEmail"
-            android:drawableLeft="@drawable/ic_check_mark"
             android:layout_gravity="center"
-            tools:targetApi="lollipop"
-            tools:ignore="RtlHardcoded" />
+            android:backgroundTint="@color/success"
+            android:drawableLeft="@drawable/ic_check_mark"
+            android:text="@string/buttonRequestEditEmail"
+            tools:ignore="RtlHardcoded"
+            tools:targetApi="lollipop" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

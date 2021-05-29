@@ -58,7 +58,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
         buttonEditEmail();
         buttonEditPass();
 
-        //buttonLinkFacebook();
+        buttonLinkFacebook();
         buttonLinkGoogle();
 
         buttonRemoveAccount();
@@ -187,6 +187,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
 
     }
 
+    @SuppressWarnings("deprecation")
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);

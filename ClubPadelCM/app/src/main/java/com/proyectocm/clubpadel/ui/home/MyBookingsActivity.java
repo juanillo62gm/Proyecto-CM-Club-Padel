@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.TimeZone;
 
-
+@SuppressWarnings("All")
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MyBookingsActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -74,7 +74,7 @@ public class MyBookingsActivity extends AppCompatActivity {
                                         if (task1.isSuccessful()) {
                                             String id1 = Objects.requireNonNull(task1.getResult()).getDocuments().get(0).getId();
                                             db.collection("Bookings").document(id1).delete().addOnSuccessListener(unused -> {
-                                                Toast.makeText(getApplicationContext(), "Pista anulada", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getApplicationContext(), "Pista anulada.", Toast.LENGTH_LONG).show();
                                                 Intent jumpTo = new Intent(parent.getContext(), MainActivity.class);
                                                 startActivity(jumpTo);
                                             }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Error al anular pista", Toast.LENGTH_LONG).show());
