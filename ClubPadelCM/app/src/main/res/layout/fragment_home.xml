@@ -20,6 +20,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textBienvenida"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
         <Button
             android:id="@+id/buttonBooking"
             android:layout_width="wrap_content"
@@ -37,6 +45,50 @@
             android:drawableLeft="@drawable/ic_booked"
             android:text="@string/buttonMyBookings"
             tools:ignore="RtlHardcoded" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/home_image1"
+                    android:layout_width="355dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="false"
+                    android:scaleType="fitStart"
+                    android:src="@mipmap/almazara_0001"
+                    android:contentDescription="@string/Image1"/>
+
+                <ImageView
+                    android:id="@+id/home_image2"
+                    android:layout_width="355dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/almazara_0002"
+                    android:contentDescription="@string/Image2"/>
+
+                <ImageView
+                    android:id="@+id/home_image3"
+                    android:layout_width="355dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/almazara_0003"
+                    android:contentDescription="@string/Image3"/>
+            </LinearLayout>
+        </HorizontalScrollView>
 
     </LinearLayout>
 
