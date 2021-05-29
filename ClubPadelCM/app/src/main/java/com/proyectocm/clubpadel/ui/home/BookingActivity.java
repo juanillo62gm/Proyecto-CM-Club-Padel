@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,6 +23,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.proyectocm.clubpadel.Booking;
 import com.proyectocm.clubpadel.MainActivity;
 import com.proyectocm.clubpadel.R;
+
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +34,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -42,14 +46,15 @@ public class BookingActivity extends AppCompatActivity {
     private final List<Pair<Integer, Integer>> lsTuple = new ArrayList<>();
     private RadioGroup radioGroup;
     private Button button;
+    private Timestamp time_database;
     private LocalDateTime Today, Day_selected;
     private Button button1_1, button1_2, button1_3, button1_4, button1_5, button2_1, button2_2, button2_3, button2_4, button2_5, button3_1, button3_2, button3_3, button3_4, button3_5, button4_1, button4_2, button4_3, button4_4, button4_5, button5_1, button5_2, button5_3, button5_4, button5_5, button6_1, button6_2, button6_3, button6_4, button6_5;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-
-        Today = LocalDateTime.now(ZoneId.of("Europe/Madrid"));
+        time_database = Timestamp.now();
+        Today = LocalDateTime.ofInstant(time_database.toDate().toInstant(), ZoneId.systemDefault());
         Day_selected = Today;
         espacioTemporal();
         obtenerDatos(Day_selected);
@@ -450,8 +455,8 @@ public class BookingActivity extends AppCompatActivity {
 
     private void seleccionaButtonIdInversa() {
         for (int k = 0; k < lsTuple.size(); k++) {
-            Integer i = lsTuple.get(k).first;
-            Integer j = lsTuple.get(k).second;
+             Integer i = lsTuple.get(k).first;
+             Integer j = lsTuple.get(k).second;
             switch (i) {
                 case 0:
                     switch (j) {
@@ -481,6 +486,8 @@ public class BookingActivity extends AppCompatActivity {
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + j);
                     }
                     break;
                 case 1:
@@ -510,6 +517,8 @@ public class BookingActivity extends AppCompatActivity {
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + j);
                     }
                     break;
                 case 2:
@@ -540,6 +549,8 @@ public class BookingActivity extends AppCompatActivity {
 
                             button.setEnabled(true);
                             break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + j);
                     }
                     break;
                 case 3:
@@ -569,6 +580,8 @@ public class BookingActivity extends AppCompatActivity {
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + j);
                     }
                     break;
                 case 4:
@@ -598,6 +611,8 @@ public class BookingActivity extends AppCompatActivity {
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + j);
                     }
                     break;
                 case 5:
@@ -627,7 +642,12 @@ public class BookingActivity extends AppCompatActivity {
                             button.setBackgroundColor(Color.parseColor("#99FF99"));
                             button.setEnabled(true);
                             break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + j);
                     }
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + i);
             }
         }
         lsTuple.clear();
@@ -677,7 +697,7 @@ public class BookingActivity extends AppCompatActivity {
             int y = Day_selected.getYear();
             String aux = d + "/" + m + "/" + y + " " + hora;
             String aux2 = d + "/" + m + "/" + y;
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
             AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this)
                     .setMessage("¿Desea reservar la " + pista + " a las " + hora + " el " + aux2 + "?").setTitle("Reserva de pista")
                     .setPositiveButton(R.string.ok, (dialog, which) -> {

@@ -58,7 +58,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
         buttonEditEmail();
         buttonEditPass();
 
-        buttonLinkFacebook();
+        //buttonLinkFacebook();
         buttonLinkGoogle();
 
         buttonRemoveAccount();

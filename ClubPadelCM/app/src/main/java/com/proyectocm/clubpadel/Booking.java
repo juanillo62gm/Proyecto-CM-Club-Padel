@@ -6,6 +6,8 @@ import androidx.annotation.RequiresApi;
 
 import com.google.firebase.Timestamp;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
@@ -34,6 +36,7 @@ public class Booking implements Comparable {
         return time;
     }
 
+    @NotNull
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String toString() {
         return "Pista " + nFloor + " " + getDate(time);
