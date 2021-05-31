@@ -49,6 +49,8 @@ public class BookingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+        setTitle("Realizar una reserva");
+
         Timestamp time_database = Timestamp.now();
         Today = LocalDateTime.ofInstant(time_database.toDate().toInstant(), ZoneId.systemDefault());
         Day_selected = Today;

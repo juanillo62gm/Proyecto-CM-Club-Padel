@@ -39,7 +39,7 @@ public class MyBookingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_bookings);
-
+        setTitle("Mis reservas");
 
         listView_pendent = findViewById(R.id.listViewPendiente);
         listView_finalized = findViewById(R.id.listViewFinalizada);

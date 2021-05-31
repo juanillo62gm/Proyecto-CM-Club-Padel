@@ -32,7 +32,8 @@
         <TextView
             android:id="@+id/fetchName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="match_parent"
@@ -52,7 +53,8 @@
         <TextView
             android:id="@+id/fetchSurname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="match_parent"
@@ -72,7 +74,8 @@
         <TextView
             android:id="@+id/fetchPhone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="match_parent"
@@ -92,7 +95,8 @@
         <TextView
             android:id="@+id/fetchEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="match_parent"

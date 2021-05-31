@@ -134,6 +134,8 @@
     <!-- Fragment Home -->
     <string name="buttonBooking">Realizar una reserva</string>
     <string name="buttonMyBookings">Mis reservas</string>
+    <string name="textWantTo">¿Quieres jugar?</string>
+    <string name="textFloors">Nuestras pistas</string>
     <string name="Image1">Imagen 1</string>
     <string name="Image2">Imagen 2</string>
     <string name="Image3">Imagen 3</string>
