@@ -1,6 +1,6 @@
 <resources>
     <!-- Activities -->
-    <string name="app_name">Club Padel</string>
+    <string name="app_name">Club Pádel</string>
     <string name="title_home">Inicio</string>
     <string name="title_notifications">Perfil</string>
 
@@ -121,7 +121,7 @@
     <string name="buttonRemoveAccount">Eliminar cuenta</string>
 
     <!-- Activity My Bookings -->
-    <string name="textReservasPendiente">Reservas pendientes</string>
+    <string name="textReservasPendiente">Reservas activas</string>
     <string name="textReservasFinalizada">Reservas finalizadas</string>
 
     <!-- Activity Remove Account -->
