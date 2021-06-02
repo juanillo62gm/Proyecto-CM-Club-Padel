@@ -28,10 +28,10 @@
             android:text="@string/textReservasPendiente"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/listViewPendiente"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView_pendientes"
             android:layout_width="match_parent"
-            android:layout_height="346dp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textReservasFinalizada"
@@ -40,8 +40,8 @@
             android:text="@string/textReservasFinalizada"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/listViewFinalizada"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView_finalizadas"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

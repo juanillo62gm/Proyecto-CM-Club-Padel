@@ -123,6 +123,7 @@
     <!-- Activity My Bookings -->
     <string name="textReservasPendiente">Reservas activas</string>
     <string name="textReservasFinalizada">Reservas finalizadas</string>
+    <string name="image_item">Imagen CardView</string>
 
     <!-- Activity Remove Account -->
     <string name="textRemoveEmail">Correo</string>
