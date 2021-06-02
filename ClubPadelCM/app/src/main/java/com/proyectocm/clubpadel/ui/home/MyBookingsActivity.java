@@ -65,7 +65,7 @@ public class MyBookingsActivity extends AppCompatActivity implements RecyclerVie
                 }
                 Collections.sort(ls_pendent);
                 Collections.sort(ls_finalized);
-                adapaterBooking_pendent = new RecyclerViewAdapter(ls_pendent,this);
+                adapaterBooking_pendent = new RecyclerViewAdapter(ls_pendent, this);
                 adapaterBooking_finalized = new RecyclerViewAdapter_finalized(ls_finalized);
                 recyclerViewBooking_pendent.setAdapter(adapaterBooking_pendent);
                 recyclerViewBooking_finalized.setAdapter(adapaterBooking_finalized);
@@ -97,7 +97,7 @@ public class MyBookingsActivity extends AppCompatActivity implements RecyclerVie
 
     @Override
     public void onNoteClick(int position) {
-        if(ls_pendent.get(position).getTime().getSeconds() > Timestamp.now().getSeconds()) {
+        if (ls_pendent.get(position).getTime().getSeconds() > Timestamp.now().getSeconds()) {
             int pista = ls_pendent.get(position).getnFloor();
             Pair<String, String> tupla = getDateString(ls_pendent.get(position).getTime());
             String hora = tupla.second;

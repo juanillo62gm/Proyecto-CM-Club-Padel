@@ -31,7 +31,7 @@ import com.proyectocm.clubpadel.BuildConfig;
 import com.proyectocm.clubpadel.MainActivity;
 import com.proyectocm.clubpadel.R;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        bFacebook.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile")));
+        bFacebook.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Collections.singleton("email")));
 
         bGoogle.setOnClickListener(v -> {
             signIn();
