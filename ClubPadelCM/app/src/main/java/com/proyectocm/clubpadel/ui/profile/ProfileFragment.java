@@ -38,6 +38,18 @@ public class ProfileFragment extends Fragment {
         final TextView dataPhone = root.findViewById(R.id.fetchPhone);
         final TextView dataUserEmail = root.findViewById(R.id.fetchEmail);
 
+        fetchUserData(userId, dataName, dataSurname, dataPhone, dataUserEmail);
+
+        final Button bEditProfile = root.findViewById(R.id.buttonEditProfile);
+        buttonEditProfile(bEditProfile);
+
+        final Button bLogOut = root.findViewById(R.id.buttonSignOut);
+        buttonLogOut(bLogOut);
+
+        return root;
+    }
+
+    private void fetchUserData(String userId, TextView dataName, TextView dataSurname, TextView dataPhone, TextView dataUserEmail) {
         // Request stored info from DB
         DocumentReference docRef = db.collection("Users").document(userId);
         docRef.get().addOnCompleteListener(task -> {
@@ -59,17 +71,17 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "Error en la solicitud" + task.getException(), Toast.LENGTH_LONG).show();
             }
         });
+    }
 
-        // Edit Profile Button
-        final Button bEditProfile = root.findViewById(R.id.buttonEditProfile);
+    private void buttonEditProfile(Button bEditProfile) {
         bEditProfile.setOnClickListener(v -> {
             Intent jumpTo = new Intent(getActivity(), EditUserProfileActivity.class);
             startActivity(jumpTo);
         });
+    }
 
-        // SignOut Button
-        final Button buttonLogOut = root.findViewById(R.id.buttonSignOut);
-        buttonLogOut.setOnClickListener(v -> {
+    private void buttonLogOut(Button bLogOut) {
+        bLogOut.setOnClickListener(v -> {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 FirebaseAuth.getInstance().signOut(); //signout firebase
@@ -81,9 +93,6 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "Se ha producido un error al cerrar sesión.", Toast.LENGTH_LONG).show();
             }
         });
-
-
-        return root;
     }
 
 }
