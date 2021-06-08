@@ -134,6 +134,15 @@ public class EditUserProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void buttonRemoveAccount() {
+        final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
+        bRemoveAccount.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(EditUserProfileActivity.this, RemoveAccountActivity.class);
+            startActivity(jumpTo);
+            finish();
+        });
+    }
+
     private void buttonLinkFacebook() {
         final Button buttonFacebook = findViewById(R.id.buttonLinkFB);
         AccessToken token = AccessToken.getCurrentAccessToken();
@@ -154,26 +163,10 @@ public class EditUserProfileActivity extends AppCompatActivity {
         buttonGoogle.setOnClickListener(v -> signIn());
     }
 
-    private void buttonRemoveAccount() {
-        final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
-        bRemoveAccount.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(EditUserProfileActivity.this, RemoveAccountActivity.class);
-            startActivity(jumpTo);
-            finish();
-        });
-    }
-
-    private void LinkGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-
-        Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Se ha vinculado correctamente la cuenta de Google.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No se ha podido vincular la cuenta de Google", Toast.LENGTH_LONG).show();
-                    }
-                });
+    @SuppressWarnings("deprecation")
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     private void SignInGoogle() {
@@ -187,10 +180,17 @@ public class EditUserProfileActivity extends AppCompatActivity {
 
     }
 
-    @SuppressWarnings("deprecation")
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+    private void linkGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+
+        Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Se ha vinculado correctamente la cuenta de Google.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No se ha podido vincular la cuenta de Google", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -203,7 +203,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null) {
-                    LinkGoogle(account.getIdToken());
+                    linkGoogle(account.getIdToken());
                 }
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately

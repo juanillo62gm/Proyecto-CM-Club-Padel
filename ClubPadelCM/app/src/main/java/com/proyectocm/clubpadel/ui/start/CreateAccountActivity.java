@@ -43,6 +43,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         dataEmail = findViewById(R.id.insertSignUpEmail);
         dataPassword = findViewById(R.id.insertSignUpPass);
 
+        buttonRegisterUser();
+
+    }
+
+    private void buttonRegisterUser() {
         Button bSignUp = findViewById(R.id.buttonNewAccount);
 
         bSignUp.setOnClickListener(v -> {
@@ -59,7 +64,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Complete todos los campos para crear una cuenta.", Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     private void registerUser() {

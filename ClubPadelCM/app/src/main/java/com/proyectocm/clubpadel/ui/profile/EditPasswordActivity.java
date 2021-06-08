@@ -44,16 +44,6 @@ public class EditPasswordActivity extends AppCompatActivity {
         buttonChangePassword(dataEmail, dataOldPass, dataNewPass);
     }
 
-    private void buttonChangePassword(TextView dataEmail, TextView dataOldPass, TextView dataNewPass) {
-        final Button bChangePassword = findViewById(R.id.buttonRequestEditPass);
-        bChangePassword.setOnClickListener(v -> {
-            changePassword(dataEmail, dataOldPass, dataNewPass);
-            Intent jumpTo = new Intent(EditPasswordActivity.this, MainActivity.class);
-            startActivity(jumpTo);
-            finish();
-        });
-    }
-
     private void fetchUserEmail(String userId, TextView dataEmail) {
         // Request stored info from DB
         DocumentReference docRef = db.collection("Users").document(userId);
@@ -68,8 +58,18 @@ public class EditPasswordActivity extends AppCompatActivity {
         });
     }
 
+    private void buttonChangePassword(TextView dataEmail, TextView dataOldPass, TextView dataNewPass) {
+        final Button bChangePassword = findViewById(R.id.buttonRequestEditPass);
+        bChangePassword.setOnClickListener(v -> {
+            changePassword(dataEmail, dataOldPass, dataNewPass);
+            Intent jumpTo = new Intent(EditPasswordActivity.this, MainActivity.class);
+            startActivity(jumpTo);
+            finish();
+        });
+    }
+
     private void changePassword(TextView dataEmail, TextView dataOldPass, TextView dataNewPass) {
-        reauthenticate(dataEmail.getText().toString(), dataOldPass.getText().toString());
+        reauthenticateUser(dataEmail.getText().toString(), dataOldPass.getText().toString());
 
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -81,7 +81,7 @@ public class EditPasswordActivity extends AppCompatActivity {
                 });
     }
 
-    private void reauthenticate(String email, String pass) {
+    private void reauthenticateUser(String email, String pass) {
         FirebaseUser user = mAuth.getCurrentUser();
 
         AuthCredential credential = EmailAuthProvider.getCredential(email, pass);

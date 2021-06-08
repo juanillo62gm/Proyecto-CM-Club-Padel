@@ -41,15 +41,6 @@ public class RemoveAccountActivity extends AppCompatActivity {
         buttonRemoveAccount(userId, dataEmail, dataPass);
     }
 
-    private void buttonRemoveAccount(String userId, TextView dataEmail, TextView dataPass) {
-        final Button bRemoveAccount = findViewById(R.id.buttonRequestRemoveAccount);
-        bRemoveAccount.setOnClickListener(v -> {
-            removeUser(userId, dataEmail, dataPass);
-            finish();
-            this.finishAffinity();
-        });
-    }
-
     private void fetchUserEmail(String userId, TextView dataEmail) {
         // Request stored info from DB
         DocumentReference docRef = db.collection("Users").document(userId);
@@ -64,8 +55,17 @@ public class RemoveAccountActivity extends AppCompatActivity {
         });
     }
 
-    private void removeUser(String userId, TextView dataEmail, TextView dataPass) {
-        reauthenticate(dataEmail.getText().toString(), dataPass.getText().toString());
+    private void buttonRemoveAccount(String userId, TextView dataEmail, TextView dataPass) {
+        final Button bRemoveAccount = findViewById(R.id.buttonRequestRemoveAccount);
+        bRemoveAccount.setOnClickListener(v -> {
+            removeUserFromFirebaseAuth(userId, dataEmail, dataPass);
+            finish();
+            this.finishAffinity();
+        });
+    }
+
+    private void removeUserFromFirebaseAuth(String userId, TextView dataEmail, TextView dataPass) {
+        reauthenticateUser(dataEmail.getText().toString(), dataPass.getText().toString());
 
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -78,7 +78,7 @@ public class RemoveAccountActivity extends AppCompatActivity {
                 });
     }
 
-    private void reauthenticate(String email, String pass) {
+    private void reauthenticateUser(String email, String pass) {
         FirebaseUser user = mAuth.getCurrentUser();
 
         AuthCredential credential = EmailAuthProvider.getCredential(email, pass);
