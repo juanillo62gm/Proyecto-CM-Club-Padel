@@ -64,9 +64,9 @@ public class RecyclerViewAdapter_finalized extends RecyclerView.Adapter<Recycler
 
         private ViewHolder(View itemView) {
             super(itemView);
-            nFloor = (TextView) itemView.findViewById(R.id.floor_item);
-            date = (TextView) itemView.findViewById(R.id.date_item);
-            time = (TextView) itemView.findViewById(R.id.time_item);
+            nFloor = itemView.findViewById(R.id.floor_item);
+            date = itemView.findViewById(R.id.date_item);
+            time = itemView.findViewById(R.id.time_item);
 
         }
     }

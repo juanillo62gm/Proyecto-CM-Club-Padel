@@ -70,9 +70,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         private ViewHolder(View itemView, OnNoteListener onNoteListener) {
             super(itemView);
-            nFloor = (TextView) itemView.findViewById(R.id.floor_item);
-            date = (TextView) itemView.findViewById(R.id.date_item);
-            time = (TextView) itemView.findViewById(R.id.time_item);
+            nFloor = itemView.findViewById(R.id.floor_item);
+            date = itemView.findViewById(R.id.date_item);
+            time = itemView.findViewById(R.id.time_item);
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
         }

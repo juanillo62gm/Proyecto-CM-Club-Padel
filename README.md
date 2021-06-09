@@ -1,4 +1,8 @@
-# Proyecto CM 
-## Club Pádel
+# Computación Móvil 20-21
+## Proyecto Club Pádel
 
-[App de Ejemplo](https://play.google.com/store/apps/details?id=com.playtomic)
+Basada en [Playtomic](https://play.google.com/store/apps/details?id=com.playtomic)
+
+## Desarrollada
+- Juan Gómez Mateos
+- Antonio Prieto Tagua

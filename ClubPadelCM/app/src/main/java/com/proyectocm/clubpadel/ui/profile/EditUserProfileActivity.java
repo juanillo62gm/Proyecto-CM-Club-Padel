@@ -49,9 +49,9 @@ public class EditUserProfileActivity extends AppCompatActivity {
         final TextView dataSurname = findViewById(R.id.insertModifiedSurname);
         final TextView dataPhone = findViewById(R.id.insertModifiedPhone);
 
-        SignInGoogle();
-
         fetchUserDataFromDB(userId, dataName, dataSurname, dataPhone);
+
+        requestGoogleToken();
 
         buttonEditProfile(userId, dataName, dataSurname, dataPhone);
 
@@ -134,6 +134,16 @@ public class EditUserProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void buttonRemoveAccount() {
+        final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
+        bRemoveAccount.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(EditUserProfileActivity.this, RemoveAccountActivity.class);
+            startActivity(jumpTo);
+            finish();
+        });
+    }
+
+    // Facebook Login
     private void buttonLinkFacebook() {
         final Button buttonFacebook = findViewById(R.id.buttonLinkFB);
         AccessToken token = AccessToken.getCurrentAccessToken();
@@ -149,21 +159,30 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 }));
     }
 
+    // Google Login
     private void buttonLinkGoogle() {
         final Button buttonGoogle = findViewById(R.id.buttonLinkGoogle);
-        buttonGoogle.setOnClickListener(v -> signIn());
+        buttonGoogle.setOnClickListener(v -> signInWithGoogle());
     }
 
-    private void buttonRemoveAccount() {
-        final Button bRemoveAccount = findViewById(R.id.buttonRemoveAccount);
-        bRemoveAccount.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(EditUserProfileActivity.this, RemoveAccountActivity.class);
-            startActivity(jumpTo);
-            finish();
-        });
+    private void requestGoogleToken() {
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
     }
 
-    private void LinkGoogle(String idToken) {
+    @SuppressWarnings("deprecation")
+    private void signInWithGoogle() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void firebaseAuthLinkWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
 
         Objects.requireNonNull(mAuth.getCurrentUser()).linkWithCredential(credential)
@@ -176,23 +195,6 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 });
     }
 
-    private void SignInGoogle() {
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-    }
-
-    @SuppressWarnings("deprecation")
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -203,7 +205,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null) {
-                    LinkGoogle(account.getIdToken());
+                    firebaseAuthLinkWithGoogle(account.getIdToken());
                 }
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately

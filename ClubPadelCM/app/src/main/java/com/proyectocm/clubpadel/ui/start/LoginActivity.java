@@ -46,75 +46,23 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-
-        Button bGoogle = findViewById(R.id.buttonSignInGoogle);
-        Button bFacebook = findViewById(R.id.buttonSignInFacebook);
-        Button bSignUp = findViewById(R.id.buttonSignUp);
-        Button bForgottenPass = findViewById(R.id.buttonForgottenPass);
-
-        SignInGoogle();
-
-        // Debug Mode Facebook Login Tokens
-        if (BuildConfig.DEBUG) {
-            FacebookSdk.setIsDebugEnabled(true);
-            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
-        }
-
-        // Initialize Facebook Login button
-        callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                Toast.makeText(getApplicationContext(), "Se ha cancelado el inicio de sesión con Facebook.", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(getApplicationContext(), "Se ha producido un error al iniciar sesión con Facebook" + error, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        bFacebook.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Collections.singleton("email")));
-
-        bGoogle.setOnClickListener(v -> {
-            signIn();
-            Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google.", Toast.LENGTH_LONG).show();
-        });
-
-        Button bEmail = findViewById(R.id.buttonSignInEmail);
         dataEmail = findViewById(R.id.insertSignInEmail);
         dataPassword = findViewById(R.id.insertSignInPass);
 
-        bEmail.setOnClickListener(v -> {
-            String email = dataEmail.getText().toString();
-            String pass = dataPassword.getText().toString();
+        requestGoogleToken();
+        debugModeFacebook();
+        requestFacebookToken();
 
-            if (!email.isEmpty() && !pass.isEmpty()) {
-                loginUser(email, pass);
-            } else {
-                Toast.makeText(getApplicationContext(), "Complete todos los campos para acceder.", Toast.LENGTH_LONG).show();
-            }
-        });
+        buttonSignInWithFacebook();
+        buttonSignInWithGoogle();
+        buttonSignInWithEmail();
 
-        bSignUp.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(LoginActivity.this, CreateAccountActivity.class);
-            startActivity(jumpTo);
-        });
-
-        bForgottenPass.setOnClickListener(v -> {
-            Intent jumpTo = new Intent(LoginActivity.this, ForgottenPasswordActivity.class);
-            startActivity(jumpTo);
-        });
+        buttonSignUp();
+        buttonForgottenPass();
 
     }
 
@@ -130,8 +78,50 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // Start Email SignIn
-    private void loginUser(String email, String pass) {
+    private void buttonSignInWithFacebook() {
+        Button bFacebook = findViewById(R.id.buttonSignInFacebook);
+        bFacebook.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Collections.singleton("email")));
+    }
+
+    private void buttonSignInWithGoogle() {
+        Button bGoogle = findViewById(R.id.buttonSignInGoogle);
+        bGoogle.setOnClickListener(v -> {
+            signInWithGoogle();
+            Toast.makeText(getApplicationContext(), "Se ha iniciado sesión con Google.", Toast.LENGTH_LONG).show();
+        });
+    }
+
+    private void buttonSignInWithEmail() {
+        Button bEmail = findViewById(R.id.buttonSignInEmail);
+        bEmail.setOnClickListener(v -> {
+            String email = dataEmail.getText().toString();
+            String pass = dataPassword.getText().toString();
+
+            if (!email.isEmpty() && !pass.isEmpty()) {
+                signInWithEmail(email, pass);
+            } else {
+                Toast.makeText(getApplicationContext(), "Complete todos los campos para acceder.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void buttonSignUp() {
+        Button bSignUp = findViewById(R.id.buttonSignUp);
+        bSignUp.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(jumpTo);
+        });
+    }
+
+    private void buttonForgottenPass() {
+        Button bForgottenPass = findViewById(R.id.buttonForgottenPass);
+        bForgottenPass.setOnClickListener(v -> {
+            Intent jumpTo = new Intent(LoginActivity.this, ForgottenPasswordActivity.class);
+            startActivity(jumpTo);
+        });
+    }
+
+    private void signInWithEmail(String email, String pass) {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
@@ -143,11 +133,54 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    // End Email SignIn
 
-    // Start Google SignIn
-    private void SignInGoogle() {
-        // Configure Google Sign In
+    // Facebook Login
+    private void debugModeFacebook() {
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
+    }
+
+    private void requestFacebookToken() {
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                firebaseAuthWithFacebook(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getApplicationContext(), "Se ha cancelado el inicio de sesión con Facebook.", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(getApplicationContext(), "Se ha producido un error al iniciar sesión con Facebook" + error, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void firebaseAuthWithFacebook(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Toast.makeText(LoginActivity.this, "Se ha iniciado sesión con Facebook.", Toast.LENGTH_LONG).show();
+                        Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(jumpTo);
+                        finish();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(LoginActivity.this, "Cuenta ya existente, inicie sesión con Email o Google.", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    // Google Login
+    private void requestGoogleToken() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -158,9 +191,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("deprecation")
-    private void signIn() {
+    private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(jumpTo);
+                        finish();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(getApplicationContext(), "No se ha podido iniciar sesión con Google." + task.getException(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @Override
@@ -185,41 +234,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(jumpTo);
-                        finish();
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(getApplicationContext(), "No se ha podido iniciar sesión con Google." + task.getException(), Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
-    // End Google SignIn
-
-    // Start Facebook SignIn
-    private void handleFacebookAccessToken(AccessToken token) {
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Toast.makeText(LoginActivity.this, "Se ha iniciado sesión con Facebook.", Toast.LENGTH_LONG).show();
-                        Intent jumpTo = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(jumpTo);
-                        finish();
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(LoginActivity.this, "Cuenta ya existente, inicie sesión con Email o Google.", Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
-    // End Facebook SignIn
-
 }

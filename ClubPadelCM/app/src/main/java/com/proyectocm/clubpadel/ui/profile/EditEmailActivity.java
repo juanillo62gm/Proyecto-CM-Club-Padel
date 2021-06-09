@@ -41,7 +41,7 @@ public class EditEmailActivity extends AppCompatActivity {
 
         fetchUserEmail(userId, dataOldEmail);
 
-        buttonSendEmail(userId, dataOldEmail, dataPass, dataNewEmail);
+        buttonModifyUserEmail(userId, dataOldEmail, dataPass, dataNewEmail);
     }
 
     private void fetchUserEmail(String userId, TextView dataOldEmail) {
@@ -63,8 +63,18 @@ public class EditEmailActivity extends AppCompatActivity {
 
     }
 
+    private void buttonModifyUserEmail(String userId, TextView dataOldEmail, TextView dataPass, TextView dataNewEmail) {
+        final Button bEditEmail = findViewById(R.id.buttonRequestEditEmail);
+        bEditEmail.setOnClickListener(v -> {
+            modifyUserEmail(userId, dataOldEmail, dataPass, dataNewEmail);
+            Intent jumpTo = new Intent(EditEmailActivity.this, MainActivity.class);
+            startActivity(jumpTo);
+            finish();
+        });
+    }
+
     private void modifyUserEmail(String userId, TextView dataOldEmail, TextView dataPass, TextView dataNewEmail) {
-        reauthenticate(dataOldEmail.getText().toString(), dataPass.getText().toString());
+        reauthenticateUser(dataOldEmail.getText().toString(), dataPass.getText().toString());
 
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -81,17 +91,7 @@ public class EditEmailActivity extends AppCompatActivity {
                 });
     }
 
-    private void buttonSendEmail(String userId, TextView dataOldEmail, TextView dataPass, TextView dataNewEmail) {
-        final Button bEditEmail = findViewById(R.id.buttonRequestEditEmail);
-        bEditEmail.setOnClickListener(v -> {
-            modifyUserEmail(userId, dataOldEmail, dataPass, dataNewEmail);
-            Intent jumpTo = new Intent(EditEmailActivity.this, MainActivity.class);
-            startActivity(jumpTo);
-            finish();
-        });
-    }
-
-    private void reauthenticate(String email, String pass) {
+    private void reauthenticateUser(String email, String pass) {
         FirebaseUser user = mAuth.getCurrentUser();
 
         AuthCredential credential = EmailAuthProvider.getCredential(email, pass);
